@@ -411,632 +411,455 @@
             <button id="restartBtn" class="restart-btn">Neues Quiz starten</button>
         </div>
     </div>
+    
+    <!-- Load questions from external file -->
+    <script src="questions.js"></script>
+    
     <script>
-        // --- DATA ---
-        const initialRawQuestions = [
-    { name: "Musterprüfung A.1-Frage 03", question: "Im Gegensatz zur klassischen TV-Werbung, wo sich der Kunde passiv beschallen lässt, sucht der Online-Kunde aktiv nach Produkten und Dienstleistungen. Mit welchem Fachbegriff wird das Verhalten des Online-Kunden betitelt?", answers: ["Pushing", "Lean forward"], correct: ["Lean forward"] },
-    { name: "Musterprüfung G.1- Frage 03", question: "Worin liegt der Schwerpunkt von Social Media Analytics?", answers: ["Erstellung von Social Ads auf Meta", "Beobachtung der Konkurrenz auf X (Twitter) und Foren", "Analyse der Performance der eigenen Social-Media-Kanäle", "Analyse von Kommentaren und Stimmungen auf Bewertungsportalen"], correct: ["Analyse der Performance der eigenen Social-Media-Kanäle"] },
-    { name: "Musterprüfung C.1-Frage 02", question: "Welche Formel veranschaulicht die Werbewirkung im Marketing?", answers: ["VERDI", "FISH", "AIDA", "RADAR"], correct: ["AIDA"] },
-    { name: "Musterprüfung F.2 - Frage 03", question: "Welche sozialen Netzwerke bieten uns die Möglichkeit, über ein eigenes Pixel Website-Tracking zu betreiben?", answers: ["Tik Tok", "Linkedin", "Pinterest", "XING"], correct: ["Tik Tok", "Linkedin", "Pinterest", "XING"] },
-    { name: "Musterprüfung F.3 - Frage 06", question: "Ordne die Kampagnenstufen des TOFU-/MOFU-/BOFU-Prinzips den Bewusstseinsstufen der Zielgruppe richtig zu.", answers: ["BOFU: Nutzende, die wahrscheinlich großes Kaufinteresse haben, und die Reaktivierung von Bestandskundinnen und -kunden", "TOFU: Potenzielle Kundinnen und Kunden, die noch keinen Kontakt mit der Marke hatten", "MOFU: Nutzende, die bereits Kontakt mit der Marke oder den Produkten hatten und ein grundsätzliches Interesse haben"], correct: ["BOFU: Nutzende, die wahrscheinlich großes Kaufinteresse haben, und die Reaktivierung von Bestandskundinnen und -kunden", "TOFU: Potenzielle Kundinnen und Kunden, die noch keinen Kontakt mit der Marke hatten", "MOFU: Nutzende, die bereits Kontakt mit der Marke oder den Produkten hatten und ein grundsätzliches Interesse haben"] },
-    { name: "Musterprüfung D.1 - Frage 02", question: "Wofür steht FISH im FISH-Modell?", answers: ["Flag - Inbound - Significant - Highlight", "Follow - Inbound - Search - Highend", "False - Intensive - Super - Honest", "Follow - Inbound - Search - Highlight"], correct: ["Follow - Inbound - Search - Highlight"] },
-    { name: "Musterprüfung C.5 - Frage 03", question: "Welche Arten von Tools und Lizenzen können im Rahmen einer Ressourcenplanung relevant sein?", answers: ["Social-Media-Management-Tools", "Content-Creation-Tools", "Analyse-Tools", "Lizenzgebühren für Personas"], correct: ["Social-Media-Management-Tools", "Content-Creation-Tools", "Analyse-Tools"] },
-    { name: "Musterprüfung G.2- Frage 05", question: "Welche Aussage in Bezug auf qualitative und quantitative Kennzahlen im Social Listening ist korrekt?", answers: ["Qualitative Kennzahlen sind zu bevorzugen.", "Nur zusammen fördern sie ein umfassendes Verständnis der Markenperformance.", "Quantitative Kennzahlen sind zu bevorzugen."], correct: ["Nur zusammen fördern sie ein umfassendes Verständnis der Markenperformance."] },
-    { name: "Musterprüfung C.3 - Frage 02", question: "Was kann man in der Limbic Map positionieren?", answers: ["Zielgruppen", "Marken", "Unternehmen", "Personen"], correct: ["Zielgruppen", "Marken", "Unternehmen", "Personen"] },
-    { name: "Musterprüfung F.3 - Frage 02", question: "Was ist ein „Creative\"?", answers: ["Creative bezeichnet das Foto oder Video, welches in einer Anzeige genutzt wird.", "Creative bezeichnet die visuellen, auditiven und textlichen Elemente einer Anzeige."], correct: ["Creative bezeichnet die visuellen, auditiven und textlichen Elemente einer Anzeige."] },
-    { name: "Musterprüfung A.1-Frage 02", question: "Welches P aus dem Marketing-Mix entwickelt sich durch die Digitalisierung in Richtung \"Vermarktung\"?", answers: ["Price", "Product", "Promotion", "Place"], correct: ["Promotion"] },
-    { name: "Musterprüfung E.3 - Frage 01", question: "Welche sozialen Netzwerke und Plattformen gelten als B2B-Communitys?", answers: ["Google Business Profile", "Meta Business Manager", "XING", "Linkedin"], correct: ["XING", "Linkedin"] },
-    { name: "Musterprüfung F.1- Frage 09", question: "Was ist ein Pixel im Kontext von Social Media Ads?", answers: ["Ein Pixel ist eine bestimmte Zielgruppe, die wir sowohl für Custom Audiences als auch für Lookalike Audiences nutzen können.", "Ein Pixel ist ein Trackingcode, den man auf einer Website, einem Onlineshop oder auch in einer eigenen App implementieren kann."], correct: ["Ein Pixel ist ein Trackingcode, den man auf einer Website, einem Onlineshop oder auch in einer eigenen App implementieren kann."] },
-    { name: "Musterprüfung D.2 - Frage 01", question: "Was gilt bei der Art und Qualität des Contents, den wir über Social Networks veröffentlichen?", answers: ["Content sollte immer das gleiche Format (z. B. Bild, Video, Text) haben.", "Content sollte auch interaktiv sein.", "Content sollte vielfältig gestaltet sein.", "Content sollte immer einen Mehrwert haben."], correct: ["Content sollte auch interaktiv sein.", "Content sollte vielfältig gestaltet sein.", "Content sollte immer einen Mehrwert haben."] },
-    { name: "Musterprüfung A.1-Frage 04", question: "Wie beeinflusst der demografische Wandel das Online-Marketing?", answers: ["Der demografische Wandel hat keinen Einfluss auf das Online-Marketing, da sich Nutzer unabhängig von ihrer Altersgruppe online ähnlich verhalten.", "Er hat Auswirkungen auf die Zielgruppenzusammensetzung. So sollte man sich der wachsenden älteren Bevölkerung anpassen."], correct: ["Er hat Auswirkungen auf die Zielgruppenzusammensetzung. So sollte man sich der wachsenden älteren Bevölkerung anpassen."] },
-    { name: "Musterprüfung F.1- Frage 04", question: "Was spricht für den Einsatz von Social Media Ads?", answers: ["Einfache Handhabung", "Interaktive Möglichkeiten", "Kontrolle über Kosten", "Höhere Streuverluste"], correct: ["Einfache Handhabung", "Interaktive Möglichkeiten", "Kontrolle über Kosten"] },
-    { name: "Musterprüfung E.2-Frage 04", question: "Von welchen Faktoren wird die Lebensdauer eines Posts maßgeblich beeinflusst?", answers: ["Von den plattformspezifischen Algorithmen", "Von der Interaktion mit dem Beitrag", "Von der Art des Inhalts"], correct: ["Von den plattformspezifischen Algorithmen", "Von der Interaktion mit dem Beitrag", "Von der Art des Inhalts"] },
-    { name: "Musterprüfung G.2- Frage 03", question: "Welche Vorteile haben Social-Media-Monitoring- und Social-Listening-Tools in der Regel?", answers: ["Sie bieten zeitsparende Automatisierungen.", "Sie sind auch mit wenig Know-how leicht zu bedienen.", "Sie bieten netzwerkübergreifende Datenerfassung.", "Sie sind als professionelle Tools kostenfrei."], correct: ["Sie bieten zeitsparende Automatisierungen.", "Sie bieten netzwerkübergreifende Datenerfassung."] },
-    { name: "Musterprüfung E.4- Frage 05", question: "Was sind für viele Unternehmen noch immer Herausforderungen und Hindernisse bei der Nutzung von Social Media?", answers: ["Möglicher Kontrollverlust", "Zu viele Ressourcen", "Datensicherheit", "Zu hohe Reichweite"], correct: ["Möglicher Kontrollverlust", "Datensicherheit"] },
-    { name: "Musterprüfung E.4-Frage 04", question: "Ordne die folgenden Schwerpunkte dem Beschwerdemanagement und dem Krisenmanagement richtig zu.", answers: ["Krisenmanagement: Behebt unternehmensweite Notlagen", "Beschwerde Management: Fokussiert auf individuelle Kundenprobleme"], correct: ["Krisenmanagement: Behebt unternehmensweite Notlagen", "Beschwerde Management: Fokussiert auf individuelle Kundenprobleme"] },
-    { name: "Musterprüfung D.1 - Frage 05", question: "Auf welcher Ebene wirkt Storytelling vorrangig?", answers: ["Auf der informativen Ebene", "Auf der emotionalen Ebene"], correct: ["Auf der emotionalen Ebene"] },
-    { name: "Musterprüfung B.1-Frage 01", question: "Welche \"Features\" bietet uns Facebook?", answers: ["Gruppen", "Unternehmensseiten", "Veranstaltungen", "Profile"], correct: ["Gruppen", "Unternehmensseiten", "Veranstaltungen", "Profile"] },
-    { name: "Musterprüfung E.4- Frage 03", question: "Was ist laut einer Umfrage der überwiegende Grund für Kunden, sich von einem Unternehmen oder einer Marke zu trennen?", answers: ["Fehlende Aufmerksamkeit", "Neue Kaufgewohnheiten", "Hoher Preis", "Schlechte Qualität"], correct: ["Fehlende Aufmerksamkeit"] },
-    { name: "Musterprüfung F.1 - Frage 06", question: "Was sind Ziele von Retargeting?", answers: ["Eine möglichst hohe Bounce Rate zu erreichen", "Daten zu sammeln, um eine Lookalike Audience zu erstellen", "Website-Besuchende erneut mit einer Anzeige anzusprechen", "Nutzende erstmalig auf eine Website zu bringen"], correct: ["Daten zu sammeln, um eine Lookalike Audience zu erstellen", "Website-Besuchende erneut mit einer Anzeige anzusprechen"] },
-    { name: "Musterprüfung A.2-Frage 05", question: "Welche Aussage passt am besten zur Wahl von Social-Media-Kanälen für dein Unternehmen?", answers: ["Ich nutze stets die großen sozialen Medien.", "Ich wähle die Kanäle entsprechend ihrer Nutzergruppe und der medialen Möglichkeiten aus.", "Ich nutze stets die sozialen Medien mit dem größten Wachstum.", "Ich nutze die sozialen Medien, die mir am besten gefallen."], correct: ["Ich wähle die Kanäle entsprechend ihrer Nutzergruppe und der medialen Möglichkeiten aus."] },
-    { name: "Musterprüfung D.3 - Frage 05", question: "Welche Bestandteile sollte eine Redaktionsplanung haben?", answers: ["Verantwortlichkeiten", "Veröffentlichungsdaten", "KPIs zur Erfolgsmessung", "Themen"], correct: ["Verantwortlichkeiten", "Veröffentlichungsdaten", "Themen"] },
-    { name: "Musterprüfung A.3-Frage 02", question: "Welche Aussage trifft auf das AIDA-Modell im Marketing zu?", answers: ["Das AIDA-Modell ist eine Methode, die sich auf die Steigerung der Kundenbindung bezieht.", "Beim AIDA-Modell geht es darum, das Interesse der Zielgruppe zu erwecken und sie zu einer gewünschten Handlung zu führen."], correct: ["Beim AIDA-Modell geht es darum, das Interesse der Zielgruppe zu erwecken und sie zu einer gewünschten Handlung zu führen."] },
-    { name: "Musterprüfung B.3-Frage 03", question: "Was bedeutet der Begriff \"Social Selling\"?", answers: ["Social Selling zielt darauf ab, vor allem physische Produkte über soziale Netzwerke zu verkaufen.", "Social Selling zielt darauf ab, sich als Experte in einem bestimmten Bereich zu positionieren und den Mehrwert für potenzielle Kunden zu betonen."], correct: ["Social Selling zielt darauf ab, sich als Experte in einem bestimmten Bereich zu positionieren und den Mehrwert für potenzielle Kunden zu betonen."] },
-    { name: "Musterprüfung B.3-Frage 02", question: "Warum spielt Xing im Content-Marketing häufig eine untergeordnete Rolle?", answers: ["Das Veröffentlichen von Beiträgen ist auf Xing generell nicht möglich.", "Die Nutzer sind auf der Plattform eher passiv, es wird eher wenig mit Content interagiert."], correct: ["Die Nutzer sind auf der Plattform eher passiv, es wird eher wenig mit Content interagiert."] },
-    { name: "Musterprüfung F.1 - Frage 07", question: "Was ist unter dem Begriff,,Impressionen\" zu verstehen?", answers: ["Impressionen sind Vorschaubilder für Werbeanzeigen.", "Impressionen sind die potenziellen Reichweiten bei Werbeanzeigen.", "Impressionen geben an, wie oft eine Werbeanzeige für eine Zielgruppe auf dem Bildschirm zu sehen war.", "Impressionen sind Abrechnungsformate von Werbeanzeigen."], correct: ["Impressionen geben an, wie oft eine Werbeanzeige für eine Zielgruppe auf dem Bildschirm zu sehen war."] },
-    { name: "Musterprüfung G.3- Frage 06", question: "Warum sollten wir regelmäßig analysieren, welche Beiträge unsere Top-Performing-Posts waren?", answers: ["Um diese Beiträge ggf. mit Social Media Ads noch weiter zu promoten", "Um zu erfahren, was unsere beliebtesten Posts gemeinsam haben (z. B. Art des Inhalts, Content-Format, Plattformen), und um unsere zukünftigen Beiträge danach ausrichten zu können", "Um Zielgruppen-Account für unser externes Community-Management zu identifizieren"], correct: ["Um diese Beiträge ggf. mit Social Media Ads noch weiter zu promoten", "Um zu erfahren, was unsere beliebtesten Posts gemeinsam haben (z. B. Art des Inhalts, Content-Format, Plattformen), und um unsere zukünftigen Beiträge danach ausrichten zu können"] },
-    { name: "Musterprüfung A.4 - Frage 01", question: "Wofür stehen die Buchstaben P, O und E im POE-Modell?", answers: ["Product, Order, Exit", "Paid Media, Owned Media, Earned Media"], correct: ["Paid Media, Owned Media, Earned Media"] },
-    { name: "Musterprüfung E.2-Frage 02", question: "Was ist unter dem Begriff proaktive Redaktionsplanung zu verstehen?", answers: ["Inhalte und Kommunikationsmaßnahmen sollen reaktiv auf aktuelle Ereignisse geplant werden.", "Inhalte und Kommunikationsmaßnahmen sollen vorausschauend geplant werden."], correct: ["Inhalte und Kommunikationsmaßnahmen sollen vorausschauend geplant werden."] },
-    { name: "Musterprüfung G.2 - Frage 04", question: "Welche Kennzahl gibt den Anteil der Markenerwähnungen im Vergleich zu Mitbewerbenden an?", answers: ["Anzahl der Mentions", "Sentiment Ratio", "Share of Voice"], correct: ["Share of Voice"] },
-    { name: "Musterprüfung B.1-Frage 03", question: "Welche Funktionen bietet WhatsApp Business gegenüber dem normalen WhatsApp zusätzlich?", answers: ["Shopping-Funktion", "Unternehmenssteckbrief", "Umfragen", "Automatisierte Nachrichten"], correct: ["Shopping-Funktion", "Unternehmenssteckbrief", "Automatisierte Nachrichten"] },
-    { name: "Musterprüfung D.2 - Frage 03", question: "Ordne die folgenden Content-Arten den entsprechenden Formaten zu.", answers: ["Audio: Podcast", "Video: Vlog", "Text: Whitepaper", "Bild: Infografik"], correct: ["Audio: Podcast", "Video: Vlog", "Text: Whitepaper", "Bild: Infografik"] },
-    { name: "Musterprüfung B.2-Frage 07", question: "Welche Aussage beschreibt die Nutzung von Facebook-Gruppen richtig?", answers: ["Sie sind kostenpflichtig und nur für Unternehmen nutzbar.", "Sie fördern den Community-Austausch zu spezifischen Themen.", "Sie ersetzen klassische Fanseiten vollständig.", "Sie dienen ausschließlich zur Bewerbung von Events."], correct: ["Sie fördern den Community-Austausch zu spezifischen Themen."] },
-    { name: "Musterprüfung B.1-Frage 05", question: "Was sind die Vorteile des Video-Formats im Social-Media-Marketing?", answers: ["Video sind sehr einfach in der Produktion.", "Video können Emotionen gut transportieren.", "Mit Videos lassen sich komplexe Zusammenhänge schnell und einfach erklären.", "Videos wirken glaubwürdig und authentisch."], correct: ["Video können Emotionen gut transportieren.", "Mit Videos lassen sich komplexe Zusammenhänge schnell und einfach erklären.", "Videos wirken glaubwürdig und authentisch."] },
-    { name: "Musterprüfung G.3- Frage 07", question: "Warum ist die Anzahl der Beiträge bei Social Media Analytics eine wichtige Kennzahl?", answers: ["Um zu messen, ob über das Unternehmen in den sozialen Netzwerken gesprochen wird", "Um zu messen, ob wir in einer ausreichenden Frequenz gepostet haben"], correct: ["Um zu messen, ob wir in einer ausreichenden Frequenz gepostet haben"] },
-    { name: "Musterprüfung C.1- Frage 01", question: "Was ist ein wichtiger erster Schritt zur Entwicklung einer Social-Media-Strategie?", answers: ["Durchführung eines Social-Media-Audits", "Einstellung eines neuen Teams", "Gestaltung des Corporate Designs", "Auswahl eines Content-Management-Tools"], correct: ["Durchführung eines Social-Media-Audits"] },
-    { name: "Musterprüfung E.4- Frage 02", question: "Was sind „Zielgruppen-Accounts\"?", answers: ["Bestehende Communitys, die die eigene Zielgruppe repräsentieren", "Eine eigene Zielgruppe, die man beim Retargeting in Social Media Ads einsetzt"], correct: ["Bestehende Communitys, die die eigene Zielgruppe repräsentieren"] },
-    { name: "Musterprüfung B.2-Frage 02", question: "Wofür eignet sich YouTube als Plattform?", answers: ["Shopping", "Tutorials", "Imagefilme", "Musikvideos"], correct: ["Tutorials", "Imagefilme", "Musikvideos"] },
-    { name: "Musterprüfung F.1- Frage 08", question: "Was wird zunächst benötigt, um eine Lookalike Audience zu erstellen?", answers: ["Meta-Pixel", "Eine Custom Audience"], correct: ["Eine Custom Audience"] },
-    { name: "Musterprüfung B.1-Frage 02", question: "Welche Netzwerke gehören zum Konzern Meta (ehemals Facebook)?", answers: ["Facebook", "WhatsApp", "X", "Instagram"], correct: ["Facebook", "WhatsApp", "Instagram"] },
-    { name: "Musterprüfung E.1-Frage 02", question: "Was sind Social-Media-Guidelines?", answers: ["Interne Richtlinien, die einen Verhaltenskodex für die Online-Kommunikation darstellen", "Ein fester Ablaufplan, um Social-Media-Management-Tools in ein Unternehmen zu integrieren"], correct: ["Interne Richtlinien, die einen Verhaltenskodex für die Online-Kommunikation darstellen"] },
-    { name: "Musterprüfung A.3-Frage 05", question: "Zwischen welchen Arten von Touchpoints wird im Touchpoint-Management unterschieden?", answers: ["Zwischen der Website und Social Media", "Zwischen Zielgruppenfaktoren", "Zwischen Kanälen und Formaten", "Zwischen Arten und Formaten"], correct: ["Zwischen Kanälen und Formaten"] },
-    { name: "Musterprüfung A.2-Frage 02", question: "Wofür steht die Kategorisierung in kurzfristige, mittelfristige und langfristige Ziele im Social Media Marketing?", answers: ["Für Werbeziele, Analyseziele und Reportingziele", "Für operative, taktische und strategische Zielarten", "Für Zielgruppen, Contentarten und Plattformen", "Für Erfolg, Misserfolg und Neutralität"], correct: ["Für operative, taktische und strategische Zielarten"] },
-    { name: "Musterprüfung C.3 - Frage 03", question: "Wie könnte man eine Persona beschreiben?", answers: ["Eine Sammlung demografischer Merkmale", "Nutzermodell, das Personen einer Zielgruppe in ihren Merkmalen charakterisiert", "Eine oberflächliche Betrachtung einer Personengruppe", "Eine Personengruppe, die besonders für Werbeanzeigen interessant ist"], correct: ["Nutzermodell, das Personen einer Zielgruppe in ihren Merkmalen charakterisiert"] },
-    { name: "Musterprüfung B.2-Frage 04", question: "Was ist ein Thumbnail?", answers: ["Social-Media-Tool", "Vorschaubild", "Verschlagwortung", "News-Portal"], correct: ["Vorschaubild"] },
-    { name: "Musterprüfung C.2 - Frage 02", question: "Was sind Social-Media-Benchmarks?", answers: ["Standardwerte für bestimmte Metriken im Social-Media-Marketing", "Modelle für die Entwicklung einer Unternehmensmission", "Eine digitale Währung in sozialen Netzwerken"], correct: ["Standardwerte für bestimmte Metriken im Social-Media-Marketing"] },
-    { name: "Musterprüfung D.3 - Frage 03", question: "Welche Recherchen und Analysen können uns bei der Erstellung einer Content-Strategie behilflich sein?", answers: ["Konkurrenz- und Wettbewerbsanalyse", "Keyword-Recherche", "Content-Audit", "Trendscouting"], correct: ["Konkurrenz- und Wettbewerbsanalyse", "Keyword-Recherche", "Content-Audit", "Trendscouting"] },
-    { name: "Musterprüfung F.1- Frage 05", question: "Welche Möglichkeiten bietet uns Meta, um unser Budget einzuplanen?", answers: ["Likebudget", "Wochenbudget", "Tagesbudget", "Laufzeitbudget"], correct: ["Tagesbudget", "Laufzeitbudget"] },
-    { name: "Musterprüfung A.3 - Frage 01", question: "Um Buyer-Personas zu erstellen, solltest du dir einzelne potenzielle Kunden konkret vorstellen. Was sind die wichtigsten Fragen, die dabei hilfreich sind?", answers: ["Wie ist die Lebenssituation der Kunden hinsichtlich Wohnort und Familienleben?", "Welches Alter und welchen Beruf haben die Kunden?", "Welches Geschlecht haben die Kunden?", "Wie heißen die Kunden (Vor- und Nachname)?"], correct: ["Wie ist die Lebenssituation der Kunden hinsichtlich Wohnort und Familienleben?", "Welches Alter und welchen Beruf haben die Kunden?", "Welches Geschlecht haben die Kunden?"] },
-    { name: "Musterprüfung G.2 - Frage 02", question: "Welche Möglichkeiten zur Datenerfassung stehen uns im Social Media Monitoring und Social Listening zur Verfügung?", answers: ["Alert-Services", "Meta Talk Library", "Social-Media-Monitoring-Tools", "Hashtag- und Erwähnungs-Tracking"], correct: ["Alert-Services", "Social-Media-Monitoring-Tools", "Hashtag- und Erwähnungs-Tracking"] },
-    { name: "Musterprüfung C.3 - Frage 06", question: "Was sind gängige Zielgruppenfaktoren?", answers: ["Psychografische Merkmale", "Informationsverhalten", "Kommunikationsverhalten", "Demografische Merkmale"], correct: ["Psychografische Merkmale", "Informationsverhalten", "Kommunikationsverhalten", "Demografische Merkmale"] },
-    { name: "Musterprüfung D.2 - Frage 06", question: "Welche Aussagen in Bezug auf User Generated Content sind korrekt?", answers: ["User Generated Content ist nicht planbar.", "User Generated Content ist häufig kostenintensiv.", "User Generated Content wird häufiger geteilt.", "User Generated Content wirkt glaubwürdiger."], correct: ["User Generated Content wird häufiger geteilt.", "User Generated Content wirkt glaubwürdiger."] },
-    { name: "Musterprüfung D.2 - Frage 02", question: "In welcher Form kann uns Content begegnen?", answers: ["Text", "Audio", "Video", "Bild"], correct: ["Text", "Audio", "Video", "Bild"] },
-    { name: "Musterprüfung A.1-Frage 08", question: "Welcher Aspekt gehört nicht zu den Grundprinzipien des Datenschutzes?", answers: ["Zweckbindung", "Monetarisierung", "Datensicherheit", "Einwilligung"], correct: ["Monetarisierung"] },
-    { name: "Musterprüfung G.1- Frage 06", question: "Was ist das Ziel von Social Listening?", answers: ["Tieferes Verständnis von Meinungen, Motiven und Stimmungen gewinnen", "Nutzer für E-Mail-Kampagnen identifizieren", "Zahl der Erwähnungen pro Marke zählen", "Likes und Shares auswerten"], correct: ["Tieferes Verständnis von Meinungen, Motiven und Stimmungen gewinnen"] },
-    { name: "Musterprüfung G.1-Frage 01", question: "Nach welchen Bereichen lässt sich eine Social-Media-Analyse generell klassifizieren?", answers: ["Social Bookmarking", "Social Media Analytics", "Social Media Monitoring", "Social Listening"], correct: ["Social Media Analytics", "Social Media Monitoring", "Social Listening"] },
-    { name: "Musterprüfung C.4 - Frage 01", question: "Was bezeichnet man als „Active Sourcing\"?", answers: ["Ein Handelsmodell, um die Kaufentscheidungen der Kundinnen und Kunden zu beeinflussen", "Den Einsatz von Personal Branding in einem Unternehmen", "Die aktive Suche, Ansprache und Bindung von qualifizierten Kandidaten"], correct: ["Die aktive Suche, Ansprache und Bindung von qualifizierten Kandidaten"] },
-    { name: "Musterprüfung D.3 - Frage 04", question: "Vor welchen Herausforderungen stehen Unternehmen im Content-Marketing häufig?", answers: ["Social-Media-Content ist sehr teuer in der Produktion.", "Eine erfolgreiche Content-Marketing-Strategie erfordert die Zusammenarbeit verschiedener Abteilungen.", "Content sollte über verschiedene Kanäle hinweg konsistent sein.", "Content ist nur in Verbindung mit Werbebudget erfolgreich einsetzbar."], correct: ["Eine erfolgreiche Content-Marketing-Strategie erfordert die Zusammenarbeit verschiedener Abteilungen.", "Content sollte über verschiedene Kanäle hinweg konsistent sein."] },
-    { name: "Musterprüfung G.3- Frage 05", question: "Welche Maßnahmen können wir nutzen, um das Wachstum von aktiven und relevanten Followern zu beschleunigen?", answers: ["Follower online kaufen", "Externes Community-Management leisten", "Kooperationen mit Influencern eingehen"], correct: ["Externes Community-Management leisten", "Kooperationen mit Influencern eingehen"] },
-    { name: "Musterprüfung A.1 - Frage 01", question: "Was bedeutet das Akronym USP?", answers: ["Ein Modell für die Zielgruppendefinition", "Logistikmethode eines Unternehmens", "Alleinstellungsmerkmal eines Unternehmens oder eines Produktes", "Einzigartiger Verkaufspreis eines Produktes"], correct: ["Alleinstellungsmerkmal eines Unternehmens oder eines Produktes"] },
-    { name: "Musterprüfung C.2 - Frage 01", question: "Was ist mit dem Begriff „Social Commerce\" gemeint?", answers: ["Der direkte Verkauf von Produkten über soziale Medien", "Marktforschung in sozialen Netzwerken", "Eine Art des Empfehlungs-Marketings", "Die Steigerung des Bekanntheitsgrades"], correct: ["Der direkte Verkauf von Produkten über soziale Medien"] },
-    { name: "Musterprüfung F.1 - Frage 10", question: "Welche Möglichkeiten stehen uns zur Verfügung, um ein Pixel mit einer Website zu verknüpfen?", answers: ["Verknüpfung über den Social Hub", "Spezielle Plugins", "Einbettung über einen HTML-Quellcode"], correct: ["Spezielle Plugins", "Einbettung über einen HTML-Quellcode"] },
-    { name: "Musterprüfung E.3 - Frage 02", question: "Mit welchen Maßnahmen können wir uns auf mögliche Krisensituationen vorbereiten?", answers: ["Erstellung eines Ablaufplans", "Gute interne Organisation", "Einsatz von Monitoring-Tools", "Frühzeitiges Blockieren von Kritikern"], correct: ["Erstellung eines Ablaufplans", "Gute interne Organisation", "Einsatz von Monitoring-Tools"] },
-    { name: "Musterprüfung D.1 - Frage 04", question: "Was ist mit dem Begriff „Viralität\" gemeint?", answers: ["Viralität bedeutet, dass Inhalte immer auf einer emotionalen Ebene wirken müssen, um ihre Wirkung zu entfalten.", "Viralität bedeutet, dass Inhalte durch Interaktionen wie Likes, Kommentare, Shares und selbst das Abspeichern weiterverbreitet werden."], correct: ["Viralität bedeutet, dass Inhalte durch Interaktionen wie Likes, Kommentare, Shares und selbst das Abspeichern weiterverbreitet werden."] },
-    { name: "Musterprüfung E.3 - Frage 03", question: "Warum gestaltet sich die Erfolgskontrolle im Community-Management in der Praxis oft schwierig?", answers: ["Weil die meisten sozialen Netzwerke kaum Insights zur Verfügung stellen", "Weil sie nicht nur von quantifizierbaren Daten, sondern auch von qualitativen Aspekten abhängt"], correct: ["Weil sie nicht nur von quantifizierbaren Daten, sondern auch von qualitativen Aspekten abhängt"] },
-    { name: "Musterprüfung D.2 - Frage 05", question: "Was sind GIFs?", answers: ["Animierte Bilder", "Live-Übertragungen von Bild und Ton", "Ein spezielles Content-Format bei Instagram", "besonders umfangreiche Kommentare von Fans"], correct: ["Animierte Bilder"] },
-    { name: "Musterprüfung G.3 - Frage 01", question: "Was sind Insights?", answers: ["Einsichten in die Statistiken unserer Social-Media-Channels", "Eine Nutzer-Typologie", "Ein Modell zur Relevanzbewertung von Zielgruppen", "Eine spezielle Social-Media-Nutzergruppe"], correct: ["Einsichten in die Statistiken unserer Social-Media-Channels"] },
-    { name: "Musterprüfung F.2 - Frage 01", question: "Ordne die Begriffe zur Klassifizierung von Social Media Ads richtig zu.", answers: ["Format: Carousel Ad", "Platzierung: Facebook Feed", "Ziel: Markenbekanntheit"], correct: ["Format: Carousel Ad", "Platzierung: Facebook Feed", "Ziel: Markenbekanntheit"] },
-    { name: "Musterprüfung B.2-Frage 06", question: "Was ist für Reels in der Regel kennzeichnend?", answers: ["Meistens kürzer als 1:00 Minute", "Für die stationäre Nutzung optimiert", "Vertikales Format (9:16)", "Oft mit Musik/Audio hinterlegt"], correct: ["Meistens kürzer als 1:00 Minute", "Vertikales Format (9:16)", "Oft mit Musik/Audio hinterlegt"] },
-    { name: "Musterprüfung F.3 - Frage 05", question: "Ordne die Faustformeln, die man beim strategischen Aufbau von Social-Media-Ad-Kampagnen berücksichtigen sollte, richtig zu.", answers: ["Je wärmer die Zielgruppe ist,: ... desto spezifischer kann man werben.", "Je kälter eine Zielgruppe ist,: ... desto allgemeiner sollte man kommunizieren."], correct: ["Je wärmer die Zielgruppe ist,: ... desto spezifischer kann man werben.", "Je kälter eine Zielgruppe ist,: ... desto allgemeiner sollte man kommunizieren."] },
-    { name: "Musterprüfung G.3-Frage 04", question: "Was ist bei der Einrichtung eines Webtracking-Tools wie Google Analytics oder Matomo zu beachten?", answers: ["Ein Mindest-Traffic von 100 Sitzungen pro Tag", "Ein entsprechender Hinweis in der Datenschutzbestimmung", "Eine vorherige Umwandlung auf eine Business-Website", "Ein DSGVO-konformes Cookie-Banner"], correct: ["Ein entsprechender Hinweis in der Datenschutzbestimmung", "Ein DSGVO-konformes Cookie-Banner"] },
-    { name: "Musterprüfung C.1- Frage 03", question: "Wie sind die verschiedenen Bereiche einer Social-Media-Strategie in der Regel aufgebaut?", answers: ["1.: Ziele", "2.: Zielgruppen", "3.: Auswahl der Kanäle", "4.: Maßnahmen", "5.: Erfolgskontrolle"], correct: ["1.: Ziele", "2.: Zielgruppen", "3.: Auswahl der Kanäle", "4.: Maßnahmen", "5.: Erfolgskontrolle"] },
-    { name: "Musterprüfung C.3 - Frage 07", question: "Was wird mit der Limbic Map ermittelt?", answers: ["Die Positionierung einer Marke oder eines Unternehmens", "Die Werte, nach der eine Person/Zielgruppe lebt und handelt", "Demografische Merkmale einer Zielgruppe", "Wie viel Geld eine Person zur Verfügung hat"], correct: ["Die Positionierung einer Marke oder eines Unternehmens", "Die Werte, nach der eine Person/Zielgruppe lebt und handelt"] },
-    { name: "Musterprüfung E.4- Frage 06", question: "Über welche Merkmale lässt sich ein Shitstorm identifizieren und klassifizieren?", answers: ["Die Geschwindigkeit der Verbreitung", "Die eigene Unternehmensgröße", "Das Medien-Echo", "Die Menge und Intensität der negativen Kommentare"], correct: ["Die Geschwindigkeit der Verbreitung", "Das Medien-Echo", "Die Menge und Intensität der negativen Kommentare"] },
-    { name: "Musterprüfung G.3 - Frage 02", question: "Wo finden wir die Meta-Insights?", answers: ["Bekommen wir auf Anfrage von den sozialen Netzwerken", "In der Meta Business Suite", "Direkt über unsere Seite", "Nur über ein externes Monitoring-Tool"], correct: ["In der Meta Business Suite", "Direkt über unsere Seite"] },
-    { name: "Musterprüfung A.3-Frage 04", question: "Welche gängigen Modelle beschreiben Teile der oder die gesamte Customer Journey?", answers: ["Sales Funnel", "AIDA-Modell", "FISH-Modell", "SMART-Modell"], correct: ["Sales Funnel", "AIDA-Modell"] },
-    { name: "Musterprüfung D.4 - Frage 03", question: "In welcher Reihenfolge erfolgen die fünf grundlegenden Schritte der Videobearbeitung?", answers: ["1.: Importieren des Videomaterials", "2.: Rohschnitt", "3.: Feinschnitt", "4.: Tonbearbeitung", "5.: Exportieren der Videos"], correct: ["1.: Importieren des Videomaterials", "2.: Rohschnitt", "3.: Feinschnitt", "4.: Tonbearbeitung", "5.: Exportieren der Videos"] },
-    { name: "Musterprüfung B.4-Frage 03", question: "Welche Aussage zu Foren ist korrekt?", answers: ["Unternehmen nutzen fremde Foren für ihre Marketing-Aktivitäten.", "Foren gehören eigentlich nicht zu den sozialen Netzwerken", "Foren können von Unternehmen selbst betrieben werden."], correct: ["Unternehmen nutzen fremde Foren für ihre Marketing-Aktivitäten.", "Foren können von Unternehmen selbst betrieben werden."] },
-    { name: "Musterprüfung B.4-Frage 02", question: "Welche Altersgruppe verbringt eher Zeit auf Social Networks wie Snapchat?", answers: ["Eher ältere Nutzer", "Alle Altersgruppen verbringen ähnlich viel Zeit auf diesen Social Networks.", "Sehr junge und sehr alte Nutzer", "Eher jüngere Nutzer"], correct: ["Eher jüngere Nutzer"] },
-    { name: "Musterprüfung E.1-Frage 01", question: "Ordne die folgenden Rollen ihren entsprechenden Aufgaben zu.", answers: ["Content Creator: Erstellung von visuellen und textbasierten Inhalten", "Social-Media-Manager: Entwicklung und Umsetzung von Social-Media- Strategien", "Community-Manager: Interaktion mit Kundinnen und Kunden, das Lösen von Problemen, das Sammeln von Feedback"], correct: ["Content Creator: Erstellung von visuellen und textbasierten Inhalten", "Social-Media-Manager: Entwicklung und Umsetzung von Social-Media- Strategien", "Community-Manager: Interaktion mit Kundinnen und Kunden, das Lösen von Problemen, das Sammeln von Feedback"] },
-    { name: "Musterprüfung E.2-Frage 03", question: "Warum sollten wir eine regelmäßige Redaktionsplanung durchführen?", answers: ["Um die finanziellen Ressourcen zu analysieren", "Um eine Statusübersicht aller Beiträge zu haben", "Um einen Überblick über die jeweiligen Aufgaben im Team zu bekommen"], correct: ["Um eine Statusübersicht aller Beiträge zu haben", "Um einen Überblick über die jeweiligen Aufgaben im Team zu bekommen"] },
-    { name: "Musterprüfung E.3- Frage 04", question: "Wie bezeichnet man eine Sammlung von Hausregeln und Verhaltensregeln, um einen angenehmen Umgangston innerhalb einer Online-Community zu gewährleisten?", answers: ["Guidelines", "Community-Education", "Netiquette"], correct: ["Netiquette"] },
-    { name: "Musterprüfung D.3 - Frage 02", question: "Welche Fragen sollten im Rahmen einer Content-Strategie gestellt und beantwortet werden?", answers: ["Wie viel Werbebudget setzen wir ein?", "Wie wird die Content-Verbreitung organisiert?", "Welche Monitoring-Tools setzen wir ein?", "Was sind die Ziele des Contents?"], correct: ["Wie wird die Content-Verbreitung organisiert?", "Was sind die Ziele des Contents?"] },
-    { name: "Musterprüfung C.2 - Frage 03", question: "Warum bietet Social Media auch für Human Resources gute Möglichkeiten?", answers: ["Bewerberinnen und Bewerber informieren sich gerne via Social Media über ein Unternehmen.", "Wir können via Social Media potenzielle Bewerberinnen und Bewerber finden.", "Wir können via Social Media Crowdfunding-Kampagnen durchführen.", "Social Media bietet tolle Möglichkeiten für einen schnellen Erstkontakt."], correct: ["Bewerberinnen und Bewerber informieren sich gerne via Social Media über ein Unternehmen.", "Wir können via Social Media potenzielle Bewerberinnen und Bewerber finden.", "Social Media bietet tolle Möglichkeiten für einen schnellen Erstkontakt."] },
-    { name: "Musterprüfung B.3-Frage 01", question: "Welche Aussage zu Xing ist richtig?", answers: ["Xing wird überhaupt nicht in der Region DACH genutzt.", "Gruppen- und Eventfunktionen sind sehr relevant.", "Xing wird vor allem in der Region DACH genutzt.", "Xing ist für das Video-Marketing sehr gut geeignet."], correct: ["Xing wird vor allem in der Region DACH genutzt."] },
-    { name: "Musterprüfung A.2 - Frage 03", question: "Welcher Vorteil ergibt sich durch die Unterscheidung von Zielarten (kurz-, mittel-, langfristig)?", answers: ["Die Konkurrenz hat weniger Einfluss auf die Reichweite.", "Die Zielgruppe segmentiert sich automatisch.", "Die Maßnahmen lassen sich gezielter planen und aufeinander abstimmen.", "Die Planung von Postings wird automatisiert."], correct: ["Die Maßnahmen lassen sich gezielter planen und aufeinander abstimmen."] },
-    { name: "Musterprüfung D.4 - Frage 01", question: "Welche Vorteile hat Content Curation?", answers: ["Transportieren von Fachkenntnissen", "Zeitersparnis", "Mehr Unabhängigkeit von anderen Quellen", "Mehr Originalität"], correct: ["Transportieren von Fachkenntnissen", "Zeitersparnis"] },
-    { name: "Musterprüfung A.1-Frage 05", question: "Worin besteht der Unterschied zwischen einer Unternehmens-Vision und einer -Mission?", answers: ["Mission: Folgt dem Muster, Das erreichen wir, indem wir ...\".", "Vision: Kann sozial und unternehmerisch formuliert sein."], correct: ["Mission: Folgt dem Muster, Das erreichen wir, indem wir ...\".", "Vision: Kann sozial und unternehmerisch formuliert sein."] },
-    { name: "Musterprüfung C.4 - Frage 02", question: "Welche Fragen sollten wir uns bei der Auswahl der richtigen Social Networks stellen?", answers: ["Welche Relevanz haben einzelne Social Networks für meine Zielgruppe?", "Welche Ressourcen sind für das Bespielen notwendig?", "Die aktive Suche, Ansprache und Bindung von qualifizierten Kandidaten", "Wie ist das (Nutzungs-) Verhalten meiner Zielgruppe?"], correct: ["Welche Relevanz haben einzelne Social Networks für meine Zielgruppe?", "Welche Ressourcen sind für das Bespielen notwendig?", "Wie ist das (Nutzungs-) Verhalten meiner Zielgruppe?"] },
-    { name: "Musterprüfung F.1- Frage 03", question: "Was ist eine Custom Audience?", answers: ["Eine Zielgruppe, die aus vorhandenen Kundinnen und Kunden oder Kontakten eines Unternehmens erstellt wird", "Eine Zielgruppe, die vor allem über demografische Faktoren erstellt wird"], correct: ["Eine Zielgruppe, die aus vorhandenen Kundinnen und Kunden oder Kontakten eines Unternehmens erstellt wird"] },
-    { name: "Musterprüfung B.1-Frage 04", question: "Über welches Tool lassen sich die Geschäftsaktivitäten im Meta-Ökosystem verwalten?", answers: ["Meta Business Manager", "Facebook Watch", "Facebook Studio", "Instagram Cirect"], correct: ["Meta Business Manager"] },
-    { name: "Musterprüfung G.1- Frage 05", question: "Was unterscheidet Social Media Monitoring von Social Media Analytics?", answers: ["Analytics wird ausschließlich manuell durchgeführt", "Monitoring analysiert die eigene Zielgruppe", "Analytics wertet nur negative Kommentare aus", "Monitoring beobachtet externe Inhalte und Nutzergespräche"], correct: ["Monitoring beobachtet externe Inhalte und Nutzergespräche"] },
-    { name: "Musterprüfung A.1-Frage 07", question: "Welche Aussage zu den AGBs sozialer Netzwerke ist korrekt?", answers: ["AGBs sind nur bei kommerzieller Nutzung relevant.", "Verstöße gegen AGBs können lediglich zur Löschung einzelner Beiträge führen.", "Die AGBs eines sozialen Netzwerkes geben vor, welche Inhalte auf der Plattform erlaubt sind und was nicht.", "AGBs sind im Social-Media-Marketing irrelevant, da sie nur Nutzerverhalten regeln."], correct: ["Die AGBs eines sozialen Netzwerkes geben vor, welche Inhalte auf der Plattform erlaubt sind und was nicht."] },
-    { name: "Musterprüfung C.5 - Frage 02", question: "Welche Art von Ressourcen gilt es bei einer Strategie zu berücksichtigen?", answers: ["Budget", "Zeit", "Technische Infrastruktur", "Tools"], correct: ["Budget", "Zeit", "Technische Infrastruktur", "Tools"] },
-    { name: "Musterprüfung F.3 - Frage 07", question: "Welche Kennzahlen und KPIs sollten beim Einsatz von Social Media Ads regelmäßig ausgewertet werden?", answers: ["CTR (Click-Through-Rate)", "POI (Perfect Order Index)", "Kosten pro Conversion", "Reichweite"], correct: ["CTR (Click-Through-Rate)", "Kosten pro Conversion", "Reichweite"] },
-    { name: "Musterprüfung C.5 - Frage 01", question: "Was sind gängige technische Ressourcen, die es zu beachten gilt?", answers: ["Lizenzen", "Tools", "Zielgruppen", "Endgeräte"], correct: ["Lizenzen", "Tools", "Endgeräte"] },
-    { name: "Wissenstest Frage 1", question: "Wie lautet der Grundtyp von Facebook? (SC)", answers: ["Business-Plattform", "Videoplattform", "Suchmaschine", "Soziales Netzwerk"], correct: ["Soziales Netzwerk"] },
-    { name: "Wissenstest Frage 2", question: "Was ist ein zentraler Erfolgsfaktor für das Community Building auf Facebook? (SC)", answers: ["Quantität vor Qualität - Hauptsache viele Fans", "Influencer-Marketing mit TikTok-Creators", "Relevanter und hochwertiger Content für die Zielgruppe", "Nur Beiträge mit Gewinnspielen posten"], correct: ["Relevanter und hochwertiger Content für die Zielgruppe"] },
-    { name: "Wissenstest Frage 3", question: "Wie heißt das Kurzvideoformat bei Instagram? (SC)", answers: ["Reels", "Snaps", "Vidz", "IGTV"], correct: ["Reels"] },
-    { name: "Wissenstest Frage 4", question: "Was ist der Meta Business Manager? (SC)", answers: ["Ein reines Analysetool für Instagram-Profile", "Ein Tool zur zentralen Verwaltung von Unternehmensressourcen im Meta-Ökosystem", "Ein KI-gesteuerter Avatar-Generator für Meta", "Eine kostenpflichtige Werbeanzeigenplattform"], correct: ["Ein Tool zur zentralen Verwaltung von Unternehmensressourcen im Meta-Ökosystem"] },
-    { name: "Wissenstest Frage 5", question: "Was ist WhatsApp Business? (SC)", answers: ["Ein soziales Netzwerk mit Fokus auf Karrierenetzwerke", "Eine klassische Newsletter-App", "Eine App zur Organisation interner Teamkommunikation", "Eine spezielle Version von WhatsApp für Unternehmen zur direkten Kundenkommunikation"], correct: ["Eine spezielle Version von WhatsApp für Unternehmen zur direkten Kundenkommunikation"] },
-    { name: "Wissenstest Frage 6", question: "Was unterscheidet Vimeo von YouTube? (MPC)", answers: ["Die Rechte am hochgeladenen Material bleiben vollständig beim Erstellenden.", "Der Fokus liegt auf künstlerisch anspruchsvollen Videos.", "Es besticht in seinem Aufbau durch eine große Schlichtheit.", "Es bietet mehr Monetarisierungsmöglichkeiten."], correct: ["Die Rechte am hochgeladenen Material bleiben vollständig beim Erstellenden.", "Der Fokus liegt auf künstlerisch anspruchsvollen Videos.", "Es besticht in seinem Aufbau durch eine große Schlichtheit."] },
-    { name: "Wissenstest Frage 7", question: "Was soll mit der Aussage Content is King\" ausgedrückt werden? (SC)", answers: ["Gute Inhalte sind die Basis für alle Online-Marketing-Maßnahmen.", "Inhalte müssen einen sehr hohen Wertbeitrag für den Umsatz eines Unternehmens bringen."], correct: ["Gute Inhalte sind die Basis für alle Online-Marketing-Maßnahmen."] },
-    { name: "Wissenstest Frage 8", question: "Was bedeutet der Discovery Faktor in Bezug auf TikTok? (SC)", answers: ["Nutzende gehen auf,,Entdeckungsreise\" und lassen sich durch neue Inhalte überraschen und inspirieren.", "Nutzende schauen sich Inhalte von Creators und Kanälen an, die sie bereits kennen und abonniert haben."], correct: ["Nutzende gehen auf,,Entdeckungsreise\" und lassen sich durch neue Inhalte überraschen und inspirieren."] },
-    { name: "Wissenstest Frage 9", question: "Was lässt sich auf Business- und Karrierenetzwerken gut umsetzen? (MPC)", answers: ["Personal Branding", "Social Shopping", "Social Selling", "Recruiting"], correct: ["Personal Branding", "Social Selling", "Recruiting"] },
-    { name: "Wissenstest Frage 10", question: "Warum ist Xing im Recruiting weiterhin sehr beliebt? (MPC)", answers: ["Xing bietet viele Tools und Möglichkeiten im Recruiting.", "Der Eventmarkt bietet tolle Möglichkeiten für Recruiter.", "Über die Gruppenfunktion kann gezielt nach Bewerbenden gesucht werden.", "Über die Jobbörse können Stellen direkt auf der Plattform geteilt werden."], correct: ["Xing bietet viele Tools und Möglichkeiten im Recruiting.", "Über die Jobbörse können Stellen direkt auf der Plattform geteilt werden."] },
-    { name: "Wissenstest Frage 11", question: "Zu welchem Unternehmen gehört LinkedIn? (SC)", answers: ["Apple", "Meta", "Microsoft", "Google"], correct: ["Microsoft"] },
-    { name: "Wissenstest Frage 13", question: "Zu welchem Unternehmen gehört Youtube? (SC)", answers: ["Google", "Facebook", "Microsoft", "X (Twitter)"], correct: ["Google"] },
-    { name: "Wissenstest Frage 14", question: "Ordne die folgenden Aspekte dem Hero-Hub-Help-Modell zu.", answers: ["Hero: Die Videos sind aufwendig produzierte, spektakuläre Videos, die das Potenzial haben, zu viralen Videos zu werden.", "Hub: Die Videos richten sich an bestehende und potentielle Abonnenten eines Video-Kanals.", "Help: Die Videos bieten nützliche Informationen und werden häufig über Suchmaschinen gefunden."], correct: ["Hero: Die Videos sind aufwendig produzierte, spektakuläre Videos, die das Potenzial haben, zu viralen Videos zu werden.", "Hub: Die Videos richten sich an bestehende und potentielle Abonnenten eines Video-Kanals.", "Help: Die Videos bieten nützliche Informationen und werden häufig über Suchmaschinen gefunden."] },
-    { name: "Quiz LF C Frage 2", question: "Welche Aspekte sollte eine Social-Media-Strategie immer beinhalten? (MP)", answers: ["Klare Ziele", "Zielgruppenverständnis", "Supply-Chain-Audit", "Effiziente Ressourcennutzung"], correct: ["Klare Ziele", "Zielgruppenverständnis", "Effiziente Ressourcennutzung"] },
-    { name: "Quiz LF C Frage 4", question: "Welches dieser Ziele ist deiner Meinung nach SMART definiert? (SC)", answers: ["Wir erhöhen die Reichweite unserer YouTube-Videos.", "Wir gewinnen bis Ende 2024 mehr Instagram-Follower.", "Wir generieren durch eine LinkedIn-Ad-Kampagne 20 Bewerbungen bis Ende Q1/2024."], correct: ["Wir generieren durch eine LinkedIn-Ad-Kampagne 20 Bewerbungen bis Ende Q1/2024."] },
-    { name: "Quiz LF C Frage 5", question: "Welche Informationen sollte eine Persona enthalten? (MC)", answers: ["Name", "Foto oder Bild", "Kauf- und Konsumverhalten", "Bevorzugte Marken"], correct: ["Name", "Foto oder Bild", "Kauf- und Konsumverhalten", "Bevorzugte Marken"] },
-    { name: "Quiz LF C Frage 6", question: "Was sind demografische Merkmale einer Zielgruppe? (MP)", answers: ["Alter", "Geschlecht", "Psyche", "Kaufverhalten"], correct: ["Alter", "Geschlecht"] },
-    { name: "Quiz LF C Frage 7", question: "Was sind gängige externe Ressourcen, die es zu beachten gilt? (MP)", answers: ["Texterinnen und Texter", "Supply Chain Managerinnen und Manager", "Fans sowie Followerinnen und Follower", "Influencerinnen und Influencer"], correct: ["Texterinnen und Texter", "Fans sowie Followerinnen und Follower", "Influencerinnen und Influencer"] },
-    { name: "Quiz LF C Frage 10", question: "Wonach sollte man die sozialen Netzwerke für die eigenen Social-Media Aktivitäten idealerweise auswählen? (SC)", answers: ["Nach der bestmöglichen Reichweite des Netzwerkes.", "Nach dem POST-Modell.", "Nach den Vorlieben der Zielgruppe."], correct: ["Nach den Vorlieben der Zielgruppe."] },
-    { name: "Quiz LF C Frage 11", question: "Ordne die nachfolgenden Begriffe in eine sinnvolle Reihenfolge", answers: ["1. Ziele", "2. Zielgruppe", "3. Maßnahmen", "4. Zeit-, Projekt- und Budgetbedarfsplanung", "5. Erfolgsmessung"], correct: ["1. Ziele", "2. Zielgruppe", "3. Maßnahmen", "4. Zeit-, Projekt- und Budgetbedarfsplanung", "5. Erfolgsmessung"] },
-    { name: "Quiz LF C Frage 12", question: "Wie wird der Verkauf bzw. Vertrieb von B2B-Produkten und Dienstleistungen in sozialen Netzwerken häufig genannt? (SC)", answers: ["Social Services", "Social Business", "Social Commerce", "Social Selling"], correct: ["Social Selling"] },
-    { name: "Quiz LF C Frage 13", question: "Was gilt bei der Auswahl von passenden Social Networks? (MPC)", answers: ["Wir sollten auf allen Channels aktiv sein,", "Maximal ein bis zwei Networks sind genug.", "Wir sollten dort aktiv werden, wo auch die Zielgruppe aktiv ist.", "Social Networks sollten auch zum eigenen Nutzungsverhalten passen."], correct: ["Wir sollten dort aktiv werden, wo auch die Zielgruppe aktiv ist.", "Social Networks sollten auch zum eigenen Nutzungsverhalten passen."] },
-    { name: "Quiz best of Frage 01", question: "Benenne die 5 Phasen der Customer Journey.", answers: ["Awareness (Bewusstsein): Der Kunde wird auf ein Problem oder Bedürfnis aufmerksam.", "Consideration (Kaufabsicht): Der Kunde recherchiert verschiedene Optionen und sammelt Informationen, um eine informierte Entscheidung zu treffen.", "Purchase (Kauf): Der Kunde trifft die Kaufentscheidung und führt den Kauf durch.", "Retention (Kundenbindung): Das Unternehmen konzentriert sich darauf, Kunden zufriedenzustellen, um Wiederholungskäufe zu fördern.", "Advocacy (Weiterempfehlung): Zufriedene Kunden empfehlen das Produkt oder die Dienstleistung weiter."], correct: ["Awareness (Bewusstsein): Der Kunde wird auf ein Problem oder Bedürfnis aufmerksam.", "Consideration (Kaufabsicht): Der Kunde recherchiert verschiedene Optionen und sammelt Informationen, um eine informierte Entscheidung zu treffen.", "Purchase (Kauf): Der Kunde trifft die Kaufentscheidung und führt den Kauf durch.", "Retention (Kundenbindung): Das Unternehmen konzentriert sich darauf, Kunden zufriedenzustellen, um Wiederholungskäufe zu fördern.", "Advocacy (Weiterempfehlung): Zufriedene Kunden empfehlen das Produkt oder die Dienstleistung weiter."] },
-    { name: "Quiz LF A-1 Frage 01", question: "Was bedeutet \"CTA\"?", answers: ["Call to Action.", "Ein Call-to-Action ist eine Marketingstrategie, die eine direkte Aufforderung an den Nutzer darstellt, eine bestimmte Handlung auszuführen. Typische Beispiele für CTAs sind \"Jetzt kaufen\", \"Mehr erfahren\" und \"Hier anmelden\"."], correct: ["Call to Action."] },
-    { name: "Quiz LF B2 Frage 01", question: "Welche Netzwerke gehören zum Konzern \"Meta\"?", answers: ["Zum Konzern Meta gehören mehrere soziale Netzwerke und Kommunikationsplattformen, darunter Facebook, Instagram, WhatsApp und Messenger¹."], correct: ["Zum Konzern Meta gehören mehrere soziale Netzwerke und Kommunikationsplattformen, darunter Facebook, Instagram, WhatsApp und Messenger¹."] },
-    { name: "Quiz LF B2 Frage 02", question: "Was ist ein Thumbnail?", answers: ["Ein Thumbnail ist eine verkleinerte Version eines größeren Bildes, die als Platzhalter dient².", "Sie werden häufig verwendet, um die Ladezeiten von Webseiten zu verkürzen und die Navigation zu erleichtern³.", "Ein gutes Synonym hierfür wäre \"Vorschaubild\"4."], correct: ["Ein Thumbnail ist eine verkleinerte Version eines größeren Bildes, die als Platzhalter dient².", "Ein gutes Synonym hierfür wäre \"Vorschaubild\"4."] },
-    { name: "Quiz LF B2 Frage 05", question: "Warum ist Xing im Bereich Content nicht mehr so relevant?", answers: ["Xing hat sich zunehmend zu einer spezialisierten Recruiting-Plattform entwickelt, was sich in der strategischen Neuausrichtung zeigt, die den Fokus auf die Jobsuche legt.", "Viele Nutzer empfinden die Plattform mittlerweile als \"digitale Geisterstadt\", in der es an lebhaften Diskussionen und wertvollen Inhalten mangelt, was die Attraktivität von Xing im Vergleich zu dynamischeren Netzwerken wie LinkedIn weiter verringert®."], correct: ["Xing hat sich zunehmend zu einer spezialisierten Recruiting-Plattform entwickelt, was sich in der strategischen Neuausrichtung zeigt, die den Fokus auf die Jobsuche legt.", "Viele Nutzer empfinden die Plattform mittlerweile als \"digitale Geisterstadt\", in der es an lebhaften Diskussionen und wertvollen Inhalten mangelt, was die Attraktivität von Xing im Vergleich zu dynamischeren Netzwerken wie LinkedIn weiter verringert®."] },
-    { name: "Quiz LF C1 Frage 01", question: "Wer war hier der Kooperationspartner?", answers: ["Wagner (Pizza)", "Disney", "Netflix", "Primark"], correct: ["Wagner (Pizza)"] },
-    { name: "Quiz LF C1 Frage 02", question: "Wer war hier der Kooperationspartner?", answers: ["McDonalds", "Toyota", "Mercedes", "Levi's"], correct: ["Mercedes"] },
-    { name: "Quiz LF C1 Frage 03", question: "Nenne mögliche Aspekte, die in die Ressourcenplanung fallen können.", answers: ["Kosten für interne und externe Mitarbeiter³.", "Werbebudgets (Social Media Ads)4.", "Social Media Management und Projektmanagementtools.", "Kosten für weitere Tools (Content, Analyse, Recherche).", "Kostenpflichtige Accounts (z.B. Xing, LinkedIn)7.", "Reise- und Veranstaltungskosten (z. B. Messebesuche) .", "Rechts- und Beratungskosten.", "Lizenzgebühren und Urheberrechte 10.", "Kosten für Partnerschaften und Influencer Marketing¹¹.", "Schulung und Weiterbildung 12."], correct: ["Kosten für interne und externe Mitarbeiter³.", "Werbebudgets (Social Media Ads)4.", "Social Media Management und Projektmanagementtools.", "Kosten für weitere Tools (Content, Analyse, Recherche).", "Kostenpflichtige Accounts (z.B. Xing, LinkedIn)7.", "Reise- und Veranstaltungskosten (z. B. Messebesuche) .", "Rechts- und Beratungskosten.", "Lizenzgebühren und Urheberrechte 10.", "Kosten für Partnerschaften und Influencer Marketing¹¹.", "Schulung und Weiterbildung 12."] },
-    { name: "Quiz LF C2 Frage 08", question: "Was war nochmal ein Social Media Audit? Und wie läuft das ab?", answers: ["Ein Social Media Audit kann als eine Art Bestandsaufnahme bezeichnet werden 28.", "Dabei wird untersucht, auf welchen Plattformen das Unternehmen aktiv ist und wie effektiv diese Präsenzen sind29.", "Dazu können Kennzahlen wie Follower-Zahlen, Engagement-Raten und die Reichweite von Posts herangezogen werden 30.", "Ein Audit hilft dabei, herauszufinden, was gut funktioniert und was verbessert werden könnte 31."], correct: ["Ein Social Media Audit kann als eine Art Bestandsaufnahme bezeichnet werden 28.", "Dabei wird untersucht, auf welchen Plattformen das Unternehmen aktiv ist und wie effektiv diese Präsenzen sind29.", "Dazu können Kennzahlen wie Follower-Zahlen, Engagement-Raten und die Reichweite von Posts herangezogen werden 30.", "Ein Audit hilft dabei, herauszufinden, was gut funktioniert und was verbessert werden könnte 31."] },
-    { name: "Quiz LF C3 Frage 01", question: "Ordne die nachfolgenden Begriffe in eine sinnvolle Reihenfolge", answers: ["1. Ziele", "2. Zielgruppe", "3. Maßnahmen", "4. Zeit-, Projekt- und Budgetplanung", "5. Erfolgsmessung"], correct: ["1. Ziele", "2. Zielgruppe", "3. Maßnahmen", "4. Zeit-, Projekt- und Budgetplanung", "5. Erfolgsmessung"] },
-    { name: "Quiz LF C3 Frage 02", question: "Wie finde ich das richtige Social Network?", answers: ["Zielgruppe", "Ressourcen (Budget/Zeit/Mitarbeiter)", "Ziele", "Content"], correct: ["Zielgruppe", "Ressourcen (Budget/Zeit/Mitarbeiter)", "Ziele", "Content"] },
-    { name: "Quiz LF C3 Frage 03", question: "Was war nochmal ein Social Media Audit? Und wie läuft das ab?", answers: ["Ein Social Media Audit ist eine Art Bestandsaufnahme 10.", "Es wird untersucht, auf welchen Plattformen ein Unternehmen aktiv ist und wie effektiv diese Präsenzen sind¹¹.", "Dazu können Kennzahlen wie Follower-Zahlen, Engagement-Raten und die Reichweite von Posts herangezogen werden12.", "Das Audit hilft herauszufinden, was gut funktioniert und was verbessert werden könnte 13."], correct: ["Ein Social Media Audit ist eine Art Bestandsaufnahme 10.", "Es wird untersucht, auf welchen Plattformen ein Unternehmen aktiv ist und wie effektiv diese Präsenzen sind¹¹.", "Dazu können Kennzahlen wie Follower-Zahlen, Engagement-Raten und die Reichweite von Posts herangezogen werden12.", "Das Audit hilft herauszufinden, was gut funktioniert und was verbessert werden könnte 13."] },
-    { name: "Quiz LF C3 Frage 05", question: "Wofür stehen die einzelnen Buchstaben der SMART-Formel?", answers: ["S für Spezifisch", "M für Messbar", "A für Attraktiv", "R für Realistisch", "T für Terminiert"], correct: ["S für Spezifisch", "M für Messbar", "A für Attraktiv", "R für Realistisch", "T für Terminiert"] },
-    { name: "Quiz LF C3 Frage 06", question: "Was sind (Social Media) Benchmarks?", answers: ["Ein Benchmark ist ein Vergleichsmaßstab, der als Referenzpunkt dient, um die Leistung von Produkten, Dienstleistungen oder Prozessen zu messen 23.", "Sie sind Durchschnittswerte, Entscheidungshilfen oder Orientierungspunkte, die zur Formulierung sinnvoller Ziele hilfreich sind24.", "Sie ermöglichen es Unternehmen, Schwachstellen zu identifizieren und Best Practices aus der Branche zu übernehmen 25."], correct: ["Ein Benchmark ist ein Vergleichsmaßstab, der als Referenzpunkt dient, um die Leistung von Produkten, Dienstleistungen oder Prozessen zu messen 23.", "Sie sind Durchschnittswerte, Entscheidungshilfen oder Orientierungspunkte, die zur Formulierung sinnvoller Ziele hilfreich sind24.", "Sie ermöglichen es Unternehmen, Schwachstellen zu identifizieren und Best Practices aus der Branche zu übernehmen 25."] },
-    { name: "Quiz LF C3 Frage 08", question: "Was ist der Unterschied zwischen einer Zielgruppe und einer Persona?", answers: ["Personas sind fiktive Charaktere, die auf realen Daten und Verhaltensmustern basieren und eine Zielgruppe repräsentieren 28.", "Sie sind ein Werkzeug im Marketing, um Nutzer und Kunden besser zu verstehen29.", "Personas sind ein effektives Mittel, um abstrakte Daten über Zielgruppen zu personifizieren und lebendiger zu gestalten30."], correct: ["Personas sind fiktive Charaktere, die auf realen Daten und Verhaltensmustern basieren und eine Zielgruppe repräsentieren 28.", "Sie sind ein Werkzeug im Marketing, um Nutzer und Kunden besser zu verstehen29.", "Personas sind ein effektives Mittel, um abstrakte Daten über Zielgruppen zu personifizieren und lebendiger zu gestalten30."] },
-    { name: "Quiz LF G1 Frage 01", question: "Was wird bei Social Media Analytics getrackt? (MPC)", answers: ["a) Die Reichweite unserer Beiträge¹.", "b) Die Entwicklung unserer Fan-/Follower-Anzahl².", "c) Mentions in Foren³.", "d) Die Interaktionen zu unseren Beiträgen."], correct: ["a) Die Reichweite unserer Beiträge¹.", "b) Die Entwicklung unserer Fan-/Follower-Anzahl².", "d) Die Interaktionen zu unseren Beiträgen."] },
-    { name: "Quiz LF G1 Frage 02", question: "Ordne die folgenden KPIs den entsprechenden Ebenen der Key Performance-Indicator-Pyramide zu.", answers: ["1. Ebene = Follower", "2. Ebene = Share of Buzz", "3. Ebene = Kundenzufriedenheit"], correct: ["1. Ebene = Follower", "2. Ebene = Share of Buzz", "3. Ebene = Kundenzufriedenheit"] },
-    { name: "Quiz LF G1 Frage 03", question: "Warum ist beim Social Listening eine gründliche Keyword-Analyse entscheidend? (MPC)", answers: ["a) Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben.", "b) Wir können damit die Auffindbarkeit unserer Beiträge deutlich erhöhen.", "c) Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern10."], correct: ["a) Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben.", "c) Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern10."] },
-    { name: "Quiz LF G1 Frage 04", question: "Was sagt die potenzielle Reichweite im Social Media Monitoring aus? (SC)", answers: ["a) Die geschätzte Anzahl von Personen, die einen Beitrag sehen könnten¹¹.", "b) Die Anzahl der Personen, die laut Insights tatsächlich einen Beitrag gesehen haben 12.", "c) Der geschätzte Anteil der Markenerwähnungen im Vergleich zu Mitbewerbenden 13."], correct: ["a) Die geschätzte Anzahl von Personen, die einen Beitrag sehen könnten¹¹."] },
-    { name: "Quiz LF G1 Frage 05", question: "Was wird im Rahmen einer Sentiment-Analyse analysiert? (SC)", answers: ["a) Es geht dabei vorrangig um das Verständnis spezifischer Themen oder Diskussionen in sozialen Medien 14.", "b) Es werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Produkts, einer Marke oder eines Themas zu erhalten 15."], correct: ["b) Es werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Produkts, einer Marke oder eines Themas zu erhalten 15."] },
-    { name: "Quiz LF G1 Frage 06", question: "Wie oft sollte die Erfolgskontrolle der eigenen Maßnahmen idealerweise erfolgen? (SC)", answers: ["a) Mindestens einmal täglich¹6.", "b) Mindestens einmal monatlich 17171717.", "c) Lediglich im Rahmen einer Strategieentwicklung 18.", "d) Maximal einmal im Jahr¹9."], correct: ["b) Mindestens einmal monatlich 17171717."] },
-    { name: "Quiz LF G1 Frage 07", question: "Was sagt ein ROI mit einem Faktor von 0,8 aus? (SC)", answers: ["a) Dass die Investitionen in eine Kampagne mehr Kosten verursacht haben, als sie an Gewinn gebracht haben20202020", "b) Dass die Investitionen in eine Kampagne mehr Gewinn gebracht haben, als sie Kosten verursacht haben21."], correct: ["a) Dass die Investitionen in eine Kampagne mehr Kosten verursacht haben, als sie an Gewinn gebracht haben20202020"] },
-    { name: "Quiz LF G1 Frage 08", question: "Was ist mit dem Begriff,,Learning-Aspekt\" in Bezug auf Social Media Analytics gemeint? (SC)", answers: ["a) Mit jeder Analyse kann sich der Algorithmus besser auf unsere Zielgruppe und unser Vorhaben einstellen 22.", "b) Man sollte im Rahmen einer Analyse immer aus den Ergebnissen lernen und Erkenntnisse zur Optimierung zukünftiger Maßnahmen nutzen23232323"], correct: ["b) Man sollte im Rahmen einer Analyse immer aus den Ergebnissen lernen und Erkenntnisse zur Optimierung zukünftiger Maßnahmen nutzen23232323"] },
-    { name: "Quiz LF G1 Frage 09", question: "Was gibt die Bounce Rate im Kontext von Web Analytics an? (SC)", answers: ["a) Den Anteil der Nutzenden, die das Webtracking abgelehnt haben24.", "b) Den Anteil der Besuchenden, die die Website nach kurzer Zeit wieder verlassen haben25252525"], correct: ["b) Den Anteil der Besuchenden, die die Website nach kurzer Zeit wieder verlassen haben25252525"] },
-    { name: "Quiz LF G1 Frage 10", question: "Welcher KPI gibt an, wie viele Nutzende nach dem Klicken auf einen Link eine gewünschte Aktion, wie einen Kauf, durchgeführt haben? (SC)", answers: ["a) Sentiment Rate 26.", "b) Interaktionsrate 27.", "c) Conversion Rate 28282828"], correct: ["c) Conversion Rate 28282828"] },
-    { name: "Quiz LF G1 Frage 11", question: "Was ist beim Einsatz des Social Media Tools Later zu beachten? (MPC)", answers: ["a) Es ist nicht DSGVO-konform29292929", "b) Es bietet neben einem Analytics-Tool auch ein Planungstool an30303030", "c) Es unterstützt lediglich Instagram³¹."], correct: ["a) Es ist nicht DSGVO-konform29292929", "b) Es bietet neben einem Analytics-Tool auch ein Planungstool an30303030"] },
-    { name: "Quiz LF A.1 Frage 01", question: "Was ist der Unterschied zwischen Sales Funnel und Customer Journey?", answers: ["Sales Funnel: Kaufprozess bis zum erfolgreichen Abschluss.", "Customer Journey: Betrachtet die gesamte Reise des Kunden."], correct: ["Sales Funnel: Kaufprozess bis zum erfolgreichen Abschluss.", "Customer Journey: Betrachtet die gesamte Reise des Kunden."] },
-    { name: "Quiz LF A.1 Frage 02", question: "Was beinhaltet die Impressumspflicht?", answers: ["Name und Anschrift des Diensteanbieters.", "Kontaktinformationen, einschließlich einer Telefonnummer und E-Mail-Adresse.", "Angaben zum Registereintrag bei juristischen Personen.", "Rechtsform des Unternehmens.", "Umsatzsteuer-Identifikationsnummer, wenn sie auf Antrag erteilt wurde.", "Zusätzliche Informationen für bestimmte Berufe."], correct: ["Name und Anschrift des Diensteanbieters.", "Kontaktinformationen, einschließlich einer Telefonnummer und E-Mail-Adresse.", "Angaben zum Registereintrag bei juristischen Personen.", "Rechtsform des Unternehmens.", "Umsatzsteuer-Identifikationsnummer, wenn sie auf Antrag erteilt wurde.", "Zusätzliche Informationen für bestimmte Berufe."] },
-    { name: "Quiz LF A.1 Frage 03", question: "Was ist ein Supply Chain Manager?", answers: ["Ein Supply Chain Manager ist ein Fachmann, der für die Planung, Ausführung und Überwachung aller Aktivitäten innerhalb der Lieferkette eines Unternehmens verantwortlich ist.", "Dies umfasst die Beschaffung von Rohmaterialien, die Produktion, die Lagerung und die Distribution von Produkten bis hin zur Auslieferung an den Endkunden."], correct: ["Ein Supply Chain Manager ist ein Fachmann, der für die Planung, Ausführung und Überwachung aller Aktivitäten innerhalb der Lieferkette eines Unternehmens verantwortlich ist.", "Dies umfasst die Beschaffung von Rohmaterialien, die Produktion, die Lagerung und die Distribution von Produkten bis hin zur Auslieferung an den Endkunden."] },
-    { name: "Quiz LF A.1 Frage 04", question: "Was ist Content Curation?", answers: ["Content Curation bezeichnet den Prozess des Sammelns, Auswählens und Teilens von relevanten Inhalten aus verschiedenen Quellen im Social Media Marketing.", "Diese Strategie hilft Marken, ihre Online-Präsenz zu stärken und Autorität aufzubauen, ohne ständig neue Inhalte erstellen zu müssen."], correct: ["Content Curation bezeichnet den Prozess des Sammelns, Auswählens und Teilens von relevanten Inhalten aus verschiedenen Quellen im Social Media Marketing.", "Diese Strategie hilft Marken, ihre Online-Präsenz zu stärken und Autorität aufzubauen, ohne ständig neue Inhalte erstellen zu müssen."] },
-    { name: "Quiz LF A.1 Frage 05", question: "Was ist der Unterschied zwischen Cross- und Upselling?", answers: ["Cross-Selling: Bietet zusätzliche Produkte oder Dienstleistungen an, die das ursprüngliche Produkt ergänzen.", "Upselling: Bewegt Kunden zu einem teureren oder höherwertigen Produkt."], correct: ["Cross-Selling: Bietet zusätzliche Produkte oder Dienstleistungen an, die das ursprüngliche Produkt ergänzen.", "Upselling: Bewegt Kunden zu einem teureren oder höherwertigen Produkt."] },
-    { name: "Quiz LF A.1 Frage 06", question: "Was sind First Party Daten?", answers: ["First Party Daten sind Informationen, die ein Unternehmen direkt von seinen Kunden oder Zielgruppen über eigene Kanäle sammelt.", "Sie entstehen durch Interaktionen wie Website-Besuche, Käufe, Umfragen und andere direkte Engagements.", "Da sie direkt vom Nutzer stammen, gelten sie als besonders wertvoll und zuverlässig."], correct: ["First Party Daten sind Informationen, die ein Unternehmen direkt von seinen Kunden oder Zielgruppen über eigene Kanäle sammelt.", "Sie entstehen durch Interaktionen wie Website-Besuche, Käufe, Umfragen und andere direkte Engagements.", "Da sie direkt vom Nutzer stammen, gelten sie als besonders wertvoll und zuverlässig."] },
-    { name: "Quiz LF A.1 Frage 07", question: "Wie viele Menschen erschaffen aktiv Content in den Sozialen Medien?", answers: ["Nach der 90-9-1 Regel:", "90% der Nutzer sind \"Lurker\", die Inhalte konsumieren, ohne aktiv zu interagieren.", "9% der Nutzer sind aktive Teilnehmer, die kommentieren, aber keine eigenen Inhalte erstellen.", "1% der Nutzer sind Inhaltsersteller, die die Mehrheit der Inhalte produzieren."], correct: ["Nach der 90-9-1 Regel:", "90% der Nutzer sind \"Lurker\", die Inhalte konsumieren, ohne aktiv zu interagieren.", "9% der Nutzer sind aktive Teilnehmer, die kommentieren, aber keine eigenen Inhalte erstellen.", "1% der Nutzer sind Inhaltsersteller, die die Mehrheit der Inhalte produzieren."] },
-    { name: "Quiz LF A.1 Frage 08", question: "Wie kann man auf Youtube Geld verdienen?", answers: ["Monetarisierung durch Werbung (Anzeigenschaltung).", "Sponsoren / Kooperationspartner.", "Bezahlte Kanalmitgliedschaften."], correct: ["Monetarisierung durch Werbung (Anzeigenschaltung).", "Sponsoren / Kooperationspartner.", "Bezahlte Kanalmitgliedschaften."] },
-    { name: "Quiz LF A.2 Frage 01", question: "Was bedeutet \"SMART\"?", answers: ["SMART ist ein Akronym, das für spezifisch, messbar, attraktiv, relevant und terminiert steht und als Leitfaden für die effektive Zielsetzung dient.", "Spezifisch: Das Ziel wird klar benannt.", "Messbar: Die Zielerreichung muss messbar sein (Kennzahlen).", "Attraktiv: Das Ziel muss Lust darauf machen, es zu erreichen.", "Realistisch: Das Ziel darf aber auch nicht frustrierend hoch gehängt werden.", "Terminiert: Bis wann soll das Ziel erreicht werden?."], correct: ["SMART ist ein Akronym, das für spezifisch, messbar, attraktiv, relevant und terminiert steht und als Leitfaden für die effektive Zielsetzung dient.", "Spezifisch: Das Ziel wird klar benannt.", "Messbar: Die Zielerreichung muss messbar sein (Kennzahlen).", "Attraktiv: Das Ziel muss Lust darauf machen, es zu erreichen.", "Realistisch: Das Ziel darf aber auch nicht frustrierend hoch gehängt werden.", "Terminiert: Bis wann soll das Ziel erreicht werden?."] },
-    { name: "Quiz LF A.2 Frage 02", question: "Was ist der Unterschied zwischen Vision und Mission?", answers: ["Eine Unternehmensvision beschreibt ein Ziel oder ein Idealbild, das das Unternehmen in der Zukunft erreichen möchte.", "Eine Unternehmensmission beschreibt, was das Unternehmen tut, um seine Vision zu verwirklichen."], correct: ["Eine Unternehmensvision beschreibt ein Ziel oder ein Idealbild, das das Unternehmen in der Zukunft erreichen möchte.", "Eine Unternehmensmission beschreibt, was das Unternehmen tut, um seine Vision zu verwirklichen."] },
-    { name: "Quiz LF A.2 Frage 03", question: "Was ist der Unterschied zwischen Zielgruppe und Persona?", answers: ["Eine Zielgruppe umfasst eine breitere Gruppe von Personen mit bestimmten gemeinsamen Merkmalen (demografisch, psychografisch), die für ein Produkt relevant sind.", "Eine Persona ist eine fiktive, detaillierte Darstellung eines idealen Kunden innerhalb der Zielgruppe."], correct: ["Eine Zielgruppe umfasst eine breitere Gruppe von Personen mit bestimmten gemeinsamen Merkmalen (demografisch, psychografisch), die für ein Produkt relevant sind.", "Eine Persona ist eine fiktive, detaillierte Darstellung eines idealen Kunden innerhalb der Zielgruppe."] },
-    { name: "Quiz LF A.3 Frage 01", question: "Warum ist die Customer Experience wichtig?", answers: ["Die Customer Experience (CX) ist entscheidend für den Erfolg eines Unternehmens, da sie einen direkten Einfluss auf die Kundenzufriedenheit hat.", "Eine positive CX fördert nicht nur die Loyalität der Kunden, sondern ermöglicht auch die Sammlung wertvollen Feedbacks.", "Darüber hinaus kann eine durchdachte Customer Experience gezielt in die Mundpropaganda der Kunden eingreifen."], correct: ["Die Customer Experience (CX) ist entscheidend für den Erfolg eines Unternehmens, da sie einen direkten Einfluss auf die Kundenzufriedenheit hat.", "Eine positive CX fördert nicht nur die Loyalität der Kunden, sondern ermöglicht auch die Sammlung wertvollen Feedbacks.", "Darüber hinaus kann eine durchdachte Customer Experience gezielt in die Mundpropaganda der Kunden eingreifen."] },
-    { name: "Quiz LF A.4 Frage 01", question: "Wie entsteht eine Streulücke?", answers: ["Eine Streulücke entsteht, indem Touchpoints in der Customer Journey übersehen werden."], correct: ["Eine Streulücke entsteht, indem Touchpoints in der Customer Journey übersehen werden."] },
-    { name: "Quiz LF B.1 Frage 02", question: "Was ist ein zentraler Erfolgsfaktor für das Community Building auf Facebook? (SC)", answers: ["a) Quantität vor Qualität - Hauptsache viele Fans.", "b) Influencer-Marketing mit TikTok-Creators.", "c) Nur Beiträge mit Gewinnspielen posten.", "d) Relevanter und hochwertiger Content für die Zielgruppe."], correct: ["d) Relevanter und hochwertiger Content für die Zielgruppe."] },
-    { name: "Quiz LF B.1 Frage 03", question: "Wie heißt das Kurzvideoformat bei Instagram? (SC)", answers: ["a) Reels.", "b) Snaps.", "c) Vidz.", "d) IGTV."], correct: ["a) Reels."] },
-    { name: "Quiz LF B.1 Frage 04", question: "Was ist der Meta Business Manager? (SC)", answers: ["a) Ein reines Analysetool für Instagram-Profile.", "b) Ein Tool zur zentralen Verwaltung von Unternehmensressourcen im Meta-Ökosystem.", "c) Ein KI-gesteuerter Avatar-Generator für Meta.", "d) Eine kostenpflichtige Werbeanzeigenplattform."], correct: ["b) Ein Tool zur zentralen Verwaltung von Unternehmensressourcen im Meta-Ökosystem."] },
-    { name: "Quiz LF B.1 Frage 05", question: "Was ist WhatsApp Business? (SC)", answers: ["a) Ein soziales Netzwerk mit Fokus auf Karrierenetzwerke.", "b) Eine klassische Newsletter-App.", "c) Eine App zur Organisation interner Teamkommunikation.", "d) Eine spezielle Version von WhatsApp für Unternehmen zur direkten Kundenkommunikation."], correct: ["d) Eine spezielle Version von WhatsApp für Unternehmen zur direkten Kundenkommunikation."] },
-    { name: "Quiz LF B.1 Frage 06", question: "Welche Netzwerke gehören zum Konzern \"Meta\"?", answers: ["Facebook, Instagram, WhatsApp und Messenger."], correct: ["Facebook, Instagram, WhatsApp und Messenger."] },
-    { name: "Quiz LF B.2 Frage 01", question: "Was unterscheidet Vimeo von YouTube? (MPC)", answers: ["a) Die Rechte am hochgeladenen Material bleiben vollständig beim Erstellenden.", "b) Der Fokus liegt auf künstlerisch anspruchsvollen Videos.", "c) Es besticht in seinem Aufbau durch eine große Schlichtheit.", "d) Es bietet mehr Monetarisierungsmöglichkeiten."], correct: ["a) Die Rechte am hochgeladenen Material bleiben vollständig beim Erstellenden.", "b) Der Fokus liegt auf künstlerisch anspruchsvollen Videos.", "c) Es besticht in seinem Aufbau durch eine große Schlichtheit."] },
-    { name: "Quiz LF B.2 Frage 02", question: "Was bedeutet der Discovery-Faktor in Bezug auf TikTok? (SC)", answers: ["a) Nutzende gehen auf \"Entdeckungsreise\" und lassen sich durch neue Inhalte überraschen und inspirieren.", "b) Nutzende schauen sich Inhalte von Creators und Kanälen an, die sie bereits kennen und abonniert haben."], correct: ["a) Nutzende gehen auf \"Entdeckungsreise\" und lassen sich durch neue Inhalte überraschen und inspirieren."] },
-    { name: "Quiz LF B.2 Frage 03", question: "Ordne die folgenden Aspekte dem Hero-Hub-Help-Modell zu.", answers: ["Hero: Die Videos sind aufwendig produzierte, spektakuläre Videos, die das Potenzial haben, zu viralen Videos zu werden.", "Hub: Die Videos richten sich an bestehende und potentielle Abonnenten eines Video-Kanals.", "Help: Die Videos bieten nützliche Informationen und werden häufig über Suchmaschinen gefunden."], correct: ["Hero: Die Videos sind aufwendig produzierte, spektakuläre Videos, die das Potenzial haben, zu viralen Videos zu werden.", "Hub: Die Videos richten sich an bestehende und potentielle Abonnenten eines Video-Kanals.", "Help: Die Videos bieten nützliche Informationen und werden häufig über Suchmaschinen gefunden."] },
-    { name: "Quiz LF B.2 Frage 04", question: "Zu welchem Unternehmen gehört Youtube? (SC)", answers: ["a) Google.", "b) Facebook.", "c) Microsoft.", "d) X [Twitter]."], correct: ["a) Google."] },
-    { name: "Quiz LF B.3 Frage 01", question: "Was lässt sich auf Business- und Karrierenetzwerken gut umsetzen? (MPC)", answers: ["a) Personal Branding.", "b) Social Shopping.", "c) Social Selling.", "d) Recruiting."], correct: ["a) Personal Branding.", "c) Social Selling.", "d) Recruiting."] },
-    { name: "Quiz LF B.3 Frage 04", question: "Was ist der Unterschied zwischen Social Selling und Personal Branding?", answers: ["Social Selling bezieht sich auf die Nutzung sozialer Medien, um Beziehungen zu potenziellen Kunden aufzubauen und Verkaufschancen zu fördern.", "Personal Branding hingegen konzentriert sich darauf, eine individuelle Marke zu entwickeln, die die eigene Identität und Expertise widerspiegelt."], correct: ["Social Selling bezieht sich auf die Nutzung sozialer Medien, um Beziehungen zu potenziellen Kunden aufzubauen und Verkaufschancen zu fördern.", "Personal Branding hingegen konzentriert sich darauf, eine individuelle Marke zu entwickeln, die die eigene Identität und Expertise widerspiegelt."] },
-    { name: "Quiz LF B.4 Frage 01", question: "Ordne die nachfolgenden Plattformen nach Alter der Nutzer aufsteigend: Facebook, Tik Tok, Instagram, Snapchat", answers: ["Die aufsteigende Reihenfolge nach Alter der Nutzer ist: Snapchat, TikTok, Instagram, Facebook."], correct: ["Die aufsteigende Reihenfolge nach Alter der Nutzer ist: Snapchat, TikTok, Instagram, Facebook."] },
-    { name: "Quiz LF C.1 Frage 01", question: "Was ist mit Purpose Marketing gemeint?", answers: ["Purpose Marketing, oder zweckgetriebenes Marketing, ist eine Marketingstrategie, die darauf abzielt, die Mission und den gesellschaftlichen Einfluss eines Unternehmens in den Mittelpunkt seiner Kommunikationsbemühungen zu stellen.", "Diese Strategie geht über den reinen Verkauf von Produkten oder Dienstleistungen hinaus und konzentriert sich darauf, eine tiefere Verbindung zu den Verbrauchern herzustellen."], correct: ["Purpose Marketing, oder zweckgetriebenes Marketing, ist eine Marketingstrategie, die darauf abzielt, die Mission und den gesellschaftlichen Einfluss eines Unternehmens in den Mittelpunkt seiner Kommunikationsbemühungen zu stellen.", "Diese Strategie geht über den reinen Verkauf von Produkten oder Dienstleistungen hinaus und konzentriert sich darauf, eine tiefere Verbindung zu den Verbrauchern herzustellen."] },
-    { name: "Quiz LF C.1 Frage 02", question: "Was sind Benchmarks und wofür verwende ich sie?", answers: ["Ein Benchmark ist ein Vergleichsmaßstab, der als Referenzpunkt dient, um die Leistung von Produkten, Dienstleistungen oder Prozessen zu messen.", "Beispiele im Social Media Management sind: Engagement-Rate, Follower-Wachstum, Klickrate (CTR) und Post-Frequenz."], correct: ["Ein Benchmark ist ein Vergleichsmaßstab, der als Referenzpunkt dient, um die Leistung von Produkten, Dienstleistungen oder Prozessen zu messen.", "Beispiele im Social Media Management sind: Engagement-Rate, Follower-Wachstum, Klickrate (CTR) und Post-Frequenz."] },
-    { name: "Quiz LF C.1 Frage 03", question: "Warum sollte man eigentlich in Social Media Recruiting investieren?", answers: ["Die Zielgruppe (Bewerber und Talente) nutzt Social Media Netzwerke täglich.", "Social Media Recruiting bringt den direkten Kontakt zum Bewerber und die wechselseitige Interaktion.", "Interessenten können auf eine Stellenanzeige reagieren und Rückfragen stellen.", "Es entsteht eine wichtige Verbindung zwischen den beiden Parteien.", "Potenzielle Bewerber können sich sehr einfach und schnell ein Bild von einem Unternehmen machen."], correct: ["Die Zielgruppe (Bewerber und Talente) nutzt Social Media Netzwerke täglich.", "Social Media Recruiting bringt den direkten Kontakt zum Bewerber und die wechselseitige Interaktion.", "Interessenten können auf eine Stellenanzeige reagieren und Rückfragen stellen.", "Es entsteht eine wichtige Verbindung zwischen den beiden Parteien.", "Potenzielle Bewerber können sich sehr einfach und schnell ein Bild von einem Unternehmen machen."] },
-    { name: "Quiz LF C.2 Frage 01", question: "Warum sind Ziele so wichtig?", answers: ["Ziele spielen eine entscheidende Rolle im Social Media Marketing, denn sie geben die Richtung vor und helfen dabei, die Social-Media-Aktivitäten auf die übergeordneten Unternehmensziele abzustimmen.", "Durch klar definierte Ziele können Ressourcen effektiv eingesetzt und Prioritäten gesetzt werden.", "Ziele ermöglichen es zudem, den Erfolg von Social Media Maßnahmen zu messen."], correct: ["Ziele spielen eine entscheidende Rolle im Social Media Marketing, denn sie geben die Richtung vor und helfen dabei, die Social-Media-Aktivitäten auf die übergeordneten Unternehmensziele abzustimmen.", "Durch klar definierte Ziele können Ressourcen effektiv eingesetzt und Prioritäten gesetzt werden.", "Ziele ermöglichen es zudem, den Erfolg von Social Media Maßnahmen zu messen."] },
-    { name: "Quiz LF C.2 Frage 02", question: "Welche Aspekte sollte eine Social-Media-Strategie immer beinhalten? (MP)", answers: ["Klare Ziele", "Zielgruppenverständnis", "Supply-Chain-Audit", "Effiziente Ressourcennutzung"], correct: ["Klare Ziele", "Zielgruppenverständnis", "Effiziente Ressourcennutzung"] },
-    { name: "Quiz LF C.2 Frage 03", question: "Wofür stehen die einzelnen Buchstaben der SMART-Formel?", answers: ["S für Spezifisch: Das Ziel wird klar benannt.", "M für Messbar: Die Zielerreichung muss messbar sein (Kennzahlen).", "A für Attraktiv: Das Ziel muss Lust darauf machen, es zu erreichen.", "R für Realistisch: Das Ziel darf aber auch nicht frustrierend hoch gehängt werden.", "T für Terminiert: Bis wann soll das Ziel erreicht werden?."], correct: ["S für Spezifisch: Das Ziel wird klar benannt.", "M für Messbar: Die Zielerreichung muss messbar sein (Kennzahlen).", "A für Attraktiv: Das Ziel muss Lust darauf machen, es zu erreichen.", "R für Realistisch: Das Ziel darf aber auch nicht frustrierend hoch gehängt werden.", "T für Terminiert: Bis wann soll das Ziel erreicht werden?."] },
-    { name: "Quiz LF C.2 Frage 04", question: "Welches dieser Ziele ist deiner Meinung nach SMART definiert? (SC)", answers: ["Wir erhöhen die Reichweite unserer YouTube-Videos.", "Wir gewinnen bis Ende 2024 mehr Instagram-Follower.", "Wir generieren durch eine LinkedIn-Ad-Kampagne 20 Bewerbungen bis Ende Q1/2024."], correct: ["Wir generieren durch eine LinkedIn-Ad-Kampagne 20 Bewerbungen bis Ende Q1/2024."] },
-    { name: "Quiz LF C.3 Frage 01", question: "Welche Informationen sollte eine Persona enthalten? (MC)", answers: ["Name", "Foto oder Bild", "Kauf- und Konsumverhalten", "Bevorzugte Marken"], correct: ["Name", "Foto oder Bild", "Kauf- und Konsumverhalten", "Bevorzugte Marken"] },
-    { name: "Quiz LF C.3 Frage 02", question: "Was sind demografische Merkmale einer Zielgruppe? (MP)", answers: ["Alter", "Geschlecht", "Psyche", "Kaufverhalten"], correct: ["Alter", "Geschlecht"] },
-    { name: "Quiz LF C.3 Frage 04", question: "Ordne den Performer und den Harmoniser ein. Nenne 2-3 Eigenschaften der jeweiligen Zielgruppen.", answers: ["Der Performer ist dem Bereich Dominanz zugeordnet. Mögliche Eigenschaften sind: ehrgeizig, zielstrebig, statusorientiert.", "Der Harmoniser ist dem Bereich Balance zugeordnet. Mögliche Eigenschaften sind: familien- und sozialorientiert, herzlich, engagiert."], correct: ["Der Performer ist dem Bereich Dominanz zugeordnet. Mögliche Eigenschaften sind: ehrgeizig, zielstrebig, statusorientiert.", "Der Harmoniser ist dem Bereich Balance zugeordnet. Mögliche Eigenschaften sind: familien- und sozialorientiert, herzlich, engagiert."] },
-    { name: "Quiz LF C.4 Frage 01", question: "Wonach sollte man die sozialen Netzwerke für die eigenen Social-Media-Aktivitäten idealerweise auswählen? (SC)", answers: ["Nach der bestmöglichen Reichweite des Netzwerkes.", "Nach dem POST-Modell.", "Nach den Vorlieben der Zielgruppe."], correct: ["Nach den Vorlieben der Zielgruppe."] },
-    { name: "Quiz LF C.4 Frage 02", question: "Was gilt bei der Auswahl von passenden Social Networks? (SC)", answers: ["a) Wir sollten auf allen Channels aktiv sein.", "b) Maximal ein bis zwei Networks sind genug.", "c) Wir sollten dort aktiv werden, wo auch die Zielgruppe aktiv ist.", "d) Social Networks sollten auch zum eigenen Nutzungsverhalten passen."], correct: ["c) Wir sollten dort aktiv werden, wo auch die Zielgruppe aktiv ist.", "d) Social Networks sollten auch zum eigenen Nutzungsverhalten passen."] },
-    { name: "Quiz LF D.1 Frage 01", question: "Was soll mit der Aussage „Content is King\" ausgedrückt werden? (SC)", answers: ["a) Gute Inhalte sind die Basis für alle Online-Marketing-Maßnahmen.", "b) Inhalte müssen einen sehr hohen Wertbeitrag für den Umsatz eines Unternehmens bringen."], correct: ["a) Gute Inhalte sind die Basis für alle Online-Marketing-Maßnahmen."] },
-    { name: "Quiz LF D.1 Frage 02", question: "Welche Aussagen in Bezug auf guten Content sind korrekt? (MPC)", answers: ["Qualität sollte dabei immer vor Quantität stehen.", "Es sollte immer einen Mehrwert für die Userin oder den User geben.", "Content sollte mit mindestens einem konkreten Ziel verknüpft sein.", "Content soll ausschließlich informieren."], correct: ["Qualität sollte dabei immer vor Quantität stehen.", "Es sollte immer einen Mehrwert für die Userin oder den User geben.", "Content sollte mit mindestens einem konkreten Ziel verknüpft sein."] },
-    { name: "Quiz LF D.1 Frage 03", question: "Was soll ein „Call to Action\" bewirken? (SC)", answers: ["Mehr Ideen für die Redaktionsplanung.", "Eine Interaktion seitens der Userinnen und User.", "Effektiveres Ausspielen von Beiträgen.", "Erhöhte Werbeausgaben."], correct: ["Eine Interaktion seitens der Userinnen und User."] },
-    { name: "Quiz LF D.1 Frage 04", question: "Warum sollten wir im (Social Media-) Marketing auf Storytelling setzen? (MPC)", answers: ["Fakten verkaufen immer noch am besten.", "Unser Gehirn kann Geschichten besser verarbeiten und abspeichern.", "Gefühl schlägt in der Regel Vernunft.", "Storytelling ist die günstigste Form der Werbung."], correct: ["Unser Gehirn kann Geschichten besser verarbeiten und abspeichern.", "Gefühl schlägt in der Regel Vernunft."] },
-    { name: "Quiz LF D.1 Frage 05", question: "Was ist beim Einsatz von Videoformaten generell zu beachten? (MPC)", answers: ["Die richtige Bild-/ Videogröße.", "Untertitel und Barrierefreiheit.", "Die maximale Länge von einer Minute.", "Die minimale Länge von zehn Sekunden."], correct: ["Die richtige Bild-/ Videogröße.", "Untertitel und Barrierefreiheit."] },
-    { name: "Quiz LF D.1 Frage 06", question: "Welche sozialen Netzwerke bieten Livestreams an? (MPC)", answers: ["Instagram.", "X (ehemals Twitter).", "YouTube.", "Pinterest."], correct: ["Instagram.", "X (ehemals Twitter).", "YouTube."] },
-    { name: "Quiz LF D.1 Frage 07", question: "Was zeichnet User Generated Content (UGC) aus? (MPC)", answers: ["Hohe Authentizität und Ehrlichkeit.", "Unterstützt unsere SEO-Aktivitäten.", "Mit hohem Aufwand für uns verbunden.", "Sollte nur im Rahmen von Werbeanzeigen verwendet werden."], correct: ["Hohe Authentizität und Ehrlichkeit.", "Unterstützt unsere SEO-Aktivitäten."] },
-    { name: "Quiz LF D.1 Frage 08", question: "Was ist mit User Generated Content gemeint? (SC)", answers: ["a) Content, der jeweils einer User-Gruppe zuzuordnen ist.", "b) Inhalte, die wir der Userin oder dem User bereitstellen.", "c) Eine besondere Form von vordergründigem Content.", "d) Content, der von Userin oder User erstellt wird."], correct: ["d) Content, der von Userin oder User erstellt wird."] },
-    { name: "Quiz LF D.1 Frage 09", question: "Was ist A/B-Testing? (SC)", answers: ["Eine Methode, um verschiedene Varianten von Inhalten zu vergleichen und die wirkungsvollste Option zu identifizieren.", "Eine Methode, um relevante Kennzahlen und KPIs zu identifizieren."], correct: ["Eine Methode, um verschiedene Varianten von Inhalten zu vergleichen und die wirkungsvollste Option zu identifizieren."] },
-    { name: "Quiz LF D.1 Frage 10", question: "Was ist Content Curation? (SC)", answers: ["Das Sammeln und Aufbereiten von Content.", "Das reine Reposten bzw. Teilen von Beiträgen.", "Das Generieren von eigenen Inhalten.", "Das Aufbauen eines Content-Pools."], correct: ["Das Sammeln und Aufbereiten von Content."] },
-    { name: "Quiz LF D.1 Frage 11", question: "Was ist bei der Nutzung von KI bei der Content Creation zu beachten? (MPC)", answers: ["Geltende Datenschutzrichtlinien sind zu beachten.", "Verluste des Kundenvertrauens sind möglich.", "Es gilt kein Urheberrecht.", "Falschaussagen seitens der Kl sind quasi ausgeschlossen."], correct: ["Geltende Datenschutzrichtlinien sind zu beachten.", "Verluste des Kundenvertrauens sind möglich."] },
-    { name: "Quiz LF D.2 Frage 01", question: "Was ist ein CTA und was soll er bewirken?", answers: ["Ein Call to Action (CTA) ist eine Aufforderung, die das Publikum zu einer bestimmten Handlung bewegen soll.", "Ein CTA ist entscheidend, um die Interaktion zu fördern und die Nutzer durch ihre Customer Journey zu leiten.", "Ein effektiver CTA kann die Engagement-Rate steigern und zu höheren Konversionen führen."], correct: ["Ein Call to Action (CTA) ist eine Aufforderung, die das Publikum zu einer bestimmten Handlung bewegen soll.", "Ein CTA ist entscheidend, um die Interaktion zu fördern und die Nutzer durch ihre Customer Journey zu leiten.", "Ein effektiver CTA kann die Engagement-Rate steigern und zu höheren Konversionen führen."] },
-    { name: "Quiz LF D.2 Frage 02", question: "Welche sozialen Netzwerke bieten kein Livestreaming an?", answers: ["Die Liste nennt LinkedIn, Pinterest, Facebook, Instagram, TikTok und X.", "Basierend auf den Informationen kann die Frage nicht beantwortet werden, da nicht explizit gesagt wird, welche davon kein Livestreaming anbieten."], correct: ["Basierend auf den Informationen kann die Frage nicht beantwortet werden, da nicht explizit gesagt wird, welche davon kein Livestreaming anbieten."] },
-    { name: "Quiz LF D.2 Frage 03", question: "Was ist UGC und warum ist er besonders interessant für Unternehmen?", answers: ["User-Generated Content (UGC) sind Inhalte, die von Nutzern erstellt und geteilt werden.", "UGC ist für Unternehmen besonders interessant, weil er Authentizität und Vertrauen schafft.", "UGC ist kosteneffektiv, da er oft kostenlos erstellt wird.", "Er kann sich ebenfalls positiv auf SEO-Aktivitäten auswirken."], correct: ["User-Generated Content (UGC) sind Inhalte, die von Nutzern erstellt und geteilt werden.", "UGC ist für Unternehmen besonders interessant, weil er Authentizität und Vertrauen schafft.", "UGC ist kosteneffektiv, da er oft kostenlos erstellt wird.", "Er kann sich ebenfalls positiv auf SEO-Aktivitäten auswirken."] },
-    { name: "Quiz LF D.2 Frage 04", question: "Was ist ein A/B Test?", answers: ["Ein A/B-Test ist eine Methode, bei der zwei Versionen eines digitalen Inhalts verglichen werden, um herauszufinden, welche Version besser abschneidet.", "Im Kontext des Social Media Marketings wird das Publikum in zwei Gruppen aufgeteilt, wobei jede Gruppe eine unterschiedliche Variante des Inhalts sieht."], correct: ["Ein A/B-Test ist eine Methode, bei der zwei Versionen eines digitalen Inhalts verglichen werden, um herauszufinden, welche Version besser abschneidet.", "Im Kontext des Social Media Marketings wird das Publikum in zwei Gruppen aufgeteilt, wobei jede Gruppe eine unterschiedliche Variante des Inhalts sieht."] },
-    { name: "Quiz LF D.2 Frage 05", question: "Was ist der Unterschied zwischen Content Recycling und Content Curation?", answers: ["Content Recycling bezieht sich auf die Wiederverwendung bereits veröffentlichter (eigener) Inhalte.", "Content Curation ist der Prozess, bei dem relevante und qualitativ hochwertige Inhalte von anderen Quellen ausgewählt und geteilt werden."], correct: ["Content Recycling bezieht sich auf die Wiederverwendung bereits veröffentlichter (eigener) Inhalte.", "Content Curation ist der Prozess, bei dem relevante und qualitativ hochwertige Inhalte von anderen Quellen ausgewählt und geteilt werden."] },
-    { name: "Quiz LF D.2 Frage 06", question: "Welche Hauptformate für Content gibt es?", answers: ["Video.", "Text.", "Audio.", "Bild."], correct: ["Video.", "Text.", "Audio.", "Bild."] },
-    { name: "Quiz LF E.1 Frage 01", question: "In welchem Bereich wird der  onlyfy TalentManager\" bevorzugt genutzt? (SC)", answers: ["a) Social Commerce.", "b) Influencer-Marketing.", "c) Recruiting."], correct: ["c) Recruiting."] },
-    { name: "Quiz LF E.1 Frage 03", question: "Welche Monetarisierungsoptionen bietet YouTube über das YouTube Studio? (MPC)", answers: ["a) Anzeigenumsatz.", "b) App-Entwicklung.", "c) Kanalmitgliedschaften."], correct: ["a) Anzeigenumsatz.", "c) Kanalmitgliedschaften."] },
-    { name: "Quiz LF E.1 Frage 04", question: "Warum sollten wir Feiertage und Thementage in unserem Redaktionsplan vermerken? (SC)", answers: ["a) Damit wir wissen, welche Tage postfrei bleiben.", "b) Es erleichtert die Urlaubsplanung.", "c) An Feiertagen ist das Schalten von Werbeanzeigen günstiger.", "d) Feiertage und Thementage bieten gute Ansätze für abwechslungsreichen und aktuellen Content."], correct: ["d) Feiertage und Thementage bieten gute Ansätze für abwechslungsreichen und aktuellen Content."] },
-    { name: "Quiz LF E.1 Frage 05", question: "Was ist mit C2C-Communitys gemeint? (SC)", answers: ["a) Company to Company, also Plattformen, auf denen Unternehmen mit anderen Unternehmen interagieren.", "b) Consumer-to-Consumer, also Plattformen, auf denen Kundinnen/Kunden miteinander interagieren, ohne dass ein Unternehmen als Mittler fungiert."], correct: ["b) Consumer-to-Consumer, also Plattformen, auf denen Kundinnen/Kunden miteinander interagieren, ohne dass ein Unternehmen als Mittler fungiert."] },
-    { name: "Quiz LF E.1 Frage 06", question: "Was sollte eine Netiquette enthalten? (MPC)", answers: ["a) Hinweise zum Schutz der Privatsphäre.", "b) Hinweise, in welcher Form Spam formuliert sein soll.", "c) Klare Richtlinien, die Mobbing und Belästigung verbieten.", "d) Verweise auf mögliche Sanktionen."], correct: ["a) Hinweise zum Schutz der Privatsphäre.", "c) Klare Richtlinien, die Mobbing und Belästigung verbieten.", "d) Verweise auf mögliche Sanktionen."] },
-    { name: "Quiz LF E.1 Frage 07", question: "Welche sozialen Netzwerke werden im Community-Service besonders gerne genutzt? (MPC)", answers: ["a) X (Twitter).", "b) Pinterest.", "c) WhatsApp.", "d) TikTok."], correct: ["a) X (Twitter).", "c) WhatsApp."] },
-    { name: "Quiz LF E.1 Frage 08", question: "Ordne die folgenden Aspekte eines Krisenkonzepts externen und internen Perspektiven zu?", answers: ["Interne Perspektive = Risikobewertung.", "Externe Perspektive = Markt- und Umfeldanalyse."], correct: ["Interne Perspektive = Risikobewertung.", "Externe Perspektive = Markt- und Umfeldanalyse."] },
-    { name: "Quiz LF E.1 Frage 09", question: "Wie kann man die optimalen Uhrzeiten für die Veröffentlichung von Beiträgen finden? (MC)", answers: ["a) Analyse von Insights der Plattformen selbst.", "b) Eigenes Austesten und Auswerten.", "c) Über Social-Media-Management-Tools.", "d) Über eine Google-Trend-Analyse."], correct: ["a) Analyse von Insights der Plattformen selbst.", "b) Eigenes Austesten und Auswerten.", "c) Über Social-Media-Management-Tools."] },
-    { name: "Quiz LF E.1 Frage 10", question: "Was ist das Hauptziel von Community-Engagement im Social-Media-Management? (SC)", answers: ["a) Die Erstellung möglichst vieler Werbeanzeigen.", "b) Die Reichweite rein organisch zu steigern.", "c) Die Community zu kostenpflichtigen Aktionen bewegen.", "d) Die aktive Beteiligung der Community fördern und erhalten."], correct: ["d) Die aktive Beteiligung der Community fördern und erhalten."] },
-    { name: "Quiz LF E.2 Frage 01", question: "Was sind Social Media Guidelines?", answers: ["Social Media Guidelines sind Regeln und Empfehlungen, die Unternehmen ihren Mitarbeitern geben, um ein angemessenes Verhalten in sozialen Medien zu fördern.", "Sie helfen dabei, die Markenreputation zu schützen und rechtliche Risiken zu minimieren.", "Die Richtlinien können für die berufliche und persönliche Nutzung gelten."], correct: ["Social Media Guidelines sind Regeln und Empfehlungen, die Unternehmen ihren Mitarbeitern geben, um ein angemessenes Verhalten in sozialen Medien zu fördern.", "Sie helfen dabei, die Markenreputation zu schützen und rechtliche Risiken zu minimieren.", "Die Richtlinien können für die berufliche und persönliche Nutzung gelten."] },
-    { name: "Quiz LF E.2 Frage 02", question: "Was ist eine Netiquette?", answers: ["Netiquette bezeichnet die Verhaltensregeln und Höflichkeitsstandards, die Nutzer beim Kommunizieren online einhalten sollten.", "Dazu gehört, andere Nutzer mit Respekt zu behandeln, beleidigende Sprache zu vermeiden und die Privatsphäre sowie Meinungen anderer zu respektieren."], correct: ["Netiquette bezeichnet die Verhaltensregeln und Höflichkeitsstandards, die Nutzer beim Kommunizieren online einhalten sollten.", "Dazu gehört, andere Nutzer mit Respekt zu behandeln, beleidigende Sprache zu vermeiden und die Privatsphäre sowie Meinungen anderer zu respektieren."] },
-    { name: "Quiz LF E.2 Frage 03", question: "Was sollte ein Redaktionsplan beinhalten?", answers: ["Ein Redaktionsplan sollte folgende Punkte enthalten:", "Thema des Beitrags.", "Termin der Veröffentlichung.", "Aktueller Bearbeitungsstand.", "Format des Beitrags.", "Freigaben & Zuständigkeiten."], correct: ["Ein Redaktionsplan sollte folgende Punkte enthalten:", "Thema des Beitrags.", "Termin der Veröffentlichung.", "Aktueller Bearbeitungsstand.", "Format des Beitrags.", "Freigaben & Zuständigkeiten."] },
-    { name: "Quiz LF E.2 Frage 04", question: "Was sind Gründe, warum Kunden Communities verlassen?", answers: ["Tod.", "Umzug.", "Änderung der Lebensumstände.", "Fehlende Aufmerksamkeit.", "Preis- oder Qualitätsänderungen."], correct: ["Tod.", "Umzug.", "Änderung der Lebensumstände.", "Fehlende Aufmerksamkeit.", "Preis- oder Qualitätsänderungen."] },
-    { name: "Quiz LF E.2 Frage 05", question: "Wie finde ich die optimale Postingzeiten?", answers: ["Es ist wichtig, die Engagement-Muster der Zielgruppe zu analysieren.", "Plattformen wie Facebook, Instagram und LinkedIn bieten Analyse-Tools, die zeigen, wann die Follower am aktivsten sind.", "Letztendlich hilft nur Testen und Auswerten der eigenen Zielgruppenaktivitäten."], correct: ["Es ist wichtig, die Engagement-Muster der Zielgruppe zu analysieren.", "Plattformen wie Facebook, Instagram und LinkedIn bieten Analyse-Tools, die zeigen, wann die Follower am aktivsten sind.", "Letztendlich hilft nur Testen und Auswerten der eigenen Zielgruppenaktivitäten."] },
-    { name: "Quiz LF E.2 Frage 06", question: "What is a C2C Community?", answers: ["Eine C2C-Community (Consumer-to-Consumer) ist ein Geschäftsmodell, das den direkten Austausch von Waren oder Dienstleistungen zwischen Privatpersonen fördert.", "In solchen Communities können Nutzer sowohl Käufer als auch Verkäufer sein."], correct: ["Eine C2C-Community (Consumer-to-Consumer) ist ein Geschäftsmodell, das den direkten Austausch von Waren oder Dienstleistungen zwischen Privatpersonen fördert.", "In solchen Communities können Nutzer sowohl Käufer als auch Verkäufer sein."] },
-    { name: "Quiz LF G.1 Frage 01", question: "Was wird bei Social Media Analytics getrackt? (MPC)", answers: ["a) Die Reichweite unserer Beiträge.", "b) Die Entwicklung unserer Fan-/Follower-Anzahl.", "c) Mentions in Foren.", "d) Die Interaktionen zu unseren Beiträgen."], correct: ["a) Die Reichweite unserer Beiträge.", "b) Die Entwicklung unserer Fan-/Follower-Anzahl.", "d) Die Interaktionen zu unseren Beiträgen."] },
-    { name: "Quiz LF G.1 Frage 02", question: "Ordne die folgenden KPIs den entsprechenden Ebenen der Key Performance-Indicator-Pyramide zu.", answers: ["1. Ebene = Follower", "2. Ebene = Share of Buzz", "3. Ebene = Kundenzufriedenheit"], correct: ["1. Ebene = Follower", "2. Ebene = Share of Buzz", "3. Ebene = Kundenzufriedenheit"] },
-    { name: "Quiz LF G.1 Frage 03", question: "Warum ist beim Social Listening eine gründliche Keyword-Analyse entscheidend? (MPC)", answers: ["a) Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben.", "b) Wir können damit die Auffindbarkeit unserer Beiträge deutlich erhöhen.", "c) Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern."], correct: ["a) Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben.", "c) Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern."] },
-    { name: "Quiz LF G.1 Frage 04", question: "Was sagt die potenzielle Reichweite im Social Media Monitoring aus? (SC)", answers: ["a) Die geschätzte Anzahl von Personen, die einen Beitrag sehen könnten.", "b) Die Anzahl der Personen, die laut Insights tatsächlich einen Beitrag gesehen haben.", "c) Der geschätzte Anteil der Markenerwähnungen im Vergleich zu Mitbewerbenden."], correct: ["a) Die geschätzte Anzahl von Personen, die einen Beitrag sehen könnten."] },
-    { name: "Quiz LF G.1 Frage 05", question: "Was wird im Rahmen einer Sentiment-Analyse analysiert? (SC)", answers: ["a) Es geht dabei vorrangig um das Verständnis spezifischer Themen oder Diskussionen in sozialen Medien.", "b) Es werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Produkts, einer Marke oder eines Themas zu erhalten."], correct: ["b) Es werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Produkts, einer Marke oder eines Themas zu erhalten."] },
-    { name: "Quiz LF G.2 Frage 01", question: "Wie oft sollte die Erfolgskontrolle der eigenen Maßnahmen idealerweise erfolgen? (SC)", answers: ["a) Mindestens einmal täglich.", "b) Mindestens einmal monatlich.", "c) Lediglich im Rahmen einer Strategieentwicklung.", "d) Maximal einmal im Jahr."], correct: ["b) Mindestens einmal monatlich."] },
-    { name: "Quiz LF G.2 Frage 02", question: "Was sagt ein ROI mit einem Faktor von 0,8 aus? (SC)", answers: ["a) Dass die Investitionen in eine Kampagne mehr Kosten verursacht haben, als sie an Gewinn gebracht haben.", "b) Dass die Investitionen in eine Kampagne mehr Gewinn gebracht haben, als sie Kosten verursacht haben."], correct: ["a) Dass die Investitionen in eine Kampagne mehr Kosten verursacht haben, als sie an Gewinn gebracht haben."] },
-    { name: "Quiz LF G.2 Frage 03", question: "Was ist mit dem Begriff Learning-Aspekt\" in Bezug auf Social Media Analytics gemeint? (SC)", answers: ["a) Mit jeder Analyse kann sich der Algorithmus besser auf unsere Zielgruppe und unser Vorhaben einstellen.", "b) Man sollte im Rahmen einer Analyse immer aus den Ergebnissen lernen und Erkenntnisse zur Optimierung zukünftiger Maßnahmen nutzen."], correct: ["b) Man sollte im Rahmen einer Analyse immer aus den Ergebnissen lernen und Erkenntnisse zur Optimierung zukünftiger Maßnahmen nutzen."] },
-    { name: "Quiz LF G.2 Frage 04", question: "Was gibt die Bounce Rate im Kontext von Web Analytics an? (SC)", answers: ["a) Den Anteil der Nutzenden, die das Webtracking abgelehnt haben.", "b) Den Anteil der Besuchenden, die die Website nach kurzer Zeit wieder verlassen haben."], correct: ["b) Den Anteil der Besuchenden, die die Website nach kurzer Zeit wieder verlassen haben."] },
-    { name: "Quiz LF G.2 Frage 05", question: "Welcher KPI gibt an, wie viele Nutzende nach dem Klicken auf einen Link eine gewünschte Aktion, wie einen Kauf, durchgeführt haben? (SC)", answers: ["a) Sentiment Rate.", "b) Interaktionsrate.", "c) Conversion Rate."], correct: ["c) Conversion Rate."] },
-    { name: "Quiz LF G.2 Frage 06", question: "Was ist beim Einsatz des Social Media Tools Later zu beachten? (MPC)", answers: ["a) Es ist nicht DSGVO-konform.", "b) Es bietet neben einem Analytics-Tool auch ein Planungstool an.", "c) Es unterstützt lediglich Instagram."], correct: ["a) Es ist nicht DSGVO-konform.", "b) Es bietet neben einem Analytics-Tool auch ein Planungstool an."] }
-        ];
-        // --- DOM ELEMENTS ---
-        const setupScreen = document.getElementById('setupScreen');
-        const quizScreen = document.getElementById('quizScreen');
-        const resultsScreen = document.getElementById('resultsScreen');
-        const modeFilterButtons = document.getElementById('modeFilterButtons');
-        const typeFilterButtons = document.getElementById('typeFilterButtons');
-        const sectionFilterButtons = document.getElementById('sectionFilterButtons');
-        const questionCountFilterButtons = document.getElementById('questionCountFilterButtons');
-        const startQuizBtn = document.getElementById('startQuizBtn');
-        const progressIndicator = document.getElementById('progressIndicator');
-        const timerEl = document.getElementById('timer');
-        const questionNameEl = document.getElementById('questionName');
-        const questionTextEl = document.getElementById('questionText');
-        const answersForm = document.getElementById('answersForm');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
-        const scoreEl = document.getElementById('score');
-        const restartBtn = document.getElementById('restartBtn');
-        const allQuestionsBtn = document.getElementById('allQuestionsBtn');
-        const progressTilesContainer = document.getElementById('progressTiles');
-        // --- STATE ---
-        const INCORRECT_QUESTIONS_KEY = 'incorrectlyAnsweredQuizQuestions';
-        const QUESTION_PROGRESS_KEY = 'questionProgress';
-        let allQuestions = [];
-        let quizQuestions = [];
-        let currentQuestionIndex = 0;
-        let userAnswers = {};
-        let timerInterval;
-        let timeLeft = 60;
-        let quizMode = 'practice'; // 'practice' or 'exam'
-        let selectedType = 'Alle';
-        let selectedSection = 'Alle';
-        let selectedQuestionCount = 'Alle';
-        // --- FUNCTIONS ---
-        
-        function getProgressData() {
-            const stored = localStorage.getItem(QUESTION_PROGRESS_KEY);
-            return stored ? JSON.parse(stored) : {};
-        }
-        function updateProgressData() {
-            const progressData = getProgressData();
-            let incorrect = new Set(JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]'));
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM ELEMENTS ---
+            const setupScreen = document.getElementById('setupScreen');
+            const quizScreen = document.getElementById('quizScreen');
+            const resultsScreen = document.getElementById('resultsScreen');
+            const modeFilterButtons = document.getElementById('modeFilterButtons');
+            const typeFilterButtons = document.getElementById('typeFilterButtons');
+            const sectionFilterButtons = document.getElementById('sectionFilterButtons');
+            const questionCountFilterButtons = document.getElementById('questionCountFilterButtons');
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const timerEl = document.getElementById('timer');
+            const questionNameEl = document.getElementById('questionName');
+            const questionTextEl = document.getElementById('questionText');
+            const answersForm = document.getElementById('answersForm');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const scoreEl = document.getElementById('score');
+            const restartBtn = document.getElementById('restartBtn');
+            const allQuestionsBtn = document.getElementById('allQuestionsBtn');
+            const progressTilesContainer = document.getElementById('progressTiles');
             
-            Object.keys(userAnswers).forEach(index => {
-                const question = quizQuestions[index];
-                const answer = userAnswers[index];
+            // --- STATE ---
+            const INCORRECT_QUESTIONS_KEY = 'incorrectlyAnsweredQuizQuestions';
+            const QUESTION_PROGRESS_KEY = 'questionProgress';
+            let allQuestions = [];
+            let quizQuestions = [];
+            let currentQuestionIndex = 0;
+            let userAnswers = {};
+            let timerInterval;
+            let timeLeft = 60;
+            let quizMode = 'practice'; // 'practice' or 'exam'
+            let selectedType = 'Alle';
+            let selectedSection = 'Alle';
+            let selectedQuestionCount = 'Alle';
+
+            // --- FUNCTIONS ---
+            function getProgressData() {
+                const stored = localStorage.getItem(QUESTION_PROGRESS_KEY);
+                return stored ? JSON.parse(stored) : {};
+            }
+
+            function updateProgressData() {
+                const progressData = getProgressData();
+                let incorrect = new Set(JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]'));
                 
-                progressData[question.question] = answer.isCorrect ? 'correct' : 'incorrect';
-                if (answer.isCorrect) {
-                    incorrect.delete(question.question);
-                } else {
-                    incorrect.add(question.question);
-                }
-            });
-            localStorage.setItem(QUESTION_PROGRESS_KEY, JSON.stringify(progressData));
-            localStorage.setItem(INCORRECT_QUESTIONS_KEY, JSON.stringify(Array.from(incorrect)));
-            calculateAndDisplayProgress();
-        }
-        function shuffle(array) {
-            let currentIndex = array.length, randomIndex;
-            while (currentIndex != 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-            }
-            return array;
-        }
-        
-        /**
-         * Parses the question name to extract its type and section (Lernfeld).
-         * @param {string} name The full name of the question.
-         * @returns {{type: string, section: string}} An object containing the extracted type and section.
-         */
-        function parseQuestionName(name) {
-            let type = 'Sonstige'; // Default type
-            let section = 'Sonstige'; // Default section
-
-            const musterpruefungMatch = name.match(/Musterprüfung\s+([A-Z])(?:\.\d+)?/i);
-            if (musterpruefungMatch) {
-                type = 'Musterprüfung';
-                section = musterpruefungMatch[1].toUpperCase();
-            } else {
-                // All other questions (Quiz LF, Wissenstest, Quiz best of) become type 'Quiz LF'
-                type = 'Quiz LF';
-                // Try to extract LF letter for Quiz LF questions
-                const quizLfMatch = name.match(/Quiz LF\s+([A-Z])(?:\.\d+)?/i);
-                if (quizLfMatch && quizLfMatch[1]) {
-                    section = quizLfMatch[1].toUpperCase();
-                } else {
-                    // For "Wissenstest Frage X" and "Quiz best of Frage X", if no LF letter found, assign to 'Sonstige'
-                    // The "Sonstige" section will not be displayed as a filter button as per user request.
-                    section = 'Sonstige';
-                }
-            }
-            return { type, section };
-        }
-
-        /**
-         * Initializes the question data, removing duplicates and applying preference for "Musterprüfung" questions.
-         * Questions are also parsed for their type and section.
-         */
-        function initializeData() {
-            const questionMap = new Map(); // Key: normalized question text, Value: question object
-
-            initialRawQuestions.forEach(q => {
-                const normalizedQuestionText = q.question.trim().toLowerCase();
-                const parsedQuestion = { ...q, ...parseQuestionName(q.name) };
-
-                if (questionMap.has(normalizedQuestionText)) {
-                    const existingQuestion = questionMap.get(normalizedQuestionText);
-
-                    // Prefer "Musterprüfung" type questions over others if a duplicate is found
-                    if (parsedQuestion.type === 'Musterprüfung' && existingQuestion.type !== 'Musterprüfung') {
-                        questionMap.set(normalizedQuestionText, parsedQuestion);
+                Object.keys(userAnswers).forEach(index => {
+                    const question = quizQuestions[index];
+                    const answer = userAnswers[index];
+                    
+                    progressData[question.question] = answer.isCorrect ? 'correct' : 'incorrect';
+                    if (answer.isCorrect) {
+                        incorrect.delete(question.question);
+                    } else {
+                        incorrect.add(question.question);
                     }
-                    // If both are the same type or existing is already Musterprüfung,
-                    // the one already in the map (first encountered Musterprüfung or latest non-Musterprüfung) is implicitly kept.
-                } else {
-                    questionMap.set(normalizedQuestionText, parsedQuestion);
+                });
+                localStorage.setItem(QUESTION_PROGRESS_KEY, JSON.stringify(progressData));
+                localStorage.setItem(INCORRECT_QUESTIONS_KEY, JSON.stringify(Array.from(incorrect)));
+                calculateAndDisplayProgress();
+            }
+
+            function shuffle(array) {
+                let currentIndex = array.length, randomIndex;
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
                 }
-            });
-
-            allQuestions = Array.from(questionMap.values());
-            setupFilters();
-            updateAllQuestionsCount();
-            calculateAndDisplayProgress();
-        }
-
-        function setupFilters() {
-            // Collect all unique sections present in the data
-            let uniqueSections = [...new Set(allQuestions.map(q => q.section))];
-            // Filter out 'Sonstige' from the sections that will be displayed as filter buttons and sort them
-            const sectionsToDisplay = uniqueSections.filter(s => s !== 'Sonstige').sort();
-
-            // Always start with 'Alle', then add the sorted, filtered sections
-            const sections = ['Alle', ...sectionsToDisplay];
-
-            sectionFilterButtons.innerHTML = sections.map(section =>
-                `<button class="filter-button ${section === 'Alle' ? 'active' : ''}" data-filter-type="section" data-filter-value="${section}">${section}</button>`
-            ).join('');
-        }
-        
-        function updateAllQuestionsCount() {
-            const filteredQuestions = allQuestions.filter(q => {
-                const typeMatch = selectedType === 'Alle' || q.type === selectedType;
-                const sectionMatch = selectedSection === 'Alle' || q.section === selectedSection;
-                return typeMatch && sectionMatch;
-            });
-            const count = filteredQuestions.length;
-            allQuestionsBtn.textContent = `Alle (${count})`;
-        }
-        function calculateAndDisplayProgress() {
-            const progressData = getProgressData();
-            // Dynamically get all sections present in the data for progress tiles
-            const sectionsForProgress = [...new Set(allQuestions.map(q => q.section))].sort();
+                return array;
+            }
             
-            progressTilesContainer.innerHTML = ''; // Clear existing tiles
-            let totalCorrect = 0;
-            let totalAnswered = 0;
+            /**
+             * Parses the question name to extract its type and section (Lernfeld).
+             * @param {string} name The full name of the question.
+             * @returns {{type: string, section: string}} An object containing the extracted type and section.
+             */
+            function parseQuestionName(name) {
+                let type = 'Sonstige'; // Default type
+                let section = 'Sonstige'; // Default section
 
-            sectionsForProgress.forEach(lf => {
-                // Only create progress tiles for sections that are not 'Sonstige'
-                if (lf === 'Sonstige') return;
-
-                const lfQuestions = allQuestions.filter(q => q.section === lf);
-                if (lfQuestions.length === 0) return; // Skip if no questions for this section
-
-                const answeredLfQuestions = lfQuestions.filter(q => progressData.hasOwnProperty(q.question));
-                const correctLfQuestions = answeredLfQuestions.filter(q => progressData[q.question] === 'correct');
-                
-                const percentage = answeredLfQuestions.length > 0 ? Math.round((correctLfQuestions.length / answeredLfQuestions.length) * 100) : 0;
-                totalCorrect += correctLfQuestions.length;
-                totalAnswered += answeredLfQuestions.length;
-
-                const tile = `
-                    <div class="progress-tile">
-                        <h4>LF ${lf}</h4>
-                        <div class="percentage">${percentage}%</div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: ${percentage}%;"></div>
-                        </div>
-                    </div>`;
-                progressTilesContainer.innerHTML += tile;
-            });
-            // Gesamt tile
-            const gesamtPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-            const gesamtTile = `
-                <div class="progress-tile">
-                    <h4>Gesamt</h4>
-                    <div class="percentage">${gesamtPercentage}%</div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: ${gesamtPercentage}%;"></div>
-                    </div>
-                </div>`;
-            progressTilesContainer.innerHTML += gesamtTile;
-        }
-        function handleFilterClick(e) {
-            const button = e.target.closest('.filter-button');
-            if (!button) return;
-            const { filterType, filterValue } = button.dataset;
-            if (filterType === 'mode') {
-                quizMode = filterValue;
-                document.querySelectorAll('[data-practice-filter]').forEach(el => el.classList.toggle('hidden', quizMode === 'exam'));
-            } else if (filterType === 'type') {
-                selectedType = filterValue;
-            } else if (filterType === 'section') {
-                selectedSection = filterValue;
-            } else if (filterType === 'count') {
-                selectedQuestionCount = filterValue;
+                const musterpruefungMatch = name.match(/Musterprüfung\s+([A-Z])(?:\.\d+)?/i);
+                if (musterpruefungMatch) {
+                    type = 'Musterprüfung';
+                    section = musterpruefungMatch[1].toUpperCase();
+                } else {
+                    const quizLfMatch = name.match(/Quiz LF\s+([A-Z])(?:\.\d+)?/i);
+                    if (quizLfMatch && quizLfMatch[1]) {
+                        type = 'Quiz LF';
+                        section = quizLfMatch[1].toUpperCase();
+                    } else {
+                         // For other names like "Wissenstest", keep type as Quiz LF but section as Sonstige
+                        type = 'Quiz LF';
+                        section = 'Sonstige';
+                    }
+                }
+                return { type, section };
             }
-            button.parentElement.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            if (filterType === 'type' || filterType === 'section') {
+
+            /**
+             * Initializes the question data by loading from the external file.
+             * The deduplication logic has been removed.
+             */
+            function initializeData() {
+                // Check if questions are loaded from external file
+                if (typeof initialRawQuestions === 'undefined') {
+                    alert("Fehler: Die Datei 'questions.js' konnte nicht geladen werden.");
+                    return;
+                }
+                
+                // --- NO DEDUPLICATION ---
+                // The deduplication logic has been removed as requested.
+                // All questions from initialRawQuestions will now be loaded.
+                allQuestions = initialRawQuestions.map(q => {
+                    return { ...q, ...parseQuestionName(q.name) };
+                });
+
+                setupFilters();
                 updateAllQuestionsCount();
+                calculateAndDisplayProgress();
             }
-        }
-        function startQuiz() {
-            let filteredQuestions;
-            if (quizMode === 'exam') {
-                const incorrectTexts = JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]');
-                const incorrectQuestions = allQuestions.filter(q => incorrectTexts.includes(q.question));
-                
-                const remainingQuestions = allQuestions.filter(q => !incorrectTexts.includes(q.question));
-                const shuffledRemaining = shuffle(remainingQuestions);
-                const needed = 100 - incorrectQuestions.length;
-                quizQuestions = [...incorrectQuestions, ...shuffledRemaining.slice(0, Math.max(0, needed))];
-                
-            } else {
-                filteredQuestions = allQuestions.filter(q => {
+
+            function setupFilters() {
+                // Collect all unique sections present in the data
+                let uniqueSections = [...new Set(allQuestions.map(q => q.section))];
+                // Filter out 'Sonstige' from the sections that will be displayed as filter buttons and sort them
+                const sectionsToDisplay = uniqueSections.filter(s => s !== 'Sonstige').sort();
+
+                // Always start with 'Alle', then add the sorted, filtered sections
+                const sections = ['Alle', ...sectionsToDisplay];
+
+                sectionFilterButtons.innerHTML = sections.map(section =>
+                    `<button class="filter-button ${section === 'Alle' ? 'active' : ''}" data-filter-type="section" data-filter-value="${section}">${section}</button>`
+                ).join('');
+            }
+            
+            function updateAllQuestionsCount() {
+                const filteredQuestions = allQuestions.filter(q => {
                     const typeMatch = selectedType === 'Alle' || q.type === selectedType;
                     const sectionMatch = selectedSection === 'Alle' || q.section === selectedSection;
                     return typeMatch && sectionMatch;
                 });
-                let shuffled = shuffle(filteredQuestions);
-                if (selectedQuestionCount !== 'Alle') {
-                    quizQuestions = shuffled.slice(0, parseInt(selectedQuestionCount, 10));
-                } else {
-                    quizQuestions = shuffled;
+                const count = filteredQuestions.length;
+                allQuestionsBtn.textContent = `Alle (${count})`;
+            }
+
+            function calculateAndDisplayProgress() {
+                const progressData = getProgressData();
+                // Dynamically get all sections present in the data for progress tiles
+                const sectionsForProgress = [...new Set(allQuestions.map(q => q.section))].sort();
+                
+                progressTilesContainer.innerHTML = ''; // Clear existing tiles
+                let totalCorrect = 0;
+                let totalAnswered = 0;
+
+                sectionsForProgress.forEach(lf => {
+                    // Only create progress tiles for sections that are not 'Sonstige'
+                    if (lf === 'Sonstige') return;
+
+                    const lfQuestions = allQuestions.filter(q => q.section === lf);
+                    if (lfQuestions.length === 0) return; // Skip if no questions for this section
+
+                    const answeredLfQuestions = lfQuestions.filter(q => progressData.hasOwnProperty(q.question));
+                    const correctLfQuestions = answeredLfQuestions.filter(q => progressData[q.question] === 'correct');
+                    
+                    const percentage = answeredLfQuestions.length > 0 ? Math.round((correctLfQuestions.length / answeredLfQuestions.length) * 100) : 0;
+                    totalCorrect += correctLfQuestions.length;
+                    totalAnswered += answeredLfQuestions.length;
+
+                    const tile = `
+                        <div class="progress-tile">
+                            <h4>LF ${lf}</h4>
+                            <div class="percentage">${percentage}%</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: ${percentage}%;"></div>
+                            </div>
+                        </div>`;
+                    progressTilesContainer.innerHTML += tile;
+                });
+                // Gesamt tile
+                const gesamtPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+                const gesamtTile = `
+                    <div class="progress-tile">
+                        <h4>Gesamt</h4>
+                        <div class="percentage">${gesamtPercentage}%</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${gesamtPercentage}%;"></div>
+                        </div>
+                    </div>`;
+                progressTilesContainer.innerHTML += gesamtTile;
+            }
+
+            function handleFilterClick(e) {
+                const button = e.target.closest('.filter-button');
+                if (!button) return;
+                const { filterType, filterValue } = button.dataset;
+                if (filterType === 'mode') {
+                    quizMode = filterValue;
+                    document.querySelectorAll('[data-practice-filter]').forEach(el => el.classList.toggle('hidden', quizMode === 'exam'));
+                } else if (filterType === 'type') {
+                    selectedType = filterValue;
+                } else if (filterType === 'section') {
+                    selectedSection = filterValue;
+                } else if (filterType === 'count') {
+                    selectedQuestionCount = filterValue;
+                }
+                button.parentElement.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                if (filterType === 'type' || filterType === 'section') {
+                    updateAllQuestionsCount();
                 }
             }
-            if (quizQuestions.length === 0) {
-                // Using a custom alert for better UX consistent with guidance
-                const messageBox = document.createElement('div');
-                messageBox.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center';
-                messageBox.innerHTML = `
-                    <div class="bg-white p-6 rounded-lg shadow-xl text-center">
-                        <p class="mb-4 text-lg font-semibold">Keine Fragen für die ausgewählten Filter gefunden. Bitte Auswahl ändern.</p>
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="this.parentElement.parentElement.remove()">OK</button>
-                    </div>
-                `;
-                document.body.appendChild(messageBox);
-                return;
+
+            function startQuiz() {
+                let filteredQuestions;
+                if (quizMode === 'exam') {
+                    const incorrectTexts = JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]');
+                    const incorrectQuestions = allQuestions.filter(q => incorrectTexts.includes(q.question));
+                    
+                    const remainingQuestions = allQuestions.filter(q => !incorrectTexts.includes(q.question));
+                    const shuffledRemaining = shuffle(remainingQuestions);
+                    const needed = 100 - incorrectQuestions.length;
+                    quizQuestions = [...incorrectQuestions, ...shuffledRemaining.slice(0, Math.max(0, needed))];
+                    
+                } else {
+                    filteredQuestions = allQuestions.filter(q => {
+                        const typeMatch = selectedType === 'Alle' || q.type === selectedType;
+                        const sectionMatch = selectedSection === 'Alle' || q.section === selectedSection;
+                        return typeMatch && sectionMatch;
+                    });
+                    let shuffled = shuffle(filteredQuestions);
+                    if (selectedQuestionCount !== 'Alle') {
+                        quizQuestions = shuffled.slice(0, parseInt(selectedQuestionCount, 10));
+                    } else {
+                        quizQuestions = shuffled;
+                    }
+                }
+                if (quizQuestions.length === 0) {
+                    const messageBox = document.createElement('div');
+                    messageBox.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center';
+                    messageBox.innerHTML = `
+                        <div class="bg-white p-6 rounded-lg shadow-xl text-center">
+                            <p class="mb-4 text-lg font-semibold">Keine Fragen für die ausgewählten Filter gefunden. Bitte Auswahl ändern.</p>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="this.parentElement.parentElement.remove()">OK</button>
+                        </div>
+                    `;
+                    document.body.appendChild(messageBox);
+                    return;
+                }
+                currentQuestionIndex = 0;
+                userAnswers = {};
+                setupScreen.classList.add('hidden');
+                resultsScreen.classList.add('hidden');
+                quizScreen.classList.remove('hidden');
+                displayQuestion();
             }
-            currentQuestionIndex = 0;
-            userAnswers = {};
-            setupScreen.classList.add('hidden');
-            resultsScreen.classList.add('hidden');
-            quizScreen.classList.remove('hidden');
-            displayQuestion();
-        }
-        function displayQuestion() {
-            clearInterval(timerInterval);
-            const question = quizQuestions[currentQuestionIndex];
-            const userAnswer = userAnswers[currentQuestionIndex];
-            progressIndicator.textContent = `Frage ${currentQuestionIndex + 1} / ${quizQuestions.length}`;
-            questionNameEl.textContent = question.name;
-            questionTextEl.textContent = question.question;
-            const isMultipleChoice = question.correct.length > 1;
-            if (isMultipleChoice) {
-                const optionsHTML = question.answers.map(answer => `<option value="${answer}">${answer}</option>`).join('');
-                answersForm.innerHTML = `
-                    <label for="multi-select-box" class="block mb-2 font-semibold text-slate-700">Wählen Sie alle korrekten Antworten aus (halten Sie Strg/Cmd gedrückt):</label>
-                    <select multiple id="multi-select-box" class="w-full p-2 h-48">${optionsHTML}</select>`;
-            } else {
-                answersForm.innerHTML = question.answers.map((answer, index) => `
-                    <label for="answer-${index}" class="answer-option" id="label-answer-${index}">
-                        <input type="radio" name="answer" id="answer-${index}" value="${answer}">${answer}
-                    </label>`).join('');
+
+            function displayQuestion() {
+                clearInterval(timerInterval);
+                const question = quizQuestions[currentQuestionIndex];
+                const userAnswer = userAnswers[currentQuestionIndex];
+                progressIndicator.textContent = `Frage ${currentQuestionIndex + 1} / ${quizQuestions.length}`;
+                questionNameEl.textContent = question.name;
+                questionTextEl.textContent = question.question;
+                const isMultipleChoice = question.correct.length > 1;
+
+                if (Array.isArray(question.answers) && typeof question.answers[0] === 'object' && question.answers[0] !== null) {
+                    // Handle matching questions (object-based answers)
+                    const answerParts = question.answers.map(ansObj => Object.keys(ansObj)[0]);
+                    const correctParts = question.correct.map(corrObj => Object.values(corrObj)[0]);
+                    
+                    let formHTML = '<div class="grid grid-cols-2 gap-4">';
+                    answerParts.forEach((part, index) => {
+                        formHTML += `<div><label class="block font-semibold mb-1">${part}</label><select data-part="${part}" class="w-full p-2 border rounded">`;
+                        // Provide shuffled options for matching
+                        const options = shuffle([...correctParts]);
+                        options.forEach(option => {
+                            formHTML += `<option value="${option}">${option}</option>`;
+                        });
+                        formHTML += `</select></div>`;
+                    });
+                    formHTML += '</div>';
+                    answersForm.innerHTML = formHTML;
+
+                } else if (isMultipleChoice) {
+                    const optionsHTML = question.answers.map(answer => `<option value="${answer}">${answer}</option>`).join('');
+                    answersForm.innerHTML = `
+                        <label for="multi-select-box" class="block mb-2 font-semibold text-slate-700">Wählen Sie alle korrekten Antworten aus (halten Sie Strg/Cmd gedrückt):</label>
+                        <select multiple id="multi-select-box" class="w-full p-2 h-48">${optionsHTML}</select>`;
+                } else {
+                    answersForm.innerHTML = question.answers.map((answer, index) => `
+                        <label for="answer-${index}" class="answer-option" id="label-answer-${index}">
+                            <input type="radio" name="answer" id="answer-${index}" value="${answer}">${answer}
+                        </label>`).join('');
+                }
+
+                prevBtn.disabled = currentQuestionIndex === 0;
+                nextBtn.disabled = true;
+                submitBtn.disabled = false;
+                if (userAnswer) {
+                    showAnswerResult(userAnswer);
+                    // Pre-fill user's previous answer
+                } else {
+                    startTimer();
+                }
             }
-            prevBtn.disabled = currentQuestionIndex === 0;
-            nextBtn.disabled = true;
-            submitBtn.disabled = false;
-            if (userAnswer) {
-                showAnswerResult(userAnswer);
-                const multiSelect = answersForm.querySelector('#multi-select-box');
-                if (multiSelect) {
+            
+            function startTimer() {
+                timeLeft = 60;
+                timerEl.textContent = `01:00`;
+                timerEl.classList.remove('low-time');
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                    const seconds = (timeLeft % 60).toString().padStart(2, '0');
+                    timerEl.textContent = `${minutes}:${seconds}`;
+                    if (timeLeft <= 10) timerEl.classList.add('low-time');
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        submitAnswer(true);
+                    }
+                }, 1000);
+            }
+
+            function submitAnswer(isTimeUp = false) {
+                clearInterval(timerInterval);
+                const question = quizQuestions[currentQuestionIndex];
+                let selectedOptions = [];
+                let isCorrect = false;
+
+                const matchingSelects = answersForm.querySelectorAll('select:not(#multi-select-box)');
+                if (matchingSelects.length > 0) {
+                    // Logic for matching questions
+                    let allMatched = true;
+                    const tempAnswers = {};
+                    matchingSelects.forEach(select => {
+                        const part = select.dataset.part;
+                        const selectedValue = select.value;
+                        tempAnswers[part] = selectedValue;
+                        const correctObj = question.correct.find(c => Object.keys(c)[0] === part);
+                        if (!correctObj || correctObj[part] !== selectedValue) {
+                            allMatched = false;
+                        }
+                    });
+                    isCorrect = allMatched;
+                    selectedOptions = [tempAnswers]; // Store the map of selections
+                } else {
+                    // Logic for multiple choice or single choice
+                    const multiSelect = answersForm.querySelector('#multi-select-box');
+                    if (multiSelect) {
+                        selectedOptions = Array.from(multiSelect.selectedOptions).map(option => option.value);
+                    } else {
+                        const checkedInput = answersForm.querySelector('input:checked');
+                        if (checkedInput) selectedOptions = [checkedInput.value];
+                    }
+                    
+                    if (!isTimeUp) {
+                        const selectedSet = new Set(selectedOptions);
+                        const correctSet = new Set(question.correct);
+                        if (selectedSet.size === correctSet.size) {
+                            isCorrect = [...selectedSet].every(option => correctSet.has(option));
+                        }
+                    }
+                }
+
+                userAnswers[currentQuestionIndex] = { selected: selectedOptions, isCorrect };
+                showAnswerResult(userAnswers[currentQuestionIndex]);
+            }
+
+            function showAnswerResult(userAnswer) {
+                const question = quizQuestions[currentQuestionIndex];
+                submitBtn.disabled = true;
+                nextBtn.disabled = false;
+
+                const matchingSelects = answersForm.querySelectorAll('select:not(#multi-select-box)');
+                if (matchingSelects.length > 0) {
+                    matchingSelects.forEach(select => {
+                        select.disabled = true;
+                        const part = select.dataset.part;
+                        const correctValue = question.correct.find(c => Object.keys(c)[0] === part)[part];
+                        if (select.value === correctValue) {
+                            select.classList.add('correct');
+                        } else {
+                            select.classList.add('incorrect');
+                        }
+                    });
+                } else if (answersForm.querySelector('#multi-select-box')) {
+                    const multiSelect = answersForm.querySelector('#multi-select-box');
+                    multiSelect.disabled = true;
                     Array.from(multiSelect.options).forEach(option => {
-                        option.selected = userAnswer.selected.includes(option.value);
+                        if (new Set(question.correct).has(option.value)) {
+                            option.classList.add('correct');
+                        } else if (userAnswer.selected.includes(option.value)) {
+                            option.classList.add('incorrect');
+                        }
                     });
                 } else {
-                    const radioInput = answersForm.querySelector(`input[value="${userAnswer.selected[0]}"]`);
-                    if (radioInput) radioInput.checked = true;
-                }
-            } else {
-                startTimer();
-            }
-        }
-        
-        function startTimer() {
-            timeLeft = 60;
-            timerEl.textContent = `01:00`;
-            timerEl.classList.remove('low-time');
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-                const seconds = (timeLeft % 60).toString().padStart(2, '0');
-                timerEl.textContent = `${minutes}:${seconds}`;
-                if (timeLeft <= 10) timerEl.classList.add('low-time');
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    submitAnswer(true);
-                }
-            }, 1000);
-        }
-        function submitAnswer(isTimeUp = false) {
-            clearInterval(timerInterval);
-            const question = quizQuestions[currentQuestionIndex];
-            let selectedOptions = [];
-            const multiSelect = answersForm.querySelector('#multi-select-box');
-            if (multiSelect) {
-                selectedOptions = Array.from(multiSelect.selectedOptions).map(option => option.value);
-            } else {
-                const checkedInput = answersForm.querySelector('input:checked');
-                if (checkedInput) selectedOptions = [checkedInput.value];
-            }
-            
-            let isCorrect = false;
-            if (!isTimeUp) {
-                const selectedSet = new Set(selectedOptions);
-                const correctSet = new Set(question.correct);
-                if (selectedSet.size === correctSet.size) {
-                    isCorrect = [...selectedSet].every(option => correctSet.has(option));
+                    answersForm.querySelectorAll('input').forEach(input => {
+                        input.disabled = true;
+                        const label = document.getElementById(`label-answer-${input.id.split('-')[1]}`);
+                        if (new Set(question.correct).has(input.value)) {
+                            label.classList.add('correct');
+                        } else if (input.checked) {
+                            label.classList.add('incorrect');
+                        }
+                    });
                 }
             }
-            userAnswers[currentQuestionIndex] = { selected: selectedOptions, isCorrect };
-            showAnswerResult(userAnswers[currentQuestionIndex]);
-        }
-        function showAnswerResult(userAnswer) {
-            const question = quizQuestions[currentQuestionIndex];
-            const correctAnswers = new Set(question.correct);
-            const multiSelect = answersForm.querySelector('#multi-select-box');
-            if (multiSelect) {
-                multiSelect.disabled = true;
-                Array.from(multiSelect.options).forEach(option => {
-                    if (correctAnswers.has(option.value)) {
-                        option.classList.add('correct');
-                    } else if (userAnswer.selected.includes(option.value)) {
-                        option.classList.add('incorrect');
-                    }
-                });
-            } else {
-                answersForm.querySelectorAll('input').forEach(input => {
-                    input.disabled = true;
-                    const label = document.getElementById(`label-answer-${input.id.split('-')[1]}`);
-                    if (correctAnswers.has(input.value)) {
-                        label.classList.add('correct');
-                    } else if (input.checked) {
-                        label.classList.add('incorrect');
-                    }
-                });
+
+            function showNextQuestion() {
+                if (currentQuestionIndex < quizQuestions.length - 1) {
+                    currentQuestionIndex++;
+                    displayQuestion();
+                } else {
+                    showResults();
+                }
             }
-            submitBtn.disabled = true;
-            nextBtn.disabled = false;
-        }
-        function showNextQuestion() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion();
-            } else {
-                showResults();
+
+            function showPrevQuestion() {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    displayQuestion();
+                }
             }
-        }
-        function showPrevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion();
+
+            function showResults() {
+                quizScreen.classList.add('hidden');
+                resultsScreen.classList.remove('hidden');
+                updateProgressData();
+                const score = Object.values(userAnswers).filter(ans => ans.isCorrect).length;
+                scoreEl.textContent = `Du hast ${score} von ${quizQuestions.length} Fragen richtig beantwortet.`;
             }
-        }
-        function showResults() {
-            quizScreen.classList.add('hidden');
-            resultsScreen.classList.remove('hidden');
-            updateProgressData();
-            const score = Object.values(userAnswers).filter(ans => ans.isCorrect).length;
-            scoreEl.textContent = `Du hast ${score} von ${quizQuestions.length} Fragen richtig beantwortet.`;
-        }
-        function restartQuiz() {
-            resultsScreen.classList.add('hidden');
-            setupScreen.classList.remove('hidden');
-            calculateAndDisplayProgress(); // Recalculate progress on restart to reflect latest answers
-        }
-        document.addEventListener('DOMContentLoaded', () => {
+
+            function restartQuiz() {
+                resultsScreen.classList.add('hidden');
+                setupScreen.classList.remove('hidden');
+                calculateAndDisplayProgress(); // Recalculate progress on restart to reflect latest answers
+            }
+
+            // Initial call
             initializeData();
             
+            // Event Listeners
             modeFilterButtons.addEventListener('click', handleFilterClick);
             typeFilterButtons.addEventListener('click', handleFilterClick);
             sectionFilterButtons.addEventListener('click', handleFilterClick);
