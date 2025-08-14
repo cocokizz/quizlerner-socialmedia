@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktives Social Media Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        /* Setup Screen Styles */
+        .setup-screen h1 {
+            font-size: 2.5rem;
+            color: #059669;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .setup-screen .subtitle {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 24px;
+        }
+        .filter-container {
+            margin-bottom: 8px;
+            padding: 16px;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .filter-container h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 8px;
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .filter-button {
+            padding: 4px 10px;
+            font-size: 0.875rem;
+            background-color: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .filter-button:hover {
+            background-color: #e2e8f0;
+            border-color: #94a3b8;
+        }
+        .filter-button.active {
+            background-color: #10b981;
+            color: #ffffff;
+            border-color: #059669;
+        }
+        .start-quiz-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            background-color: #059669;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: background-color 0.2s ease;
+        }
+        .start-quiz-btn:hover {
+            background-color: #047857;
+        }
+        .start-quiz-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        /* Learning Progress Styles */
+        .learning-progress-section {
+            margin-top: 2rem;
+        }
+        .learning-progress-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+        .progress-tile {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .progress-tile h4 {
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+        .progress-tile .percentage {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #059669;
+        }
+        .progress-bar-container {
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #10b981;
+            border-radius: 4px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .instructions {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f1f5f9;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .instructions h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+        .instructions p {
+            color: #475569;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+        .instructions strong {
+            color: #065f46;
+        }
+
+        /* Quiz Screen Styles */
+        .quiz-screen {
+            background-color: #ffffff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .progress-indicator {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #475569;
+        }
+        .timer {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #059669;
+            background-color: #f0fdf4;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+        .timer.low-time {
+            color: #dc2626;
+            background-color: #fef2f2;
+        }
+        .question-container .question-name {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        .question-container .question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 24px;
+        }
+        .answers-form .answer-option {
+            display: block;
+            background-color: #f8fafc;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .answers-form .answer-option:hover {
+            border-color: #10b981;
+            background-color: #f0fdf4;
+        }
+        .answers-form .answer-option input {
+            margin-right: 12px;
+        }
+        .answers-form .answer-option.correct {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+            color: #15803d;
+            font-weight: 600;
+        }
+        .answers-form .answer-option.incorrect {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+            color: #b91c1c;
+            font-weight: 600;
+        }
+        /* New styles for select box */
+        .answers-form select {
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .answers-form select:focus {
+            border-color: #10b981;
+            outline: none;
+        }
+        .answers-form option {
+            padding: 8px;
+        }
+        .answers-form option.correct {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+        .answers-form option.incorrect {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+        }
+        .nav-btn, .submit-btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .nav-btn {
+            background-color: #e2e8f0;
+            color: #334155;
+        }
+        .nav-btn:hover {
+            background-color: #cbd5e1;
+        }
+        .nav-btn:disabled {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+        .submit-btn {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .submit-btn:hover {
+            background-color: #2563eb;
+        }
+        .submit-btn:disabled {
+            background-color: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        /* Results Screen Styles */
+        .results-screen {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 48px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .results-screen h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #059669;
+            margin-bottom: 16px;
+        }
+        .results-screen .score {
+            font-size: 1.5rem;
+            color: #334155;
+            margin-bottom: 32px;
+        }
+        .results-screen .restart-btn {
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background-color: #3b82f6;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .results-screen .restart-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Screen 1: Setup -->
+        <div id="setupScreen" class="setup-screen">
+            <h1>Social Media Quiz</h1>
+            <p class="subtitle">Wählen Sie den Modus und die Fragen aus, die Sie üben möchten.</p>
+
+            <div class="filter-container">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6">
+                    <!-- Column 1: Modus -->
+                    <div>
+                        <h3>Modus:</h3>
+                        <div class="filter-buttons" id="modeFilterButtons">
+                            <button class="filter-button active" data-filter-type="mode" data-filter-value="practice">Übungsmodus</button>
+                            <button class="filter-button" data-filter-type="mode" data-filter-value="exam">Prüfungsmodus (100 Fragen)</button>
+                        </div>
+                    </div>
+                    <!-- Column 2: Typ -->
+                    <div data-practice-filter>
+                        <h3>Typ:</h3>
+                        <div class="filter-buttons" id="typeFilterButtons">
+                            <button class="filter-button active" data-filter-type="type" data-filter-value="Alle">Alle</button>
+                            <button class="filter-button" data-filter-type="type" data-filter-value="Musterprüfung">Musterprüfung</button>
+                            <button class="filter-button" data-filter-type="type" data-filter-value="Quiz LF">Quiz LF</button>
+                        </div>
+                    </div>
+                    <!-- Column 3: LF -->
+                    <div data-practice-filter>
+                        <h3>LF:</h3>
+                        <div class="filter-buttons" id="sectionFilterButtons">
+                            <!-- Dynamic buttons -->
+                        </div>
+                    </div>
+                    <!-- Column 4: Anzahl -->
+                    <div data-practice-filter>
+                        <h3>Anzahl der Fragen:</h3>
+                        <div class="filter-buttons" id="questionCountFilterButtons">
+                             <button class="filter-button" data-filter-type="count" data-filter-value="10">10</button>
+                             <button class="filter-button" data-filter-type="count" data-filter-value="25">25</button>
+                             <button class="filter-button" data-filter-type="count" data-filter-value="50">50</button>
+                             <button class="filter-button active" data-filter-type="count" data-filter-value="Alle" id="allQuestionsBtn">Alle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="startQuizBtn" class="start-quiz-btn">Quiz starten</button>
+
+            <!-- Learning Progress Section -->
+            <div class="learning-progress-section">
+                <h2>Dein Lernstand</h2>
+                <div id="progressTiles" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Progress tiles will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>Informationen zur Bedienung</h3>
+                <p><strong>Übungsmodus:</strong> Wählen Sie gezielt Fragen nach Typ, Lernfeld (LF) und Anzahl aus, um bestimmte Themen zu trainieren.</p>
+                <p><strong>Prüfungsmodus:</strong> Startet eine Prüfungssimulation mit 100 zufällig ausgewählten Fragen aus dem gesamten Pool.</p>
+                <p><strong>Intelligentes Lernen:</strong> Das System merkt sich alle Fragen, die Sie falsch beantworten. Im nächsten Prüfungsmodus werden diese Fragen automatisch bevorzugt, damit Sie sie gezielt wiederholen können. Sobald Sie eine dieser Fragen richtig beantworten, wird sie aus der "Wiederholungsliste" entfernt. <strong>(Hinweis: Diese Funktion speichert die Daten nur in der aktuellen Browser-Sitzung. Ein Neuladen der Seite setzt den Speicher zurück.)</strong></p>
+            </div>
+        </div>
+
+        <!-- Screen 2: Quiz -->
+        <div id="quizScreen" class="quiz-screen hidden">
+            <div class="quiz-header">
+                <div id="progressIndicator" class="progress-indicator">Frage 1 / 10</div>
+                <div id="timer" class="timer">01:00</div>
+            </div>
+            <div id="questionContainer" class="question-container">
+                <p class="question-name" id="questionName"></p>
+                <h2 class="question-text" id="questionText"></h2>
+                <form id="answersForm" class="answers-form"></form>
+            </div>
+            <div class="quiz-navigation">
+                <button id="prevBtn" class="nav-btn">Zurück</button>
+                <button id="submitBtn" class="submit-btn">Antwort bestätigen</button>
+                <button id="nextBtn" class="nav-btn">Weiter</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Results -->
+        <div id="resultsScreen" class="results-screen hidden">
+            <h2>Quiz beendet!</h2>
+            <p id="score" class="score">Du hast 8 von 10 Fragen richtig beantwortet.</p>
+            <button id="restartBtn" class="restart-btn">Neues Quiz starten</button>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const initialRawQuestions = [
+            { name: "Musterprüfung A.1-Frage 03", question: "Im Gegensatz zur klassischen TV-Werbung, wo sich der Kunde passiv beschallen lässt, sucht der Online-Kunde aktiv nach Produkten und Dienstleistungen. Mit welchem Fachbegriff wird das Verhalten des Online-Kunden betitelt?", answers: ["Pushing", "Lean forward"], correct: ["Lean forward"] },
+            { name: "Musterprüfung G.1- Frage 03", question: "Worin liegt der Schwerpunkt von Social Media Analytics?", answers: ["Erstellung von Social Ads auf Meta", "Beobachtung der Konkurrenz auf X (Twitter) und Foren", "Analyse der Performance der eigenen Social-Media-Kanäle", "Analyse von Kommentaren und Stimmungen auf Bewertungsportalen"], correct: ["Analyse der Performance der eigenen Social-Media-Kanäle"] },
+            { name: "Musterprüfung C.1-Frage 02", question: "Welche Formel veranschaulicht die Werbewirkung im Marketing?", answers: ["VERDI", "FISH", "AIDA", "RADAR"], correct: ["AIDA"] },
+            { name: "Musterprüfung F.2 - Frage 03", question: "Welche sozialen Netzwerke bieten uns die Möglichkeit, über ein eigenes Pixel Website-Tracking zu betreiben?", answers: ["Tik Tok", "Linkedin", "Pinterest", "XING"], correct: ["Tik Tok", "Linkedin", "Pinterest", "XING"] },
+            { name: "Musterprüfung F.3 - Frage 06", question: "Ordne die Kampagnenstufen des TOFU-/MOFU-/BOFU-Prinzips den Bewusstseinsstufen der Zielgruppe richtig zu.", answers: ["BOFU: Nutzende, die wahrscheinlich großes Kaufinteresse haben, und die Reaktivierung von Bestandskundinnen und -kunden", "TOFU: Potenzielle Kundinnen und Kunden, die noch keinen Kontakt mit der Marke hatten", "MOFU: Nutzende, die bereits Kontakt mit der Marke oder den Produkten hatten und ein grundsätzliches Interesse haben"], correct: ["BOFU: Nutzende, die wahrscheinlich großes Kaufinteresse haben, und die Reaktivierung von Bestandskundinnen und -kunden", "TOFU: Potenzielle Kundinnen und Kunden, die noch keinen Kontakt mit der Marke hatten", "MOFU: Nutzende, die bereits Kontakt mit der Marke oder den Produkten hatten und ein grundsätzliches Interesse haben"] },
+            { name: "Musterprüfung D.1 - Frage 02", question: "Wofür steht FISH im FISH-Modell?", answers: ["Flag - Inbound - Significant - Highlight", "Follow - Inbound - Search - Highend", "False - Intensive - Super - Honest", "Follow - Inbound - Search - Highlight"], correct: ["Follow - Inbound - Search - Highlight"] },
+            { name: "Musterprüfung C.5 - Frage 03", question: "Welche Arten von Tools und Lizenzen können im Rahmen einer Ressourcenplanung relevant sein?", answers: ["Social-Media-Management-Tools", "Content-Creation-Tools", "Analyse-Tools", "Lizenzgebühren für Personas"], correct: ["Social-Media-Management-Tools", "Content-Creation-Tools", "Analyse-Tools"] },
+            { name: "Musterprüfung G.2- Frage 05", question: "Welche Aussage in Bezug auf qualitative und quantitative Kennzahlen im Social Listening ist korrekt?", answers: ["Qualitative Kennzahlen sind zu bevorzugen.", "Nur zusammen fördern sie ein umfassendes Verständnis der Markenperformance.", "Quantitative Kennzahlen sind zu bevorzugen."], correct: ["Nur zusammen fördern sie ein umfassendes Verständnis der Markenperformance."] },
+            { name: "Musterprüfung C.3 - Frage 02", question: "Was kann man in der Limbic Map positionieren?", answers: ["Zielgruppen", "Marken", "Unternehmen", "Personen"], correct: ["Zielgruppen", "Marken", "Unternehmen", "Personen"] },
+            { name: "Musterprüfung F.3 - Frage 02", question: "Was ist ein „Creative\"?", answers: ["Creative bezeichnet das Foto oder Video, welches in einer Anzeige genutzt wird.", "Creative bezeichnet die visuellen, auditiven und textlichen Elemente einer Anzeige."], correct: ["Creative bezeichnet die visuellen, auditiven und textlichen Elemente einer Anzeige."] },
+            { name: "Quiz LF B.1 Frage 01", question: "Wie lautet der Grundtyp von Facebook?", answers: ["a) Business-Plattform.", "b) Videoplattform.", "c) Suchmaschine.", "d) Soziales Netzwerk."], correct: ["d) Soziales Netzwerk."] },
+            { name: "Quiz LF E.1 Frage 02", question: "Was sollten Social-Media-Guidelines enthalten?", answers: ["a) Unternehmenswerte, Unternehmenskultur.", "b) Budgetplanung für Social Media Ads.", "c) Inhalt und Form der Kommunikation.", "d) Rechtliche Hinweise."], correct: ["a) Unternehmenswerte, Unternehmenskultur.", "c) Inhalt und Form der Kommunikation.", "d) Rechtliche Hinweise."] },
+            { name: "Quiz LF G Frage 01", question: "Nach welchen drei grundlegenden Analyse-Ansätzen wird Social Media Analyse generell unterschieden?", answers: ["Social Media Analyse", "Social Media Monitoring", "Social Media Monitoring, Social Media Measurement, Social Media Analytics", "Social Listening"], correct: ["Social Media Monitoring, Social Media Measurement, Social Media Analytics"] },
+            { name: "Quiz LF G Frage 02", question: "Was wird beim Social Media Monitoring getan?", answers: ["Die Partner unserer eigenen Beiträge", "Die Entwicklung unserer Fan-/Follower-Anzahl", "Das Sammeln und Aufbereiten von für unsere Marke/ unser Unternehmen o. Ä. relevanten Beiträgen", "Die Performance von Werbeanzeigen"], correct: ["Das Sammeln und Aufbereiten von für unsere Marke/ unser Unternehmen o. Ä. relevanten Beiträgen"] },
+            { name: "Quiz LF G Frage 03", question: "Was wird bei der Social Media Analytics betrachtet?", answers: ["Die Reichweite unserer Beiträge", "Im Social-Listening versucht man, direkten Dialog/ Einblick in die Zielgruppe zu erhalten, um das \"Warum\" der Monitoring-Aktivitäten besser zu verstehen.", "Metriken in Euro", "Die Interaktionsrate unserer Beiträge"], correct: ["Die Reichweite unserer Beiträge", "Die Interaktionsrate unserer Beiträge"] },
+            { name: "Quiz LF G Frage 04", question: "Was ist mit Social-Listening gemeint?", answers: ["Im Social-Listening versucht man, direkten Dialog/ Einblick in die Zielgruppe zu erhalten, um das \"Warum\" der Monitoring-Aktivitäten besser zu verstehen.", "Im Social-Listening konzentriert man sich auf die Performance der eigenen Social-Media-Aktivitäten."], correct: ["Im Social-Listening versucht man, direkten Dialog/ Einblick in die Zielgruppe zu erhalten, um das \"Warum\" der Monitoring-Aktivitäten besser zu verstehen."] },
+            { name: "Quiz LF G Frage 05", question: "Ordne die folgenden Aussagen den beiden Bereichen \"Social Media Monitoring\" und \"Social Listening\" korrekt zu.", answers: ["Social Media Monitoring = Schaut zurück, Social Listening = Schaut in die Zukunft", "Social Media Monitoring = Betrachtet Details, Social Listening = Betrachtet das große Ganze"], correct: ["Social Media Monitoring = Schaut zurück, Social Listening = Schaut in die Zukunft", "Social Media Monitoring = Betrachtet Details, Social Listening = Betrachtet das große Ganze"] },
+            { name: "Quiz LF G Frage 06", question: "Welche kostenlosen Tools von Google können für die Durchführung von Social Media Monitoring genutzt werden?", answers: ["Google Alerts", "Google Trends", "Google Alerts, Google Trends"], correct: ["Google Alerts, Google Trends"] },
+            { name: "Quiz LF G Frage 07", question: "Was sind die Grenzen einer Sentiment-Analyse?", answers: ["Es geht dabei vorrangig um die Verständlichkeit einzelner Themen oder Diskussionen in sozialen Medien.", "Werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Themas, einer Marke, eines Services etc. zu erhalten."], correct: ["Werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Themas, einer Marke, eines Services etc. zu erhalten."] },
+            { name: "Quiz LF G Frage 08", question: "Wofür werden Alert-Services wie etwa Google Alerts im Social Media Monitoring eingesetzt?", answers: ["Alert-Services sind hilfreich, um aktuelle Ereignisse und Ad-hoc-Beiträge zu unserem Monitor zu verfolgen.", "Alert-Services werden genutzt, um spezifische Beiträge zu unserem Thema oder Service zu finden."], correct: ["Alert-Services sind hilfreich, um aktuelle Ereignisse und Ad-hoc-Beiträge zu unserem Monitor zu verfolgen."] },
+            { name: "Quiz LF G Frage 09", question: "Welche Möglichkeiten zur Datenerfassung stehen uns im Social Media Monitoring und Social-Listening zur Verfügung?", answers: ["Alert-Services", "Media Talk Library", "Nutzung und anderweitige Tocking Social-Media-Analytics-Tools"], correct: ["Alert-Services", "Nutzung und anderweitige Tocking Social-Media-Analytics-Tools"] },
+            { name: "Quiz LF G Frage 10", question: "Welche Nachteile haben Social-Media-Monitoring- und Social-Listening-Tools in der Praxis?", answers: ["Sie sind als professionelle Tools kostenfrei", "Sie bieten nutzerorientierte Datenanalyse an.", "Sie sind auch mit wenig Know-how leicht zu bedienen.", "Sie haben teilweise sehr hohe Lizenzgebühren."], correct: ["Sie haben teilweise sehr hohe Lizenzgebühren."] },
+            { name: "Quiz LF G Frage 11", question: "Warum ist beim Social Listening eine gründliche Keyword-Analyse entscheidend?", answers: ["Keywords sind wichtige Instrumente, um zu erkennen, wann, wie über unser Unternehmen und unsere Dienstleistungen gesprochen wird, und um relevante Beiträge daraus abzuleiten.", "Keywords sind die Schlagwörter, die mit unseren Keywords in den relevanten Artikeln verknüpft werden."], correct: ["Keywords sind wichtige Instrumente, um zu erkennen, wann, wie über unser Unternehmen und unsere Dienstleistungen gesprochen wird, und um relevante Beiträge daraus abzuleiten."] },
+            { name: "Quiz LF G Frage 12", question: "Wofür kann ein neues Set an Keywords genutzt werden?", answers: ["Zur Neuausrichtung des Markenbildes oder zur Einführung neuer Produkte.", "Zur Berücksichtigung des Wettbewerbs mit den neuen Keywords.", "Als UKG-Verknüpfung."], correct: ["Zur Neuausrichtung des Markenbildes oder zur Einführung neuer Produkte."] },
+            { name: "Quiz LF G Frage 13", question: "Mit welchem booleschen Operator können wir die Suchergebnisse auf ein bestimmtes und maximal 10 Wörter begrenzen?", answers: ["AROUND", "OR/10", "CJUS/10", "NEAR/10"], correct: ["NEAR/10"] },
+            { name: "Quiz LF G Frage 14", question: "Wie viele Suchbegriffe können bei dem Operator AND im Kundenmonitor verbunden werden?", answers: ["bei den Operatoren AND gibt es keine Beschränkungen", "bei dem Operator (OR) Kundenmonitor"], correct: ["bei den Operatoren AND gibt es keine Beschränkungen"] },
+            { name: "Quiz LF G Frage 15", question: "Was ist der größte Vorteil des Social-Media-Monitorings?", answers: ["Die gesammelten Daten von Personen, die zu einer bestimmten Marke oder einem bestimmten Thema Beiträge generiert haben.", "Die gesammelten Daten der Markenerwähnungen im Vergleich zu Wettbewerbern."], correct: ["Die gesammelten Daten der Markenerwähnungen im Vergleich zu Wettbewerbern."] },
+            { name: "Quiz LF G Frage 16", question: "Worin besteht der größte Vorteil der Markenwertberechnungen im Vergleich zu Wettbewerbsanalysen?", answers: ["Share of Voice", "Google Trends"], correct: ["Share of Voice"] },
+            { name: "Quiz LF G Frage 17", question: "Welche Tool-Anbieter von Newslettern gibt es, um die Informationen an die einzelnen Fachabteilungen zu steuern?", answers: ["Talkwalker free Search", "Google Trends", "Meltwater"], correct: ["Meltwater"] },
+            { name: "Quiz LF G Frage 18", question: "Welche Aussage in Bezug auf qualitative und quantitative Beiträge in sozialen Medien ist am ehesten zutreffend?", answers: ["Zur besseren Einordnung ist es oft entscheidend, Verhältnisse der Kennzahlen und nicht nur absolute Zahlen zu betrachten.", "Qualitative Kennzahlen sind zu bevorzugen."], correct: ["Zur besseren Einordnung ist es oft entscheidend, Verhältnisse der Kennzahlen und nicht nur absolute Zahlen zu betrachten."] },
+            { name: "Quiz LF G Frage 19", question: "Welche Vorteile bietet der Ansatz des Social Media Monitorings für das gesamte Unternehmen?", answers: ["Datensammlung", "Integration in bestehende Systeme", "Fokus auf neue Zielgruppen."], correct: ["Datensammlung", "Integration in bestehende Systeme"] }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const setupScreen = document.getElementById('setupScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const resultsScreen = document.getElementById('resultsScreen');
+        const modeFilterButtons = document.getElementById('modeFilterButtons');
+        const typeFilterButtons = document.getElementById('typeFilterButtons');
+        const sectionFilterButtons = document.getElementById('sectionFilterButtons');
+        const questionCountFilterButtons = document.getElementById('questionCountFilterButtons');
+        const startQuizBtn = document.getElementById('startQuizBtn');
+        const progressIndicator = document.getElementById('progressIndicator');
+        const timerEl = document.getElementById('timer');
+        const questionNameEl = document.getElementById('questionName');
+        const questionTextEl = document.getElementById('questionText');
+        const answersForm = document.getElementById('answersForm');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const scoreEl = document.getElementById('score');
+        const restartBtn = document.getElementById('restartBtn');
+        const allQuestionsBtn = document.getElementById('allQuestionsBtn');
+        const progressTilesContainer = document.getElementById('progressTiles');
+
+        // --- STATE ---
+        const INCORRECT_QUESTIONS_KEY = 'incorrectlyAnsweredQuizQuestions';
+        const QUESTION_PROGRESS_KEY = 'questionProgress';
+        let allQuestions = [];
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let timerInterval;
+        let timeLeft = 60;
+        let quizMode = 'practice'; // 'practice' or 'exam'
+        let selectedType = 'Alle';
+        let selectedSection = 'Alle';
+        let selectedQuestionCount = 'Alle';
+
+        // --- FUNCTIONS ---
+        
+        function getProgressData() {
+            const stored = localStorage.getItem(QUESTION_PROGRESS_KEY);
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function updateProgressData() {
+            const progressData = getProgressData();
+            let incorrect = new Set(JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]'));
+            
+            Object.keys(userAnswers).forEach(index => {
+                const question = quizQuestions[index];
+                const answer = userAnswers[index];
+                
+                progressData[question.question] = answer.isCorrect ? 'correct' : 'incorrect';
+
+                if (answer.isCorrect) {
+                    incorrect.delete(question.question);
+                } else {
+                    incorrect.add(question.question);
+                }
+            });
+
+            localStorage.setItem(QUESTION_PROGRESS_KEY, JSON.stringify(progressData));
+            localStorage.setItem(INCORRECT_QUESTIONS_KEY, JSON.stringify(Array.from(incorrect)));
+            calculateAndDisplayProgress();
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function parseQuestionName(name) {
+            let type = '';
+            let section = 'Sonstige';
+            const musterpruefungMatch = name.match(/Musterprüfung\s+([A-Z])(?:\.\d+)?/i);
+            if (musterpruefungMatch) {
+                type = 'Musterprüfung';
+                section = musterpruefungMatch[1].toUpperCase();
+            } else {
+                const quizLfMatch = name.match(/Quiz LF\s+([A-Z])(?:\.\d+)?/i);
+                if (quizLfMatch) {
+                    type = 'Quiz LF';
+                    section = quizLfMatch[1].toUpperCase();
+                }
+            }
+            return { type, section };
+        }
+
+        function initializeData() {
+            const questionMap = new Map();
+            initialRawQuestions.forEach(q => {
+                const normalizedQuestion = q.question.trim().toLowerCase();
+                if (!questionMap.has(normalizedQuestion) || q.name.includes('Musterprüfung')) {
+                    questionMap.set(normalizedQuestion, q);
+                }
+            });
+
+            allQuestions = Array.from(questionMap.values()).map(q => ({ ...q, ...parseQuestionName(q.name) }));
+            setupFilters();
+            updateAllQuestionsCount();
+            calculateAndDisplayProgress();
+        }
+
+        function setupFilters() {
+            const uniqueSections = [...new Set(allQuestions.map(q => q.section))].sort();
+            const sections = ['Alle', ...uniqueSections];
+            sectionFilterButtons.innerHTML = sections.map(section =>
+                `<button class="filter-button ${section === 'Alle' ? 'active' : ''}" data-filter-type="section" data-filter-value="${section}">${section}</button>`
+            ).join('');
+        }
+        
+        function updateAllQuestionsCount() {
+            const filteredQuestions = allQuestions.filter(q => {
+                const typeMatch = selectedType === 'Alle' || q.type === selectedType;
+                const sectionMatch = selectedSection === 'Alle' || q.section === selectedSection;
+                return typeMatch && sectionMatch;
+            });
+            const count = filteredQuestions.length;
+            allQuestionsBtn.textContent = `Alle (${count})`;
+        }
+
+        function calculateAndDisplayProgress() {
+            const progressData = getProgressData();
+            const lfs = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+            progressTilesContainer.innerHTML = ''; // Clear existing tiles
+
+            let totalCorrect = 0;
+            let totalAnswered = 0;
+
+            lfs.forEach(lf => {
+                const lfQuestions = allQuestions.filter(q => q.section === lf);
+                if (lfQuestions.length === 0) return;
+
+                const answeredLfQuestions = lfQuestions.filter(q => progressData.hasOwnProperty(q.question));
+                const correctLfQuestions = answeredLfQuestions.filter(q => progressData[q.question] === 'correct');
+                
+                const percentage = answeredLfQuestions.length > 0 ? Math.round((correctLfQuestions.length / answeredLfQuestions.length) * 100) : 0;
+
+                totalCorrect += correctLfQuestions.length;
+                totalAnswered += answeredLfQuestions.length;
+
+                const tile = `
+                    <div class="progress-tile">
+                        <h4>LF ${lf}</h4>
+                        <div class="percentage">${percentage}%</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${percentage}%;"></div>
+                        </div>
+                    </div>`;
+                progressTilesContainer.innerHTML += tile;
+            });
+
+            // Gesamt tile
+            const gesamtPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+            const gesamtTile = `
+                <div class="progress-tile">
+                    <h4>Gesamt</h4>
+                    <div class="percentage">${gesamtPercentage}%</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${gesamtPercentage}%;"></div>
+                    </div>
+                </div>`;
+            progressTilesContainer.innerHTML += gesamtTile;
+        }
+
+        function handleFilterClick(e) {
+            const button = e.target.closest('.filter-button');
+            if (!button) return;
+            const { filterType, filterValue } = button.dataset;
+
+            if (filterType === 'mode') {
+                quizMode = filterValue;
+                document.querySelectorAll('[data-practice-filter]').forEach(el => el.classList.toggle('hidden', quizMode === 'exam'));
+            } else if (filterType === 'type') {
+                selectedType = filterValue;
+            } else if (filterType === 'section') {
+                selectedSection = filterValue;
+            } else if (filterType === 'count') {
+                selectedQuestionCount = filterValue;
+            }
+
+            button.parentElement.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            if (filterType === 'type' || filterType === 'section') {
+                updateAllQuestionsCount();
+            }
+        }
+
+        function startQuiz() {
+            let filteredQuestions;
+            if (quizMode === 'exam') {
+                const incorrectTexts = JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]');
+                const incorrectQuestions = allQuestions.filter(q => incorrectTexts.includes(q.question));
+                
+                const remainingQuestions = allQuestions.filter(q => !incorrectTexts.includes(q.question));
+                const shuffledRemaining = shuffle(remainingQuestions);
+
+                const needed = 100 - incorrectQuestions.length;
+                quizQuestions = [...incorrectQuestions, ...shuffledRemaining.slice(0, Math.max(0, needed))];
+                
+            } else {
+                filteredQuestions = allQuestions.filter(q => {
+                    const typeMatch = selectedType === 'Alle' || q.type === selectedType;
+                    const sectionMatch = selectedSection === 'Alle' || q.section === selectedSection;
+                    return typeMatch && sectionMatch;
+                });
+
+                let shuffled = shuffle(filteredQuestions);
+                if (selectedQuestionCount !== 'Alle') {
+                    quizQuestions = shuffled.slice(0, parseInt(selectedQuestionCount, 10));
+                } else {
+                    quizQuestions = shuffled;
+                }
+            }
+
+            if (quizQuestions.length === 0) {
+                alert('Keine Fragen für die ausgewählten Filter gefunden. Bitte Auswahl ändern.');
+                return;
+            }
+
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            setupScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            clearInterval(timerInterval);
+            const question = quizQuestions[currentQuestionIndex];
+            const userAnswer = userAnswers[currentQuestionIndex];
+
+            progressIndicator.textContent = `Frage ${currentQuestionIndex + 1} / ${quizQuestions.length}`;
+            questionNameEl.textContent = question.name;
+            questionTextEl.textContent = question.question;
+
+            const isMultipleChoice = question.correct.length > 1;
+
+            if (isMultipleChoice) {
+                const optionsHTML = question.answers.map(answer => `<option value="${answer}">${answer}</option>`).join('');
+                answersForm.innerHTML = `
+                    <label for="multi-select-box" class="block mb-2 font-semibold text-slate-700">Wählen Sie alle korrekten Antworten aus (halten Sie Strg/Cmd gedrückt):</label>
+                    <select multiple id="multi-select-box" class="w-full p-2 h-48">${optionsHTML}</select>`;
+            } else {
+                answersForm.innerHTML = question.answers.map((answer, index) => `
+                    <label for="answer-${index}" class="answer-option" id="label-answer-${index}">
+                        <input type="radio" name="answer" id="answer-${index}" value="${answer}">${answer}
+                    </label>`).join('');
+            }
+
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.disabled = true;
+            submitBtn.disabled = false;
+
+            if (userAnswer) {
+                showAnswerResult(userAnswer);
+                const multiSelect = answersForm.querySelector('#multi-select-box');
+                if (multiSelect) {
+                    Array.from(multiSelect.options).forEach(option => {
+                        option.selected = userAnswer.selected.includes(option.value);
+                    });
+                } else {
+                    const radioInput = answersForm.querySelector(`input[value="${userAnswer.selected[0]}"]`);
+                    if (radioInput) radioInput.checked = true;
+                }
+            } else {
+                startTimer();
+            }
+        }
+        
+        function startTimer() {
+            timeLeft = 60;
+            timerEl.textContent = `01:00`;
+            timerEl.classList.remove('low-time');
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                const seconds = (timeLeft % 60).toString().padStart(2, '0');
+                timerEl.textContent = `${minutes}:${seconds}`;
+
+                if (timeLeft <= 10) timerEl.classList.add('low-time');
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitAnswer(true);
+                }
+            }, 1000);
+        }
+
+        function submitAnswer(isTimeUp = false) {
+            clearInterval(timerInterval);
+            const question = quizQuestions[currentQuestionIndex];
+            let selectedOptions = [];
+            const multiSelect = answersForm.querySelector('#multi-select-box');
+            if (multiSelect) {
+                selectedOptions = Array.from(multiSelect.selectedOptions).map(option => option.value);
+            } else {
+                const checkedInput = answersForm.querySelector('input:checked');
+                if (checkedInput) selectedOptions = [checkedInput.value];
+            }
+            
+            let isCorrect = false;
+            if (!isTimeUp) {
+                const selectedSet = new Set(selectedOptions);
+                const correctSet = new Set(question.correct);
+                if (selectedSet.size === correctSet.size) {
+                    isCorrect = [...selectedSet].every(option => correctSet.has(option));
+                }
+            }
+            userAnswers[currentQuestionIndex] = { selected: selectedOptions, isCorrect };
+            showAnswerResult(userAnswers[currentQuestionIndex]);
+        }
+
+        function showAnswerResult(userAnswer) {
+            const question = quizQuestions[currentQuestionIndex];
+            const correctAnswers = new Set(question.correct);
+            const multiSelect = answersForm.querySelector('#multi-select-box');
+
+            if (multiSelect) {
+                multiSelect.disabled = true;
+                Array.from(multiSelect.options).forEach(option => {
+                    if (correctAnswers.has(option.value)) {
+                        option.classList.add('correct');
+                    } else if (userAnswer.selected.includes(option.value)) {
+                        option.classList.add('incorrect');
+                    }
+                });
+            } else {
+                answersForm.querySelectorAll('input').forEach(input => {
+                    input.disabled = true;
+                    const label = document.getElementById(`label-answer-${input.id.split('-')[1]}`);
+                    if (correctAnswers.has(input.value)) {
+                        label.classList.add('correct');
+                    } else if (input.checked) {
+                        label.classList.add('incorrect');
+                    }
+                });
+            }
+            submitBtn.disabled = true;
+            nextBtn.disabled = false;
+        }
+
+        function showNextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showPrevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function showResults() {
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+
+            updateProgressData();
+
+            const score = Object.values(userAnswers).filter(ans => ans.isCorrect).length;
+            scoreEl.textContent = `Du hast ${score} von ${quizQuestions.length} Fragen richtig beantwortet.`;
+        }
+
+        function restartQuiz() {
+            resultsScreen.classList.add('hidden');
+            setupScreen.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+            
+            modeFilterButtons.addEventListener('click', handleFilterClick);
+            typeFilterButtons.addEventListener('click', handleFilterClick);
+            sectionFilterButtons.addEventListener('click', handleFilterClick);
+            questionCountFilterButtons.addEventListener('click', handleFilterClick);
+            startQuizBtn.addEventListener('click', startQuiz);
+            prevBtn.addEventListener('click', showPrevQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            submitBtn.addEventListener('click', () => submitAnswer());
+            restartBtn.addEventListener('click', restartQuiz);
+        });
+    </script>
+</body>
+</html>
