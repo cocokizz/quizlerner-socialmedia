@@ -134,7 +134,6 @@
             border-radius: 4px;
             transition: width 0.5s ease-in-out;
         }
-
         .instructions {
             margin-top: 2rem;
             padding: 1.5rem;
@@ -157,7 +156,6 @@
         .instructions strong {
             color: #065f46;
         }
-
         /* Quiz Screen Styles */
         .quiz-screen {
             background-color: #ffffff;
@@ -290,7 +288,6 @@
             background-color: #93c5fd;
             cursor: not-allowed;
         }
-
         /* Results Screen Styles */
         .results-screen {
             text-align: center;
@@ -324,7 +321,6 @@
         .results-screen .restart-btn:hover {
             background-color: #2563eb;
         }
-
         .hidden {
             display: none;
         }
@@ -336,7 +332,6 @@
         <div id="setupScreen" class="setup-screen">
             <h1>Social Media Quiz</h1>
             <p class="subtitle">Wählen Sie den Modus und die Fragen aus, die Sie üben möchten.</p>
-
             <div class="filter-container">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-x-6">
                     <!-- Column 1: Modus -->
@@ -377,7 +372,6 @@
             </div>
             
             <button id="startQuizBtn" class="start-quiz-btn">Quiz starten</button>
-
             <!-- Learning Progress Section -->
             <div class="learning-progress-section">
                 <h2>Dein Lernstand</h2>
@@ -393,7 +387,6 @@
                 <p><strong>Intelligentes Lernen:</strong> Das System merkt sich alle Fragen, die Sie falsch beantworten. Im nächsten Prüfungsmodus werden diese Fragen automatisch bevorzugt, damit Sie sie gezielt wiederholen können. Sobald Sie eine dieser Fragen richtig beantworten, wird sie aus der "Wiederholungsliste" entfernt. <strong>(Hinweis: Diese Funktion speichert die Daten nur in der aktuellen Browser-Sitzung. Ein Neuladen der Seite setzt den Speicher zurück.)</strong></p>
             </div>
         </div>
-
         <!-- Screen 2: Quiz -->
         <div id="quizScreen" class="quiz-screen hidden">
             <div class="quiz-header">
@@ -411,7 +404,6 @@
                 <button id="nextBtn" class="nav-btn">Weiter</button>
             </div>
         </div>
-
         <!-- Screen 3: Results -->
         <div id="resultsScreen" class="results-screen hidden">
             <h2>Quiz beendet!</h2>
@@ -419,7 +411,6 @@
             <button id="restartBtn" class="restart-btn">Neues Quiz starten</button>
         </div>
     </div>
-
     <script>
         // --- DATA ---
         const initialRawQuestions = [
@@ -639,7 +630,7 @@
     { name: "Quiz LF E.2 Frage 03", question: "Was sollte ein Redaktionsplan beinhalten?", answers: ["Ein Redaktionsplan sollte folgende Punkte enthalten:", "Thema des Beitrags.", "Termin der Veröffentlichung.", "Aktueller Bearbeitungsstand.", "Format des Beitrags.", "Freigaben & Zuständigkeiten."], correct: ["Ein Redaktionsplan sollte folgende Punkte enthalten:", "Thema des Beitrags.", "Termin der Veröffentlichung.", "Aktueller Bearbeitungsstand.", "Format des Beitrags.", "Freigaben & Zuständigkeiten."] },
     { name: "Quiz LF E.2 Frage 04", question: "Was sind Gründe, warum Kunden Communities verlassen?", answers: ["Tod.", "Umzug.", "Änderung der Lebensumstände.", "Fehlende Aufmerksamkeit.", "Preis- oder Qualitätsänderungen."], correct: ["Tod.", "Umzug.", "Änderung der Lebensumstände.", "Fehlende Aufmerksamkeit.", "Preis- oder Qualitätsänderungen."] },
     { name: "Quiz LF E.2 Frage 05", question: "Wie finde ich die optimale Postingzeiten?", answers: ["Es ist wichtig, die Engagement-Muster der Zielgruppe zu analysieren.", "Plattformen wie Facebook, Instagram und LinkedIn bieten Analyse-Tools, die zeigen, wann die Follower am aktivsten sind.", "Letztendlich hilft nur Testen und Auswerten der eigenen Zielgruppenaktivitäten."], correct: ["Es ist wichtig, die Engagement-Muster der Zielgruppe zu analysieren.", "Plattformen wie Facebook, Instagram und LinkedIn bieten Analyse-Tools, die zeigen, wann die Follower am aktivsten sind.", "Letztendlich hilft nur Testen und Auswerten der eigenen Zielgruppenaktivitäten."] },
-    { name: "Quiz LF E.2 Frage 06", question: "Was ist eine C2C Community?", answers: ["Eine C2C-Community (Consumer-to-Consumer) ist ein Geschäftsmodell, das den direkten Austausch von Waren oder Dienstleistungen zwischen Privatpersonen fördert.", "In solchen Communities können Nutzer sowohl Käufer als auch Verkäufer sein."], correct: ["Eine C2C-Community (Consumer-to-Consumer) ist ein Geschäftsmodell, das den direkten Austausch von Waren oder Dienstleistungen zwischen Privatpersonen fördert.", "In solchen Communities können Nutzer sowohl Käufer als auch Verkäufer sein."] },
+    { name: "Quiz LF E.2 Frage 06", question: "What is a C2C Community?", answers: ["Eine C2C-Community (Consumer-to-Consumer) ist ein Geschäftsmodell, das den direkten Austausch von Waren oder Dienstleistungen zwischen Privatpersonen fördert.", "In solchen Communities können Nutzer sowohl Käufer als auch Verkäufer sein."], correct: ["Eine C2C-Community (Consumer-to-Consumer) ist ein Geschäftsmodell, das den direkten Austausch von Waren oder Dienstleistungen zwischen Privatpersonen fördert.", "In solchen Communities können Nutzer sowohl Käufer als auch Verkäufer sein."] },
     { name: "Quiz LF G.1 Frage 01", question: "Was wird bei Social Media Analytics getrackt? (MPC)", answers: ["a) Die Reichweite unserer Beiträge.", "b) Die Entwicklung unserer Fan-/Follower-Anzahl.", "c) Mentions in Foren.", "d) Die Interaktionen zu unseren Beiträgen."], correct: ["a) Die Reichweite unserer Beiträge.", "b) Die Entwicklung unserer Fan-/Follower-Anzahl.", "d) Die Interaktionen zu unseren Beiträgen."] },
     { name: "Quiz LF G.1 Frage 02", question: "Ordne die folgenden KPIs den entsprechenden Ebenen der Key Performance-Indicator-Pyramide zu.", answers: ["1. Ebene = Follower", "2. Ebene = Share of Buzz", "3. Ebene = Kundenzufriedenheit"], correct: ["1. Ebene = Follower", "2. Ebene = Share of Buzz", "3. Ebene = Kundenzufriedenheit"] },
     { name: "Quiz LF G.1 Frage 03", question: "Warum ist beim Social Listening eine gründliche Keyword-Analyse entscheidend? (MPC)", answers: ["a) Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben.", "b) Wir können damit die Auffindbarkeit unserer Beiträge deutlich erhöhen.", "c) Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern."], correct: ["a) Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben.", "c) Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern."] },
@@ -652,7 +643,6 @@
     { name: "Quiz LF G.2 Frage 05", question: "Welcher KPI gibt an, wie viele Nutzende nach dem Klicken auf einen Link eine gewünschte Aktion, wie einen Kauf, durchgeführt haben? (SC)", answers: ["a) Sentiment Rate.", "b) Interaktionsrate.", "c) Conversion Rate."], correct: ["c) Conversion Rate."] },
     { name: "Quiz LF G.2 Frage 06", question: "Was ist beim Einsatz des Social Media Tools Later zu beachten? (MPC)", answers: ["a) Es ist nicht DSGVO-konform.", "b) Es bietet neben einem Analytics-Tool auch ein Planungstool an.", "c) Es unterstützt lediglich Instagram."], correct: ["a) Es ist nicht DSGVO-konform.", "b) Es bietet neben einem Analytics-Tool auch ein Planungstool an."] }
         ];
-
         // --- DOM ELEMENTS ---
         const setupScreen = document.getElementById('setupScreen');
         const quizScreen = document.getElementById('quizScreen');
@@ -674,7 +664,6 @@
         const restartBtn = document.getElementById('restartBtn');
         const allQuestionsBtn = document.getElementById('allQuestionsBtn');
         const progressTilesContainer = document.getElementById('progressTiles');
-
         // --- STATE ---
         const INCORRECT_QUESTIONS_KEY = 'incorrectlyAnsweredQuizQuestions';
         const QUESTION_PROGRESS_KEY = 'questionProgress';
@@ -688,14 +677,12 @@
         let selectedType = 'Alle';
         let selectedSection = 'Alle';
         let selectedQuestionCount = 'Alle';
-
         // --- FUNCTIONS ---
         
         function getProgressData() {
             const stored = localStorage.getItem(QUESTION_PROGRESS_KEY);
             return stored ? JSON.parse(stored) : {};
         }
-
         function updateProgressData() {
             const progressData = getProgressData();
             let incorrect = new Set(JSON.parse(localStorage.getItem(INCORRECT_QUESTIONS_KEY) || '[]'));
@@ -705,19 +692,16 @@
                 const answer = userAnswers[index];
                 
                 progressData[question.question] = answer.isCorrect ? 'correct' : 'incorrect';
-
                 if (answer.isCorrect) {
                     incorrect.delete(question.question);
                 } else {
                     incorrect.add(question.question);
                 }
             });
-
             localStorage.setItem(QUESTION_PROGRESS_KEY, JSON.stringify(progressData));
             localStorage.setItem(INCORRECT_QUESTIONS_KEY, JSON.stringify(Array.from(incorrect)));
             calculateAndDisplayProgress();
         }
-
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
             while (currentIndex != 0) {
@@ -727,42 +711,76 @@
             }
             return array;
         }
-
+        
+        /**
+         * Parses the question name to extract its type and section (Lernfeld).
+         * @param {string} name The full name of the question.
+         * @returns {{type: string, section: string}} An object containing the extracted type and section.
+         */
         function parseQuestionName(name) {
-            let type = '';
-            let section = 'Sonstige';
+            let type = 'Sonstige'; // Default type
+            let section = 'Sonstige'; // Default section
+
             const musterpruefungMatch = name.match(/Musterprüfung\s+([A-Z])(?:\.\d+)?/i);
             if (musterpruefungMatch) {
                 type = 'Musterprüfung';
                 section = musterpruefungMatch[1].toUpperCase();
             } else {
+                // All other questions (Quiz LF, Wissenstest, Quiz best of) become type 'Quiz LF'
+                type = 'Quiz LF';
+                // Try to extract LF letter for Quiz LF questions
                 const quizLfMatch = name.match(/Quiz LF\s+([A-Z])(?:\.\d+)?/i);
-                if (quizLfMatch) {
-                    type = 'Quiz LF';
+                if (quizLfMatch && quizLfMatch[1]) {
                     section = quizLfMatch[1].toUpperCase();
+                } else {
+                    // For "Wissenstest Frage X" and "Quiz best of Frage X", if no LF letter found, assign to 'Sonstige'
+                    // The "Sonstige" section will not be displayed as a filter button as per user request.
+                    section = 'Sonstige';
                 }
             }
             return { type, section };
         }
 
+        /**
+         * Initializes the question data, removing duplicates and applying preference for "Musterprüfung" questions.
+         * Questions are also parsed for their type and section.
+         */
         function initializeData() {
-            const questionMap = new Map();
+            const questionMap = new Map(); // Key: normalized question text, Value: question object
+
             initialRawQuestions.forEach(q => {
-                const normalizedQuestion = q.question.trim().toLowerCase();
-                if (!questionMap.has(normalizedQuestion) || q.name.includes('Musterprüfung')) {
-                    questionMap.set(normalizedQuestion, q);
+                const normalizedQuestionText = q.question.trim().toLowerCase();
+                const parsedQuestion = { ...q, ...parseQuestionName(q.name) };
+
+                if (questionMap.has(normalizedQuestionText)) {
+                    const existingQuestion = questionMap.get(normalizedQuestionText);
+
+                    // Prefer "Musterprüfung" type questions over others if a duplicate is found
+                    if (parsedQuestion.type === 'Musterprüfung' && existingQuestion.type !== 'Musterprüfung') {
+                        questionMap.set(normalizedQuestionText, parsedQuestion);
+                    }
+                    // If both are the same type or existing is already Musterprüfung,
+                    // the one already in the map (first encountered Musterprüfung or latest non-Musterprüfung) is implicitly kept.
+                } else {
+                    questionMap.set(normalizedQuestionText, parsedQuestion);
                 }
             });
 
-            allQuestions = Array.from(questionMap.values()).map(q => ({ ...q, ...parseQuestionName(q.name) }));
+            allQuestions = Array.from(questionMap.values());
             setupFilters();
             updateAllQuestionsCount();
             calculateAndDisplayProgress();
         }
 
         function setupFilters() {
-            const uniqueSections = [...new Set(allQuestions.map(q => q.section))].sort();
-            const sections = ['Alle', ...uniqueSections];
+            // Collect all unique sections present in the data
+            let uniqueSections = [...new Set(allQuestions.map(q => q.section))];
+            // Filter out 'Sonstige' from the sections that will be displayed as filter buttons and sort them
+            const sectionsToDisplay = uniqueSections.filter(s => s !== 'Sonstige').sort();
+
+            // Always start with 'Alle', then add the sorted, filtered sections
+            const sections = ['Alle', ...sectionsToDisplay];
+
             sectionFilterButtons.innerHTML = sections.map(section =>
                 `<button class="filter-button ${section === 'Alle' ? 'active' : ''}" data-filter-type="section" data-filter-value="${section}">${section}</button>`
             ).join('');
@@ -777,24 +795,26 @@
             const count = filteredQuestions.length;
             allQuestionsBtn.textContent = `Alle (${count})`;
         }
-
         function calculateAndDisplayProgress() {
             const progressData = getProgressData();
-            const lfs = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+            // Dynamically get all sections present in the data for progress tiles
+            const sectionsForProgress = [...new Set(allQuestions.map(q => q.section))].sort();
+            
             progressTilesContainer.innerHTML = ''; // Clear existing tiles
-
             let totalCorrect = 0;
             let totalAnswered = 0;
 
-            lfs.forEach(lf => {
+            sectionsForProgress.forEach(lf => {
+                // Only create progress tiles for sections that are not 'Sonstige'
+                if (lf === 'Sonstige') return;
+
                 const lfQuestions = allQuestions.filter(q => q.section === lf);
-                if (lfQuestions.length === 0) return;
+                if (lfQuestions.length === 0) return; // Skip if no questions for this section
 
                 const answeredLfQuestions = lfQuestions.filter(q => progressData.hasOwnProperty(q.question));
                 const correctLfQuestions = answeredLfQuestions.filter(q => progressData[q.question] === 'correct');
                 
                 const percentage = answeredLfQuestions.length > 0 ? Math.round((correctLfQuestions.length / answeredLfQuestions.length) * 100) : 0;
-
                 totalCorrect += correctLfQuestions.length;
                 totalAnswered += answeredLfQuestions.length;
 
@@ -808,7 +828,6 @@
                     </div>`;
                 progressTilesContainer.innerHTML += tile;
             });
-
             // Gesamt tile
             const gesamtPercentage = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
             const gesamtTile = `
@@ -821,12 +840,10 @@
                 </div>`;
             progressTilesContainer.innerHTML += gesamtTile;
         }
-
         function handleFilterClick(e) {
             const button = e.target.closest('.filter-button');
             if (!button) return;
             const { filterType, filterValue } = button.dataset;
-
             if (filterType === 'mode') {
                 quizMode = filterValue;
                 document.querySelectorAll('[data-practice-filter]').forEach(el => el.classList.toggle('hidden', quizMode === 'exam'));
@@ -837,15 +854,12 @@
             } else if (filterType === 'count') {
                 selectedQuestionCount = filterValue;
             }
-
             button.parentElement.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-
             if (filterType === 'type' || filterType === 'section') {
                 updateAllQuestionsCount();
             }
         }
-
         function startQuiz() {
             let filteredQuestions;
             if (quizMode === 'exam') {
@@ -854,7 +868,6 @@
                 
                 const remainingQuestions = allQuestions.filter(q => !incorrectTexts.includes(q.question));
                 const shuffledRemaining = shuffle(remainingQuestions);
-
                 const needed = 100 - incorrectQuestions.length;
                 quizQuestions = [...incorrectQuestions, ...shuffledRemaining.slice(0, Math.max(0, needed))];
                 
@@ -864,7 +877,6 @@
                     const sectionMatch = selectedSection === 'Alle' || q.section === selectedSection;
                     return typeMatch && sectionMatch;
                 });
-
                 let shuffled = shuffle(filteredQuestions);
                 if (selectedQuestionCount !== 'Alle') {
                     quizQuestions = shuffled.slice(0, parseInt(selectedQuestionCount, 10));
@@ -872,12 +884,19 @@
                     quizQuestions = shuffled;
                 }
             }
-
             if (quizQuestions.length === 0) {
-                alert('Keine Fragen für die ausgewählten Filter gefunden. Bitte Auswahl ändern.');
+                // Using a custom alert for better UX consistent with guidance
+                const messageBox = document.createElement('div');
+                messageBox.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center';
+                messageBox.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-xl text-center">
+                        <p class="mb-4 text-lg font-semibold">Keine Fragen für die ausgewählten Filter gefunden. Bitte Auswahl ändern.</p>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="this.parentElement.parentElement.remove()">OK</button>
+                    </div>
+                `;
+                document.body.appendChild(messageBox);
                 return;
             }
-
             currentQuestionIndex = 0;
             userAnswers = {};
             setupScreen.classList.add('hidden');
@@ -885,18 +904,14 @@
             quizScreen.classList.remove('hidden');
             displayQuestion();
         }
-
         function displayQuestion() {
             clearInterval(timerInterval);
             const question = quizQuestions[currentQuestionIndex];
             const userAnswer = userAnswers[currentQuestionIndex];
-
             progressIndicator.textContent = `Frage ${currentQuestionIndex + 1} / ${quizQuestions.length}`;
             questionNameEl.textContent = question.name;
             questionTextEl.textContent = question.question;
-
             const isMultipleChoice = question.correct.length > 1;
-
             if (isMultipleChoice) {
                 const optionsHTML = question.answers.map(answer => `<option value="${answer}">${answer}</option>`).join('');
                 answersForm.innerHTML = `
@@ -908,11 +923,9 @@
                         <input type="radio" name="answer" id="answer-${index}" value="${answer}">${answer}
                     </label>`).join('');
             }
-
             prevBtn.disabled = currentQuestionIndex === 0;
             nextBtn.disabled = true;
             submitBtn.disabled = false;
-
             if (userAnswer) {
                 showAnswerResult(userAnswer);
                 const multiSelect = answersForm.querySelector('#multi-select-box');
@@ -938,7 +951,6 @@
                 const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
                 const seconds = (timeLeft % 60).toString().padStart(2, '0');
                 timerEl.textContent = `${minutes}:${seconds}`;
-
                 if (timeLeft <= 10) timerEl.classList.add('low-time');
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
@@ -946,7 +958,6 @@
                 }
             }, 1000);
         }
-
         function submitAnswer(isTimeUp = false) {
             clearInterval(timerInterval);
             const question = quizQuestions[currentQuestionIndex];
@@ -970,12 +981,10 @@
             userAnswers[currentQuestionIndex] = { selected: selectedOptions, isCorrect };
             showAnswerResult(userAnswers[currentQuestionIndex]);
         }
-
         function showAnswerResult(userAnswer) {
             const question = quizQuestions[currentQuestionIndex];
             const correctAnswers = new Set(question.correct);
             const multiSelect = answersForm.querySelector('#multi-select-box');
-
             if (multiSelect) {
                 multiSelect.disabled = true;
                 Array.from(multiSelect.options).forEach(option => {
@@ -999,7 +1008,6 @@
             submitBtn.disabled = true;
             nextBtn.disabled = false;
         }
-
         function showNextQuestion() {
             if (currentQuestionIndex < quizQuestions.length - 1) {
                 currentQuestionIndex++;
@@ -1008,29 +1016,24 @@
                 showResults();
             }
         }
-
         function showPrevQuestion() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 displayQuestion();
             }
         }
-
         function showResults() {
             quizScreen.classList.add('hidden');
             resultsScreen.classList.remove('hidden');
-
             updateProgressData();
-
             const score = Object.values(userAnswers).filter(ans => ans.isCorrect).length;
             scoreEl.textContent = `Du hast ${score} von ${quizQuestions.length} Fragen richtig beantwortet.`;
         }
-
         function restartQuiz() {
             resultsScreen.classList.add('hidden');
             setupScreen.classList.remove('hidden');
+            calculateAndDisplayProgress(); // Recalculate progress on restart to reflect latest answers
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             initializeData();
             
