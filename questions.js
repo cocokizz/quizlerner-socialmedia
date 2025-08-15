@@ -1,9 +1,9 @@
-// In dieser Datei werden alle 236 Quizfragen aus den Dokumenten
-// "Musterprüfungsfragen.pdf" und "Quiz LF .pdf" gespeichert.
+// In dieser Datei werden alle 336 Quizfragen aus den Dokumenten
+// "Musterprüfungsfragen.pdf", "Quiz LF .pdf" und "Abschlussprüfungsfragen.pdf" gespeichert.
 // Jede Frage wurde zur Überprüfung auskommentiert durchnummeriert.
 
 const initialRawQuestions = [
-    // --- Fragen aus Musterprüfungsfragen.pdf (101 Fragen) ---
+    // --- Fragen aus Musterprüfungsfragen.pdf (101 Fragen) ---
     { // 1
         name: "Musterprüfung A.1-Frage 03",
         question: "Im Gegensatz zur klassischen TV-Werbung, wo sich der Kunde passiv beschallen lässt, sucht der Online-Kunde aktiv nach Produkten und Dienstleistungen. Mit welchem Fachbegriff wird das Verhalten des Online-Kunden betitelt?",
@@ -1496,5 +1496,606 @@ const initialRawQuestions = [
         question: "Was bedeutet das Akronym SMART? (SC)",
         answers: ["Spezifisch, messbar, ambitioniert & attraktiv, realistisch, terminiert", "Spezifisch, messbar, ambitioniert & attraktiv, reaktionär, terminiert"],
         correct: ["Spezifisch, messbar, ambitioniert & attraktiv, realistisch, terminiert"]
+    },
+    // --- Fragen aus Abschlussprüfungsfragen.pdf (100 Fragen) ---
+    { // 237
+        name: "Abschlussprüfung C.4 - Frage 03",
+        question: "Was gilt bei der Auswahl der richtigen Social Networks?",
+        answers: ["Je größer das Network, desto relevanter ist es.", "Wir sollten immer so viele Networks wie möglich bespielen.", "Auch sehr kleine Networks können ggf. relevant für uns und unsere Zielgruppe sein.", "Wir berücksichtigen vor allem unsere eigenen Präferenzen."],
+        correct: ["Auch sehr kleine Networks können ggf. relevant für uns und unsere Zielgruppe sein."]
+    },
+    { // 238
+        name: "Abschlussprüfung D.2 - Frage 06",
+        question: "Welche Aussagen in Bezug auf User Generated Content sind korrekt?",
+        answers: ["User Generated Content ist nicht planbar.", "User Generated Content wirkt glaubwürdiger.", "User Generated Content ist häufig kostenintensiv.", "User Generated Content wird häufiger geteilt."],
+        correct: ["User Generated Content wirkt glaubwürdiger.", "User Generated Content wird häufiger geteilt."]
+    },
+    { // 239
+        name: "Abschlussprüfung F.1 - Frage 01",
+        question: "Was ist im Kontext der DSGVO mit dem Begriff \"Datenminimierung\" gemeint?",
+        answers: ["Unternehmen sollen nur die Daten sammeln und speichern, die sie tatsächlich benötigen.", "Unternehmen sollen das Sammeln von Daten für die Nutzenden möglichst einfach gestalten."],
+        correct: ["Unternehmen sollen nur die Daten sammeln und speichern, die sie tatsächlich benötigen."]
+    },
+    { // 240
+        name: "Abschlussprüfung E.2 - Frage 02",
+        question: "Wie kann man die optimalen Uhrzeiten für die Veröffentlichung von Beiträgen finden?",
+        answers: ["Über eine Google-Trend-Analyse.", "Eigenes Austesten und Auswerten.", "Über Social-Media-Management-Tools.", "Analyse von Insights der Plattformen selbst."],
+        correct: ["Eigenes Austesten und Auswerten.", "Über Social-Media-Management-Tools.", "Analyse von Insights der Plattformen selbst."]
+    },
+    { // 241
+        name: "Abschlussprüfung C.3 - Frage 02",
+        question: "Was sind demografische Merkmale einer Zielgruppe?",
+        answers: ["Geschlecht", "Kaufverhalten", "Psyche", "Alter"],
+        correct: ["Geschlecht", "Alter"]
+    },
+    { // 242
+        name: "Abschlussprüfung E.3 - Frage 03",
+        question: "Was ist das Hauptziel von Community-Engagement im Social-Media-Management?",
+        answers: ["Die Reichweite rein organisch zu steigern.", "Die aktive Beteiligung der Community fördern und erhalten.", "Die Erstellung möglichst vieler Werbeanzeigen.", "Die Community zu kostenpflichtigen Aktionen bewegen."],
+        correct: ["Die aktive Beteiligung der Community fördern und erhalten."]
+    },
+    { // 243
+        name: "Abschlussprüfung A.1 - Frage 03",
+        question: "Content sollte auf die Nutzerbedürfnisse entsprechend der jeweiligen Customer Journey ausgerichtet werden. Bringe die englischen Begriffe in die richtige Reihenfolge, sodass die Anfangsbuchstaben das Akronym für das entsprechende Modell ergeben.",
+        answers: ["1. Awareness", "2. Consideration", "3. Purchase", "4. Retention", "5. Advocacy"],
+        correct: ["1. Awareness", "2. Consideration", "3. Purchase", "4. Retention", "5. Advocacy"]
+    },
+    { // 244
+        name: "Abschlussprüfung E.2 - Frage 01",
+        question: "Warum sollten wir Feiertage und Thementage in unserem Redaktionsplan vermerken?",
+        answers: ["Feiertage und Thementage bieten gute Ansätze für abwechslungsreichen und aktuellen Content.", "An Feiertagen ist das Schalten von Werbeanzeigen günstiger.", "Es erleichtert die Urlaubsplanung.", "Damit wissen wir, welche Tage postfrei bleiben."],
+        correct: ["Feiertage und Thementage bieten gute Ansätze für abwechslungsreichen und aktuellen Content."]
+    },
+    { // 245
+        name: "Abschlussprüfung E.4 - Frage 05",
+        question: "Was sind für viele Unternehmen noch immer Herausforderungen und Hindernisse bei der Nutzung von Social Media?",
+        answers: ["Zu hohe Reichweite", "Zu viele Ressourcen", "Möglicher Kontrollverlust", "Datensicherheit"],
+        correct: ["Möglicher Kontrollverlust", "Datensicherheit"]
+    },
+    { // 246
+        name: "Abschlussprüfung B.1 - Frage 05",
+        question: "Was ist WhatsApp Business?",
+        answers: ["Eine klassische Newsletter-App.", "Ein soziales Netzwerk mit Fokus auf Karrierenetzwerke.", "Eine spezielle Version von WhatsApp für Unternehmen zur direkten Kundenkommunikation.", "Eine App zur Organisation interner Teamkommunikation."],
+        correct: ["Eine spezielle Version von WhatsApp für Unternehmen zur direkten Kundenkommunikation."]
+    },
+    { // 247
+        name: "Abschlussprüfung D.4 - Frage 01",
+        question: "Was ist \"Content Curation\"?",
+        answers: ["Das Sammeln und Aufbereiten von Content", "Das Aufbauen eines Content-Pools", "Das Generieren von eigenen Inhalten"],
+        correct: ["Das Sammeln und Aufbereiten von Content"]
+    },
+    { // 248
+        name: "Abschlussprüfung G.1 - Frage 02",
+        question: "Was wird beim Social Media Monitoring getrackt?",
+        answers: ["Die Performance von Werbeanzeigen", "Gespräche im Social Web über unsere Marke / unser Unternehmen o. Ä.", "Die Performance der eigenen Beiträge", "Die Entwicklung unserer Fan-/Follower-Anzahl"],
+        correct: ["Gespräche im Social Web über unsere Marke / unser Unternehmen o. Ä."]
+    },
+    { // 249
+        name: "Abschlussprüfung F.1 - Frage 03",
+        question: "Was ist eine Custom Audience?",
+        answers: ["Eine Zielgruppe, die aus vorhandenen Kundinnen und Kunden oder Kontakten eines Unternehmens erstellt wird", "Eine Zielgruppe, die vor allem über demografische Faktoren erstellt wird"],
+        correct: ["Eine Zielgruppe, die aus vorhandenen Kundinnen und Kunden oder Kontakten eines Unternehmens erstellt wird"]
+    },
+    { // 250
+        name: "Abschlussprüfung A.1 - Frage 01",
+        question: "Welcher Kanal ist in den meisten Fällen nach wie vor das Herzstück einer Online-Marketing-Strategie?",
+        answers: ["TV", "Website", "X (ehem. Twitter)", "Facebook"],
+        correct: ["Website"]
+    },
+    { // 251
+        name: "Abschlussprüfung D.1 - Frage 02",
+        question: "Was soll ein \"Call to Action\" bewirken?",
+        answers: ["Effektiveres Ausspielen von Beiträgen", "Eine Interaktion seitens der Userinnen und User", "Erhöhte Werbeausgaben", "Mehr Ideen für die Redaktionsplanung"],
+        correct: ["Eine Interaktion seitens der Userinnen und User"]
+    },
+    { // 252
+        name: "Abschlussprüfung C.1 - Frage 01",
+        question: "Welche Aspekte sollte eine Social-Media-Strategie immer beinhalten?",
+        answers: ["Klare Ziele", "Supply-Chain-Audit", "Effiziente Ressourcennutzung", "Zielgruppenverständnis"],
+        correct: ["Klare Ziele", "Effiziente Ressourcennutzung", "Zielgruppenverständnis"]
+    },
+    { // 253
+        name: "Abschlussprüfung A.1 - Frage 04",
+        question: "Wie beeinflusst der demografische Wandel das Online-Marketing?",
+        answers: ["Der demografische Wandel hat keinen Einfluss auf das Online-Marketing, da sich Nutzer unabhängig von ihrer Altersgruppe online ähnlich verhalten.", "Er hat Auswirkungen auf die Zielgruppenzusammensetzung. So sollte man sich der wachsenden älteren Bevölkerung anpassen."],
+        correct: ["Er hat Auswirkungen auf die Zielgruppenzusammensetzung. So sollte man sich der wachsenden älteren Bevölkerung anpassen."]
+    },
+    { // 254
+        name: "Abschlussprüfung B.1 - Frage 03",
+        question: "Wie heißt das Kurzvideoformat bei Instagram?",
+        answers: ["IGTV", "Snaps", "Reels", "Vidz"],
+        correct: ["Reels"]
+    },
+    { // 255
+        name: "Abschlussprüfung B.2 - Frage 05",
+        question: "Ordne die folgenden Aspekte dem Hero-Hub-Help-Modell zu.",
+        answers: ["Help: Die Videos bieten nützliche Informationen und werden häufig über Suchmaschinen gefunden.", "Hub: Die Videos richten sich an bestehende und potentielle Abonnenten eines Video-Kanals.", "Hero: Die Videos sind aufwendig produzierte, spektakuläre Videos, die das Potenzial haben, zu viralen Videos zu werden."],
+        correct: ["Help: Die Videos bieten nützliche Informationen und werden häufig über Suchmaschinen gefunden.", "Hub: Die Videos richten sich an bestehende und potentielle Abonnenten eines Video-Kanals.", "Hero: Die Videos sind aufwendig produzierte, spektakuläre Videos, die das Potenzial haben, zu viralen Videos zu werden."]
+    },
+    { // 256
+        name: "Abschlussprüfung D.4 - Frage 03",
+        question: "In welcher Reihenfolge erfolgen die fünf grundlegenden Schritte der Videobearbeitung?",
+        answers: ["1. Importieren des Videomaterials", "2. Rohschnitt", "3. Feinschnitt", "4. Tonbearbeitung", "5. Exportieren der Videos"],
+        correct: ["1. Importieren des Videomaterials", "2. Rohschnitt", "3. Feinschnitt", "4. Tonbearbeitung", "5. Exportieren der Videos"]
+    },
+    { // 257
+        name: "Abschlussprüfung F.2 - Frage 02",
+        question: "Was ist unter dem Begriff \"First-Party-Daten\" zu verstehen?",
+        answers: ["Daten, die von den Nutzenden selbst bereitgestellt werden.", "Aktuelle Daten, die vor allem über Pixel generiert werden."],
+        correct: ["Daten, die von den Nutzenden selbst bereitgestellt werden."]
+    },
+    { // 258
+        name: "Abschlussprüfung A.2 - Frage 02",
+        question: "Was bedeutet das Akronym SMART?",
+        answers: ["Spezifisch, messbar, ambitioniert & attraktiv, reaktionär, terminiert", "Spezifisch, messbar, ambitioniert & attraktiv, realistisch, terminiert"],
+        correct: ["Spezifisch, messbar, ambitioniert & attraktiv, realistisch, terminiert"]
+    },
+    { // 259
+        name: "Abschlussprüfung C.4 - Frage 01",
+        question: "Wonach sollte man die sozialen Netzwerke für die eigenen Social-Media-Aktivitäten idealerweise auswählen?",
+        answers: ["Nach dem POST-Modell.", "Nach den Vorlieben der Zielgruppe.", "Nach der bestmöglichen Reichweite des Netzwerkes."],
+        correct: ["Nach den Vorlieben der Zielgruppe."]
+    },
+    { // 260
+        name: "Abschlussprüfung G.3 - Frage 07",
+        question: "Warum ist die Anzahl der Beiträge bei Social Media Analytics eine wichtige Kennzahl?",
+        answers: ["Um zu messen, ob über das Unternehmen in den sozialen Netzwerken gesprochen wird", "Um zu messen, ob wir in einer ausreichenden Frequenz gepostet haben"],
+        correct: ["Um zu messen, ob wir in einer ausreichenden Frequenz gepostet haben"]
+    },
+    { // 261
+        name: "Abschlussprüfung D.2 - Frage 01",
+        question: "Was gilt bei der Art und Qualität des Contents, den wir über Social Networks veröffentlichen?",
+        answers: ["Content sollte vielfältig gestaltet sein.", "Content sollte immer das gleiche Format (z. B. Bild, Video, Text) haben.", "Content sollte auch interaktiv sein.", "Content sollte immer einen Mehrwert haben."],
+        correct: ["Content sollte vielfältig gestaltet sein.", "Content sollte auch interaktiv sein.", "Content sollte immer einen Mehrwert haben."]
+    },
+    { // 262
+        name: "Abschlussprüfung A.4 - Frage 02",
+        question: "Was bedeutet der Begriff \"Streulücke\"?",
+        answers: ["Er bezeichnet die ungewollte Ansprache von Personen mit Werbemaßnahmen, die nicht zur Zielgruppe gehören.", "Er bezeichnet Touchpoints, die übersehen wurden."],
+        correct: ["Er bezeichnet Touchpoints, die übersehen wurden."]
+    },
+    { // 263
+        name: "Abschlussprüfung A.1 - Frage 07",
+        question: "Welche Aussage zu den AGBs sozialer Netzwerke ist korrekt?",
+        answers: ["Verstöße gegen AGBs können lediglich zur Löschung einzelner Beiträge führen.", "Die AGBs eines sozialen Netzwerkes geben vor, welche Inhalte auf der Plattform erlaubt sind und was nicht.", "AGBs sind nur bei kommerzieller Nutzung relevant.", "AGBs sind im Social-Media-Marketing irrelevant, da sie nur Nutzerverhalten regeln."],
+        correct: ["Die AGBs eines sozialen Netzwerkes geben vor, welche Inhalte auf der Plattform erlaubt sind und was nicht."]
+    },
+    { // 264
+        name: "Abschlussprüfung A.2 - Frage 01",
+        question: "Wie verhält es sich mit der Kennzeichnungspflicht von Werbeinhalten?",
+        answers: ["Die Kennzeichnungspflicht gilt nur für Marketing-Unternehmen, nicht aber für Influencer oder Affiliate-Partner.", "Online-Marketer sowie Influencer müssen kommerzielle Inhalte auf Social-Media klar als Werbung kennzeichnen.", "Die Werbekennzeichnung ist eher als Richtlinie gedacht und nicht verpflichtend.", "Werbe-Posts von Influencern und Unternehmen sind von einer genauen Kennzeichnungspflicht der Werbung befreit, wenn die Accounts durch den blauen Haken als kommerziell gekennzeichnet sind."],
+        correct: ["Online-Marketer sowie Influencer müssen kommerzielle Inhalte auf Social-Media klar als Werbung kennzeichnen."]
+    },
+    { // 265
+        name: "Abschlussprüfung C.2 - Frage 03",
+        question: "Warum bietet Social Media auch für Human Resources gute Möglichkeiten?",
+        answers: ["Wir können via Social Media potenzielle Bewerberinnen und Bewerber finden.", "Wir können via Social Media Crowdfunding-Kampagnen durchführen.", "Social Media bietet tolle Möglichkeiten für einen schnellen Erstkontakt.", "Bewerberinnen und Bewerber informieren sich gerne via Social Media über ein Unternehmen."],
+        correct: ["Wir können via Social Media potenzielle Bewerberinnen und Bewerber finden.", "Social Media bietet tolle Möglichkeiten für einen schnellen Erstkontakt.", "Bewerberinnen und Bewerber informieren sich gerne via Social Media über ein Unternehmen."]
+    },
+    { // 266
+        name: "Abschlussprüfung E.3 - Frage 01",
+        question: "Was ist mit C2C-Communitys gemeint?",
+        answers: ["Consumer-to-Consumer, also Plattformen, auf denen Kundinnen/Kunden miteinander interagieren, ohne dass ein Unternehmen als Mittler fungiert.", "Company to Company, also Plattformen, auf denen Unternehmen mit anderen Unternehmen interagieren."],
+        correct: ["Consumer-to-Consumer, also Plattformen, auf denen Kundinnen/Kunden miteinander interagieren, ohne dass ein Unternehmen als Mittler fungiert."]
+    },
+    { // 267
+        name: "Abschlussprüfung D.2 - Frage 03",
+        question: "Was ist mit User Generated Content gemeint?",
+        answers: ["Inhalte, die wir der Userin oder dem User bereitstellen.", "Content, der jeweils einer User-Gruppe zuzuordnen ist. Eine besondere Form von vordergründigem Content.", "Content, der von Userin oder User erstellt wird."],
+        correct: ["Content, der von Userin oder User erstellt wird."]
+    },
+    { // 268
+        name: "Abschlussprüfung A.3 - Frage 03",
+        question: "Was beschreibt der Begriff \"Usability\" im Kontext von Social Media?",
+        answers: ["Die technische und logische Nutzbarkeit einer Plattform", "Die Anzahl der Follower:innen und Likes", "Die kreative Gestaltung von Inhalten", "Die emotionale Markenbindung der Nutzer:innen"],
+        correct: ["Die technische und logische Nutzbarkeit einer Plattform"]
+    },
+    { // 269
+        name: "Abschlussprüfung G.1 - Frage 03",
+        question: "Was ist mit Social Listening gemeint?",
+        answers: ["Im Social Listening konzentriert man sich auf die Performance der eigenen Social-Media-Aktivitäten.", "Im Social Listening versucht man einen tieferen Einblick in die Gründe und Stimmungen hinter den im Monitoring erfassten Daten zu erhalten."],
+        correct: ["Im Social Listening versucht man einen tieferen Einblick in die Gründe und Stimmungen hinter den im Monitoring erfassten Daten zu erhalten."]
+    },
+    { // 270
+        name: "Abschlussprüfung F.1 - Frage 01",
+        question: "Was ist mit dem Begriff „Big Data“ gemeint?",
+        answers: ["Big Data bezeichnet ein Web-Tracking-Tool, mit dem Nutzerdaten auf Websites erfasst werden können.", "Big Data bezeichnet umfangreiche Mengen an Daten, die aus verschiedensten Quellen stammen und in hoher Geschwindigkeit generiert werden.", "Big Data bezeichnet die sehr große Anzahl an Werbeinhalten und Spam-Nachrichten, die auf sozialen Netzwerken zu finden sind."],
+        correct: ["Big Data bezeichnet umfangreiche Mengen an Daten, die aus verschiedensten Quellen stammen und in hoher Geschwindigkeit generiert werden."]
+    },
+    { // 271
+        name: "Abschlussprüfung A.1 - Frage 04",
+        question: "Welche Maßnahme zeigt einen rechtlich korrekten Umgang mit User Generated Content (UGC) auf Instagram?",
+        answers: ["Die Marketingabteilung repostet ein gelungenes Kundenfoto ohne Rücksprache, da es öffentlich einsehbar ist.", "Wenn ein Bild von der Community gepostet wurde, darf es automatisch für Ads verwendet werden.", "Vor der Veröffentlichung eines Kundenbilds wird eine schriftliche Einwilligung zur Nutzung eingeholt.", "Ein Reel mit Kundenkommentaren wird veröffentlicht, solange nur der Vorname erscheint."],
+        correct: ["Vor der Veröffentlichung eines Kundenbilds wird eine schriftliche Einwilligung zur Nutzung eingeholt."]
+    },
+    { // 272
+        name: "Abschlussprüfung F.1 - Frage 03",
+        question: "Warum eignen sich Social Networks sehr gut, um Werbeanzeigen einzusetzen?",
+        answers: ["Fokussierung auf reine Textanzeigen.", "Kaum gesetzliche Regelungen und AGB.", "Genaues Targeting aufgrund von Nutzerdaten möglich.", "Haben in der Regel hohe Reichweiten."],
+        correct: ["Genaues Targeting aufgrund von Nutzerdaten möglich.", "Haben in der Regel hohe Reichweiten."]
+    },
+    { // 273
+        name: "Abschlussprüfung G.3 - Frage 01",
+        question: "Wie oft sollte die Erfolgskontrolle der eigenen Maßnahmen idealerweise erfolgen?",
+        answers: ["Lediglich im Rahmen einer Strategieentwicklung", "Mindestens einmal täglich", "Mindestens einmal monatlich", "Maximal einmal im Jahr"],
+        correct: ["Mindestens einmal monatlich"]
+    },
+    { // 274
+        name: "Abschlussprüfung F.2 - Frage 03",
+        question: "Welches soziale Netzwerk gilt auch als zweitgrößte Suchmaschine nach Google?",
+        answers: ["Tik Tok", "Pinterest", "YouTube"],
+        correct: ["YouTube"]
+    },
+    { // 275
+        name: "Abschlussprüfung C.3 - Frage 01",
+        question: "Welche Informationen sollte eine Persona enthalten?",
+        answers: ["Foto oder Bild", "Name", "Alter und Geschlecht", "Kauf- und Konsumverhalten"],
+        correct: ["Foto oder Bild", "Name", "Alter und Geschlecht", "Kauf- und Konsumverhalten"]
+    },
+    { // 276
+        name: "Abschlussprüfung G.3 - Frage 03",
+        question: "Was ist mit dem Begriff \"Learning-Aspekt\" in Bezug auf Social Media Analytics gemeint?",
+        answers: ["Man sollte im Rahmen einer Analyse immer aus den Ergebnissen lernen und Erkenntnisse zur Optimierung zukünftiger Maßnahmen nutzen.", "Mit jeder Analyse kann sich der Algorithmus besser auf unsere Zielgruppe und unser Vorhaben einstellen."],
+        correct: ["Man sollte im Rahmen einer Analyse immer aus den Ergebnissen lernen und Erkenntnisse zur Optimierung zukünftiger Maßnahmen nutzen."]
+    },
+    { // 277
+        name: "Abschlussprüfung D.3 - Frage 01",
+        question: "Was ist A/B-Testing?",
+        answers: ["Eine Methode, um relevante Kennzahlen und KPIs zu identifizieren.", "Eine Methode, um verschiedene Varianten von Inhalten zu vergleichen und die wirkungsvollste Option zu identifizieren."],
+        correct: ["Eine Methode, um verschiedene Varianten von Inhalten zu vergleichen und die wirkungsvollste Option zu identifizieren."]
+    },
+    { // 278
+        name: "Abschlussprüfung F.1 - Frage 02",
+        question: "Was ist eine Lookalike Audience?",
+        answers: ["Eine Zielgruppe, die vor allem in Retargeting-Kampagnen genutzt wird.", "„Statistische Zwillinge“ einer bestimmten Zielgruppe."],
+        correct: ["„Statistische Zwillinge“ einer bestimmten Zielgruppe."]
+    },
+    { // 279
+        name: "Abschlussprüfung D.2 - Frage 03",
+        question: "Was zeichnet User Generated Content aus?",
+        answers: ["Unterstützt unsere SEO-Aktivitäten.", "Mit hohem Aufwand für uns verbunden.", "Hohe Authentizität und Ehrlichkeit.", "Sollte nur im Rahmen von Werbeanzeigen verwendet werden."],
+        correct: ["Unterstützt unsere SEO-Aktivitäten.", "Hohe Authentizität und Ehrlichkeit."]
+    },
+    { // 280
+        name: "Abschlussprüfung C.4 - Frage 01",
+        question: "Was bezeichnet man als „Active Sourcing\"?",
+        answers: ["Ein Handelsmodell, um die Kaufentscheidungen der Kundinnen und Kunden zu beeinflussen", "Den Einsatz von Personal Branding in einem Unternehmen", "Die aktive Suche, Ansprache und Bindung von qualifizierten Kandidaten"],
+        correct: ["Die aktive Suche, Ansprache und Bindung von qualifizierten Kandidaten"]
+    },
+    { // 281
+        name: "Abschlussprüfung F.2 - Frage 04",
+        question: "Warum ist Pinterest gerade im E-Commerce ein effektives Netzwerk?",
+        answers: ["Pinterest hat von Natur aus eine starke Verbindung zu Websites und Onlineshops.", "Pinterest bietet in Deutschland eine integrierte Zahlungs- und Versandabwicklung an.", "Pinterest spielt eine wichtige Rolle, da es Nutzenden in der Inspirations- und Planungsphase ermöglicht, Ideen effektiv zu sammeln und zu organisieren."],
+        correct: ["Pinterest hat von Natur aus eine starke Verbindung zu Websites und Onlineshops.", "Pinterest spielt eine wichtige Rolle, da es Nutzenden in der Inspirations- und Planungsphase ermöglicht, Ideen effektiv zu sammeln und zu organisieren."]
+    },
+    { // 282
+        name: "Abschlussprüfung B.3 - Frage 02",
+        question: "Zu welchem Unternehmen gehört LinkedIn?",
+        answers: ["Microsoft", "Apple", "Google", "Meta"],
+        correct: ["Microsoft"]
+    },
+    { // 283
+        name: "Abschlussprüfung D.1 - Frage 03",
+        question: "Warum sollten wir im (Social-Media-) Marketing auf Storytelling setzen?",
+        answers: ["Gefühl schlägt in der Regel Vernunft.", "Fakten verkaufen immer noch am besten.", "Storytelling ist die günstigste Form der Werbung.", "Unser Gehirn kann Geschichten besser verarbeiten und abspeichern."],
+        correct: ["Gefühl schlägt in der Regel Vernunft.", "Unser Gehirn kann Geschichten besser verarbeiten und abspeichern."]
+    },
+    { // 284
+        name: "Abschlussprüfung D.2 - Frage 01",
+        question: "Was ist beim Einsatz von Videoformaten generell zu beachten?",
+        answers: ["Die richtige Bild-/Videogröße", "Die maximale Länge von einer Minute", "Untertitel und Barrierefreiheit", "Die minimale Länge von zehn Sekunden"],
+        correct: ["Die richtige Bild-/Videogröße", "Untertitel und Barrierefreiheit"]
+    },
+    { // 285
+        name: "Abschlussprüfung F.3 - Frage 02",
+        question: "Was ist ein \"Hook\" in Bezug auf den Einsatz von Creatives?",
+        answers: ["Ein Hook schafft Wiedererkennungswert, also Farbe, Stil und Schriftart, die in einer Ad verwendet werden.", "Ein Hook ist ein Element in deinem Creative, das sofort Aufmerksamkeit erregt."],
+        correct: ["Ein Hook ist ein Element in deinem Creative, das sofort Aufmerksamkeit erregt."]
+    },
+    { // 286
+        name: "Abschlussprüfung D.2 - Frage 02",
+        question: "Welche sozialen Netzwerke bieten Livestreams an?",
+        answers: ["Pinterest", "X (Twitter)", "YouTube", "Instagram"],
+        correct: ["X (Twitter)", "YouTube", "Instagram"]
+    },
+    { // 287
+        name: "Abschlussprüfung B.3 - Frage 01",
+        question: "Was lässt sich auf Business- und Karrierenetzwerken gut umsetzen?",
+        answers: ["Recruiting", "Social Shopping", "Social Selling", "Personal Branding"],
+        correct: ["Recruiting", "Social Selling", "Personal Branding"]
+    },
+    { // 288
+        name: "Abschlussprüfung A.4 - Frage 01",
+        question: "Wofür steht das Akronym POE im Kontext des Online- und Social-Media-Marketings?",
+        answers: ["Paid, Owned, Earned", "Public Opinion Engagement", "Performance, Outreach, Engagement", "Promotion, Optimization, Engagement"],
+        correct: ["Paid, Owned, Earned"]
+    },
+    { // 289
+        name: "Abschlussprüfung G.2 - Frage 02",
+        question: "Was sagt die potenzielle Reichweite im Social Media Monitoring aus?",
+        answers: ["Die geschätzte Anzahl von Personen, die einen Beitrag sehen könnten.", "Die Anzahl der Personen, die laut Insights tatsächlich einen Beitrag gesehen haben.", "Der geschätzte Anteil der Markenerwähnungen im Vergleich zu Mitbewerbenden."],
+        correct: ["Die geschätzte Anzahl von Personen, die einen Beitrag sehen könnten."]
+    },
+    { // 290
+        name: "Abschlussprüfung E.4 - Frage 03",
+        question: "Was ist laut einer Umfrage der überwiegende Grund für Kunden, sich von einem Unternehmen oder einer Marke zu trennen?",
+        answers: ["Fehlende Aufmerksamkeit", "Schlechte Qualität", "Neue Kaufgewohnheiten", "Hoher Preis"],
+        correct: ["Fehlende Aufmerksamkeit"]
+    },
+    { // 291
+        name: "Abschlussprüfung G.3 - Frage 05",
+        question: "Was ist ein Vorteil von Social-Media-Management-Tools gegenüber den Insights der Plattformen selbst?",
+        answers: ["Sie sind immer kostenlos.", "Sie benötigen keine Einrichtung.", "Sie ersetzen Webtracking vollständig.", "Sie bieten Zusatzfunktionen wie automatisierte Reports und KPI-Berechnungen."],
+        correct: ["Sie bieten Zusatzfunktionen wie automatisierte Reports und KPI-Berechnungen."]
+    },
+    { // 292
+        name: "Abschlussprüfung G.2 - Frage 01",
+        question: "Warum ist beim Social Listening eine gründliche Keyword-Analyse entscheidend?",
+        answers: ["Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern.", "Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben."],
+        correct: ["Mit einer komplexen Suchanfrage und entsprechenden Keywords können wir die Ergebnisse verfeinern.", "Nutzende können ganz unterschiedliche Wörter verwenden, wenn sie über unser Unternehmen schreiben."]
+    },
+    { // 293
+        name: "Abschlussprüfung E.1 - Frage 03",
+        question: "In welchem Bereich wird der \"onlyfy TalentManager\" bevorzugt genutzt?",
+        answers: ["Social Commerce", "Influencer-Marketing", "Recruiting"],
+        correct: ["Recruiting"]
+    },
+    { // 294
+        name: "Abschlussprüfung E.3 - Frage 02",
+        question: "Was sollte eine Netiquette enthalten?",
+        answers: ["Verweise auf mögliche Sanktionen.", "Hinweise, in welcher Form Spam formuliert sein soll.", "Klare Richtlinien, die Mobbing und Belästigung verbieten.", "Hinweise zum Schutz der Privatsphäre."],
+        correct: ["Verweise auf mögliche Sanktionen.", "Klare Richtlinien, die Mobbing und Belästigung verbieten.", "Hinweise zum Schutz der Privatsphäre."]
+    },
+    { // 295
+        name: "Abschlussprüfung B.1 - Frage 06",
+        question: "Welche Kommunikationsmittel werden in sozialen Netzwerken genutzt?",
+        answers: ["Bild", "Video", "Text", "Audio"],
+        correct: ["Bild", "Video", "Text", "Audio"]
+    },
+    { // 296
+        name: "Abschlussprüfung D.1 - Frage 01",
+        question: "Welche Aussagen in Bezug auf guten Content sind korrekt?",
+        answers: ["Content soll ausschließlich informieren.", "Qualität sollte dabei immer vor Quantität stehen.", "Content sollte mit mindestens einem konkreten Ziel verknüpft sein.", "Es sollte immer einen Mehrwert für die Userin oder den User geben."],
+        correct: ["Qualität sollte dabei immer vor Quantität stehen.", "Content sollte mit mindestens einem konkreten Ziel verknüpft sein.", "Es sollte immer einen Mehrwert für die Userin oder den User geben."]
+    },
+    { // 297
+        name: "Abschlussprüfung F.2 - Frage 01",
+        question: "Was ist die Grundvoraussetzung dafür, dass wir Instagram Insights nutzen können?",
+        answers: ["Die Verifizierung des Profils", "Die Umwandlung in ein Unternehmensprofil", "Die Verknüpfung mit einem Facebook-Konto", "Die Umwandlung in ein privates Profil"],
+        correct: ["Die Umwandlung in ein Unternehmensprofil"]
+    },
+    { // 298
+        name: "Abschlussprüfung G.1 - Frage 02",
+        question: "Ordne die folgenden KPIs den entsprechenden Ebenen der Key-Performance-Indicator-Pyramide zu.",
+        answers: ["1. Ebene: Follower", "2. Ebene: Share of Buzz", "3. Ebene: Kundenzufriedenheit"],
+        correct: ["1. Ebene: Follower", "2. Ebene: Share of Buzz", "3. Ebene: Kundenzufriedenheit"]
+    },
+    { // 299
+        name: "Abschlussprüfung E.1 - Frage 02",
+        question: "Welche Monetarisierungsoptionen bietet YouTube über das YouTube Studio?",
+        answers: ["Anzeigenumsatz", "App-Entwicklung", "Kanalmitgliedschaften"],
+        correct: ["Anzeigenumsatz", "Kanalmitgliedschaften"]
+    },
+    { // 300
+        name: "Abschlussprüfung B.1 - Frage 04",
+        question: "Was ist der Meta Business Manager?",
+        answers: ["Ein reines Analysetool für Instagram-Profile.", "Eine kostenpflichtige Werbeanzeigenplattform.", "Ein Tool zur zentralen Verwaltung von Unternehmensressourcen im Meta-Ökosystem.", "Ein KI-gesteuerter Avatar-Generator für Meta."],
+        correct: ["Ein Tool zur zentralen Verwaltung von Unternehmensressourcen im Meta-Ökosystem."]
+    },
+    { // 301
+        name: "Abschlussprüfung G.3 - Frage 02",
+        question: "Was sagt ein ROI mit einem Faktor von 0,8 aus?",
+        answers: ["Dass die Investitionen in eine Kampagne mehr Gewinn gebracht haben, als sie Kosten verursacht haben.", "Dass die Investitionen in eine Kampagne mehr Kosten verursacht haben, als sie an Gewinn gebracht haben."],
+        correct: ["Dass die Investitionen in eine Kampagne mehr Kosten verursacht haben, als sie an Gewinn gebracht haben."]
+    },
+    { // 302
+        name: "Abschlussprüfung B.2 - Frage 03",
+        question: "Zu welchem Unternehmen gehört YouTube?",
+        answers: ["X (Twitter)", "Microsoft", "Facebook (Meta)", "Google (Alphabet)"],
+        correct: ["Google (Alphabet)"]
+    },
+    { // 303
+        name: "Abschlussprüfung A.3 - Frage 06",
+        question: "Warum ist Social Media besonders wichtig in der Customer Journey?",
+        answers: ["Es hat keinen Einfluss auf die Kaufentscheidung", "Es ersetzt vollständig alle anderen Kanäle", "Es ermöglicht direkte Interaktion und Beeinflussung in mehreren Journey-Phasen", "Es ist nur für B2C-Unternehmen relevant"],
+        correct: ["Es ermöglicht direkte Interaktion und Beeinflussung in mehreren Journey-Phasen"]
+    },
+    { // 304
+        name: "Abschlussprüfung F.1 - Frage 04",
+        question: "Ordne die Begriffe korrekt ihrer Bedeutung im Marketing zu.",
+        answers: ["Upselling: Kundinnen und Kunden eine teurere Version eines Produkts anbieten.", "Cross-Selling: Kundinnen und Kunden ergänzende Produkte zum ursprünglichen Kauf anbieten."],
+        correct: ["Upselling: Kundinnen und Kunden eine teurere Version eines Produkts anbieten.", "Cross-Selling: Kundinnen und Kunden ergänzende Produkte zum ursprünglichen Kauf anbieten."]
+    },
+    { // 305
+        name: "Abschlussprüfung F.3 - Frage 01",
+        question: "Welche Gründe haben dazu geführt, dass die Effektivität von Social Media Ads in den letzten Jahren spürbar geringer geworden ist?",
+        answers: ["Mehr Wettbewerb in den Netzwerken", "Zunehmende Banner Blindness", "Eine generelle Marktsättigung", "Datenschutzbestimmungen"],
+        correct: ["Mehr Wettbewerb in den Netzwerken", "Eine generelle Marktsättigung", "Datenschutzbestimmungen"]
+    },
+    { // 306
+        name: "Abschlussprüfung B.1 - Frage 02",
+        question: "Welche Netzwerke gehören zum Konzern Meta (ehemals Facebook)?",
+        answers: ["Instagram", "X", "WhatsApp", "Facebook"],
+        correct: ["Instagram", "WhatsApp", "Facebook"]
+    },
+    { // 307
+        name: "Abschlussprüfung A.3 - Frage 05",
+        question: "Ordne die Beispiele für Touchpoints den entsprechenden Kategorien zu.",
+        answers: ["Formate: Blogbeitrag, Reel", "Kanäle: Website, Social Media"],
+        correct: ["Formate: Blogbeitrag, Reel", "Kanäle: Website, Social Media"]
+    },
+    { // 308
+        name: "Abschlussprüfung A.1 - Frage 02",
+        question: "Wofür steht die Abkürzung CTA?",
+        answers: ["Es handelt sich um das Modell Content-Marketing, Targeting, A/B-Tests.", "Es handelt sich um das Akronym für \"Call-to-Action\"."],
+        correct: ["Es handelt sich um das Akronym für \"Call-to-Action\"."]
+    },
+    { // 309
+        name: "Abschlussprüfung B.2 - Frage 06",
+        question: "Was ist für Reels in der Regel kennzeichnend?",
+        answers: ["Meistens kürzer als 1:00 Minute", "Oft mit Musik/Audio hinterlegt", "Für die stationäre Nutzung optimiert", "Vertikales Format (9:16)"],
+        correct: ["Meistens kürzer als 1:00 Minute", "Oft mit Musik/Audio hinterlegt", "Vertikales Format (9:16)"]
+    },
+    { // 310
+        name: "Abschlussprüfung C.1 - Frage 02",
+        question: "Was ist ein Social-Media-Audit?",
+        answers: ["Eine Umfrage in einer Community", "Ein Monitoring-Tool", "Eine Liste unserer konkreten Ziele", "Eine Bestimmung des Status quo"],
+        correct: ["Eine Bestimmung des Status quo"]
+    },
+    { // 311
+        name: "Abschlussprüfung B.3 - Frage 03",
+        question: "Warum ist Xing im Recruiting weiterhin sehr beliebt?",
+        answers: ["Über die Gruppenfunktion kann gezielt nach Bewerbern gesucht werden.", "Über die Jobbörse können Stellen direkt auf der Plattform geteilt werden.", "Xing bietet viele Tools und Möglichkeiten im Recruiting.", "Der Eventmarkt bietet tolle Möglichkeiten für Recruiter."],
+        correct: ["Über die Jobbörse können Stellen direkt auf der Plattform geteilt werden.", "Xing bietet viele Tools und Möglichkeiten im Recruiting."]
+    },
+    { // 312
+        name: "Abschlussprüfung B.1 - Frage 03",
+        question: "Welche Funktionen bietet WhatsApp Business gegenüber dem normalen WhatsApp zusätzlich?",
+        answers: ["Umfragen", "Shopping-Funktion", "Unternehmenssteckbrief", "Automatisierte Nachrichten"],
+        correct: ["Shopping-Funktion", "Unternehmenssteckbrief", "Automatisierte Nachrichten"]
+    },
+    { // 313
+        name: "Abschlussprüfung C.5 - Frage 01",
+        question: "Was sind gängige externe Ressourcen, die es zu beachten gilt?",
+        answers: ["Influencerinnen und Influencer", "Supply Chain Managerinnen und Manager", "Texterinnen und Texter", "Fans sowie Followerinnen und Follower"],
+        correct: ["Influencerinnen und Influencer", "Texterinnen und Texter"]
+    },
+    { // 314
+        name: "Abschlussprüfung E.1 - Frage 01",
+        question: "Was sollten Social-Media-Guidelines enthalten?",
+        answers: ["Budgetplanung für Social Media Ads", "Rechtliche Hinweise", "Unternehmenswerte, Unternehmenskultur", "Inhalt und Form der Kommunikation"],
+        correct: ["Rechtliche Hinweise", "Unternehmenswerte, Unternehmenskultur", "Inhalt und Form der Kommunikation"]
+    },
+    { // 315
+        name: "Abschlussprüfung B.1 - Frage 01",
+        question: "Wie lautet der Grundtyp von Facebook?",
+        answers: ["Videoplattform", "Business-Plattform", "Suchmaschine", "Soziales Netzwerk"],
+        correct: ["Soziales Netzwerk"]
+    },
+    { // 316
+        name: "Abschlussprüfung G.1 - Frage 01",
+        question: "Was wird bei Social Media Analytics getrackt?",
+        answers: ["Die Interaktionen zu unseren Beiträgen.", "Mentions in Foren.", "Die Entwicklung unserer Fan-/Follower-Anzahl.", "Die Reichweite unserer Beiträge."],
+        correct: ["Die Interaktionen zu unseren Beiträgen.", "Die Entwicklung unserer Fan-/Follower-Anzahl.", "Die Reichweite unserer Beiträge."]
+    },
+    { // 317
+        name: "Abschlussprüfung E.4 - Frage 01",
+        question: "Welche sozialen Netzwerke werden im Community-Service besonders gerne genutzt?",
+        answers: ["Pinterest", "X (Twitter)", "Tik Tok", "WhatsApp"],
+        correct: ["X (Twitter)", "WhatsApp"]
+    },
+    { // 318
+        name: "Abschlussprüfung E.1 - Frage 03",
+        question: "Was ist die Meta Business Suite?",
+        answers: ["Ein leistungsstarkes Tool für das Management von Marketing-Aktivitäten auf den Plattformen des Meta-Unternehmens", "Ein Automatisierungstool, mit dem wir die Follow-Unfollow-Strategie DSGVO-konform durchführen können"],
+        correct: ["Ein leistungsstarkes Tool für das Management von Marketing-Aktivitäten auf den Plattformen des Meta-Unternehmens"]
+    },
+    { // 319
+        name: "Abschlussprüfung B.2 - Frage 01",
+        question: "Was unterscheidet Vimeo von YouTube?",
+        answers: ["Die Rechte am hochgeladenen Material bleiben vollständig beim Ersteller.", "Es besticht in seinem Aufbau durch eine große Schlichtheit.", "Es bietet mehr Monetarisierungsmöglichkeiten.", "Der Fokus liegt auf künstlerisch anspruchsvollen Videos."],
+        correct: ["Die Rechte am hochgeladenen Material bleiben vollständig beim Ersteller.", "Es besticht in seinem Aufbau durch eine große Schlichtheit.", "Der Fokus liegt auf künstlerisch anspruchsvollen Videos."]
+    },
+    { // 320
+        name: "Abschlussprüfung A.3 - Frage 04",
+        question: "Wofür stehen die Abkürzungen in AIDA?",
+        answers: ["Action, Interest, Desire, Awareness", "Attention, Interest, Desire, Action", "Action, Interaction, Desire, Awareness", "Action, Interest, Dislike, Awareness"],
+        correct: ["Attention, Interest, Desire, Action"]
+    },
+    { // 321
+        name: "Abschlussprüfung A.3 - Frage 02",
+        question: "Worin unterscheiden sich der Sales Funnel und die Customer Journey?",
+        answers: ["Die Customer Journey betrachtet aus rein betriebswirtschaftlicher Sicht den Kaufprozess bis hin zum Moment des erfolgreichen Vertriebs.", "Der Sales Funnel kümmert sich auch um die Kundenbeziehung.", "Mit der Customer Journey wird die Kundenreise über den Kaufprozess hinaus gezeigt, der Sales Funnel endet oft mit dem Kauf."],
+        correct: ["Mit der Customer Journey wird die Kundenreise über den Kaufprozess hinaus gezeigt, der Sales Funnel endet oft mit dem Kauf."]
+    },
+    { // 322
+        name: "Abschlussprüfung C.2 - Frage 02",
+        question: "Welches dieser Ziele ist deiner Meinung nach SMART definiert?",
+        answers: ["Wir generieren durch eine LinkedIn-Ad-Kampagne 20 Bewerbungen bis Ende Q1/2024.", "Wir erhöhen die Reichweite unserer YouTube-Videos.", "Wir gewinnen bis Ende 2024 mehr Instagram-Follower."],
+        correct: ["Wir generieren durch eine LinkedIn-Ad-Kampagne 20 Bewerbungen bis Ende Q1/2024."]
+    },
+    { // 323
+        name: "Abschlussprüfung F.1 - Frage 09",
+        question: "Was ist ein Pixel im Kontext von Social Media Ads?",
+        answers: ["Ein Pixel ist eine bestimmte Zielgruppe, die wir sowohl für Custom Audiences als auch für Lookalike Audiences nutzen können.", "Ein Pixel ist ein Trackingcode, den man auf einer Website, einem Onlineshop oder auch in einer eigenen App implementieren kann."],
+        correct: ["Ein Pixel ist ein Trackingcode, den man auf einer Website, einem Onlineshop oder auch in einer eigenen App implementieren kann."]
+    },
+    { // 324
+        name: "Abschlussprüfung B.1 - Frage 02",
+        question: "Was ist ein zentraler Erfolgsfaktor für das Community Building auf Facebook?",
+        answers: ["Quantität vor Qualität - Hauptsache viele Fans", "Influencer-Marketing mit TikTok-Creators", "Nur Beiträge mit Gewinnspielen posten", "Relevanter und hochwertiger Content für die Zielgruppe"],
+        correct: ["Relevanter und hochwertiger Content für die Zielgruppe"]
+    },
+    { // 325
+        name: "Abschlussprüfung D.4 - Frage 02",
+        question: "Was ist bei der Nutzung von KI bei der Content Creation zu beachten?",
+        answers: ["Geltende Datenschutzrichtlinien sind zu beachten.", "Falschaussagen seitens der Kl sind quasi ausgeschlossen.", "Es gilt kein Urheberrecht.", "Verluste des Kundenvertrauens sind möglich."],
+        correct: ["Geltende Datenschutzrichtlinien sind zu beachten.", "Verluste des Kundenvertrauens sind möglich."]
+    },
+    { // 326
+        name: "Abschlussprüfung B.2 - Frage 04",
+        question: "Was bedeutet der Discovery-Faktor im Bezug auf TikTok?",
+        answers: ["Nutzer schauen sich Inhalte von Creators und Kanälen an, die sie bereits kennen und abonniert haben.", "Nutzer gehen auf \"Entdeckungsreise\" und lassen sich durch neue Inhalte überraschen und inspirieren."],
+        correct: ["Nutzer gehen auf \"Entdeckungsreise\" und lassen sich durch neue Inhalte überraschen und inspirieren."]
+    },
+    { // 327
+        name: "Abschlussprüfung A.2 - Frage 05",
+        question: "Welche Aussage passt am besten zur Wahl von Social-Media-Kanälen für dein Unternehmen?",
+        answers: ["Ich wähle die Kanäle entsprechend ihrer Nutzergruppe und der medialen Möglichkeiten aus.", "Ich nutze stets die sozialen Medien mit dem größten Wachstum.", "Ich nutze stets die großen sozialen Medien.", "Ich nutze die sozialen Medien, die mir am besten gefallen."],
+        correct: ["Ich wähle die Kanäle entsprechend ihrer Nutzergruppe und der medialen Möglichkeiten aus."]
+    },
+    { // 328
+        name: "Abschlussprüfung C.4 - Frage 02",
+        question: "Was gilt bei der Auswahl von passenden Social Networks?",
+        answers: ["Wir sollten dort aktiv werden, wo auch die Zielgruppe aktiv ist.", "Wir sollten auf allen Channels aktiv sein.", "Social Networks sollten auch zum eigenen Nutzungsverhalten passen.", "Maximal ein bis zwei Networks sind genug."],
+        correct: ["Wir sollten dort aktiv werden, wo auch die Zielgruppe aktiv ist.", "Social Networks sollten auch zum eigenen Nutzungsverhalten passen."]
+    },
+    { // 329
+        name: "Abschlussprüfung B.2 - Frage 02",
+        question: "Was soll mit der Aussage \"Content is King\" ausgedrückt werden?",
+        answers: ["Inhalte müssen einen sehr hohen Wertbeitrag für den Umsatz eines Unternehmens bringen.", "Gute Inhalte sind die Basis für alle Online-Marketing-Maßnahmen."],
+        correct: ["Gute Inhalte sind die Basis für alle Online-Marketing-Maßnahmen."]
+    },
+    { // 330
+        name: "Abschlussprüfung E.4 - Frage 02",
+        question: "Ordne die folgenden Aspekte eines Krisenkonzepts externen und internen Perspektiven zu.",
+        answers: ["Externe Perspektive: Markt- und Umfeldanalyse", "Interne Perspektive: Risikobewertung"],
+        correct: ["Externe Perspektive: Markt- und Umfeldanalyse", "Interne Perspektive: Risikobewertung"]
+    },
+    { // 331
+        name: "Abschlussprüfung G.3 - Frage 04",
+        question: "Welcher KPI gibt an, wie viele Nutzende nach dem Klicken auf einen Link eine gewünschte Aktion, wie einen Kauf, durchgeführt haben?",
+        answers: ["Conversion Rate", "Interaktionsrate", "Sentiment Rate"],
+        correct: ["Conversion Rate"]
+    },
+    { // 332
+        name: "Abschlussprüfung G.2 - Frage 03",
+        question: "Was wird im Rahmen einer Sentiment-Analyse analysiert?",
+        answers: ["Es werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Produkts, einer Marke oder eines Themas zu erhalten.", "Es geht dabei vorrangig um das Verständnis spezifischer Themen oder Diskussionen in sozialen Medien."],
+        correct: ["Es werden Stimmungen und Meinungen in sozialen Medien analysiert, um ein allgemeines Stimmungsbild bezüglich eines Produkts, einer Marke oder eines Themas zu erhalten."]
+    },
+    { // 333
+        name: "Abschlussprüfung A.3 - Frage 01",
+        question: "Warum ist das Customer-Experience-Management wichtig für ein Unternehmen?",
+        answers: ["Es kann gezielt in die Mundpropaganda von Kunden eingreifen und Shitstorms verhindern.", "Es ist darauf ausgerichtet, den Gewinn des Unternehmens unabhängig von den Kundenbedürfnissen gezielt zu steigern.", "Es hat keine nennenswerte Relevanz.", "Es hat einen direkten Einfluss auf die Kundenzufriedenheit. Zudem kann wertvolles Feedback gesammelt werden, um Produkte und Dienstleistungen stetig zu verbessern."],
+        correct: ["Es kann gezielt in die Mundpropaganda von Kunden eingreifen und Shitstorms verhindern.", "Es hat einen direkten Einfluss auf die Kundenzufriedenheit. Zudem kann wertvolles Feedback gesammelt werden, um Produkte und Dienstleistungen stetig zu verbessern."]
+    },
+    { // 334
+        name: "Abschlussprüfung C.5 - Frage 03",
+        question: "Welche Arten von Tools und Lizenzen können im Rahmen einer Ressourcenplanung relevant sein?",
+        answers: ["Social-Media-Management-Tools", "Analyse-Tools", "Content-Creation-Tools", "Lizenzgebühren für Personas"],
+        correct: ["Social-Media-Management-Tools", "Analyse-Tools", "Content-Creation-Tools"]
+    },
+    { // 335
+        name: "Abschlussprüfung C.2 - Frage 01",
+        question: "Wie wird der Verkauf bzw. Vertrieb von B2B-Produkten und Dienstleistungen in sozialen Netzwerken häufig genannt?",
+        answers: ["Social Services", "Social Business", "Social Selling", "Social Commerce"],
+        correct: ["Social Selling"]
+    },
+    { // 336
+        name: "Abschlussprüfung A.2 - Frage 03",
+        question: "Was ist das Hauptziel bei der Erstellung von Buyer Personas im Social-Media-Marketing?",
+        answers: ["Die Zielgruppe vollständig durch reale Kundendaten zu ersetzen.", "Die Zielgruppe nach Budgethöhe zu filtern.", "Nur neue Zielgruppen anzusprechen und bestehende zu ignorieren.", "Die Zielgruppe durch fiktive, aber realitätsnahe Profile greifbar zu machen."],
+        correct: ["Die Zielgruppe durch fiktive, aber realitätsnahe Profile greifbar zu machen."]
     }
 ];
